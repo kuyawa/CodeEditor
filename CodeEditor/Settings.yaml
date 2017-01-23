@@ -10,11 +10,12 @@ word-wrap   : false
 indentation-char  : space
 indentation-count : 4
 
-syntax-default : swift
-syntax-unknown : txt
-syntax-plist   : xml
+# Syntax templates
 
-editable-files : swift txt md html xml css js plist py php rb c h json yaml
+syntax-default  : swift
+syntax-unknown  : txt
+syntax-plist    : xml
+syntax-xcscheme : xml
 
 
 # End

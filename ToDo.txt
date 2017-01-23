@@ -1,8 +1,10 @@
 TODO:
 
+- "Todas las generaciones deben padecer el precio del hambre para poder apreciar el valor de la libertad"
+- "All generations must suffer the price of hunger in order to appreciate the value of liberty"
 
 - dark theme
-- work on toolbar: new, open, save
+- save on editor lost focus, at all times
 
 - load defaults from settings.yaml
 - if empty, start with blank file
@@ -21,6 +23,7 @@ x on syntax.format("swift") assign template
 ------------------------------------------------------------
 
 x open project (working folder)
+x work on toolbar: new, open, save
 x scan dir, show all dirs, all files, save as default
 x on file select, if folder do nothing, if file editable show in text field
 x on load: get working folder from userDefaults

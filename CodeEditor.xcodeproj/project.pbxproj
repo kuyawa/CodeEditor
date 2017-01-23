@@ -41,7 +41,7 @@
 		3D1A8B3A1E2FEE070053EB1A /* SyntaxColorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxColorizer.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D28D9231E31643D0014C41E /* FileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D28D9251E31C3970014C41E /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
-		3D2E8ADD1E3538C900AF14FC /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
+		3D2E8ADD1E3538C900AF14FC /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D2FFB671E33A04200C309A8 /* EditorController..swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorController..swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D814B731E345D1F006F0044 /* Syntax.xml.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.xml.yaml; sourceTree = "<group>"; };
 		3D814B751E345D4F006F0044 /* Syntax.plist.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.plist.yaml; sourceTree = "<group>"; };

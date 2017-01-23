@@ -19,6 +19,7 @@ class FileNode: NSObject {
     var size : Int  = 0
     
     var isFolder   : Bool = false
+    var parent     : FileNode?
     var children   : [FileNode]?
     var childCount : Int {
         get {
@@ -38,10 +39,13 @@ class FileNode: NSObject {
     
     var isEditable : Bool {
         get {
-            let valid = "swift txt md html xml css js plist py php rb c h json yaml sql"
-            return valid.contains(ext)
+            //let valid = "swift txt md html xml css js plist py php rb c h json yaml sql"
+            let invalid = "exe bin"
+            return !invalid.contains(ext)
         }
     }
+    
+    var hasChanged = false
     
     override var description: String {
         get {

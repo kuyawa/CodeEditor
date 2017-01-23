@@ -32,8 +32,9 @@ class FileController: NSObject {
     var workingFolder   = FileNode()
     var currentDocument = FileNode()
 
-    var outlineView: NSOutlineView?
-    var onSelected: (_ file: FileNode) -> Void = { file in }
+    var textView    : NSTextView?
+    var outlineView : NSOutlineView?
+    var onSelected  : (_ file: FileNode) -> Void = { file in }
     
     
     func start() -> FileNode {
@@ -44,6 +45,7 @@ class FileController: NSObject {
         changeRootFolder(lastRoot)
         changeWorkingFolder(lastFolder)
         currentDocument = getFileInfo(lastFile)
+        //currentDocument.parent = workingFolder
         
         files = listFolder(root.url)
         print("Root: "  , lastRoot   ?? "Empty")
@@ -53,11 +55,15 @@ class FileController: NSObject {
         return currentDocument
     }
     
-    func assignView(_ tree: NSOutlineView) {
-        outlineView = tree
+    func assignTree(_ treeView: NSOutlineView) {
+        outlineView = treeView
         outlineView?.delegate   = self
         outlineView?.dataSource = self
         outlineView?.target     = self
+    }
+    
+    func assignEditor(_ editor: NSTextView) {
+        textView = editor
     }
     
     func reload() {
@@ -77,7 +83,9 @@ class FileController: NSObject {
             return url
         }
         
-        return url?.deletingLastPathComponent()
+        workingFolder.url = url?.deletingLastPathComponent()
+        
+        return workingFolder.url
     }
     
     func changeRootFolder(_ url: URL?) {
@@ -188,6 +196,33 @@ class FileController: NSObject {
         return files
     }
     
+    func walkTheTree(_ file: FileNode) -> FileNode? {
+        print("Finding: ", file.url)
+        let find = file.url
+        if root.url == find { return root }
+
+        // From root to file
+        func walker(_ node: FileNode) -> FileNode? {
+            print("Walking folder: ", node.url)
+            if let kids = node.children {
+                for item in kids {
+                    print("Walking item: ", item.url)
+                    if item.url == find { return item }
+                    if item.isFolder {
+                        if let found = walker(item) { return found }
+                    }
+                }
+            }
+            
+            return nil
+        }
+        
+        let node = walker(file)
+        print("Walker found ", node?.url)
+        
+        return node
+    }
+    
     func fileExists(_ url: URL?) -> Bool {
         guard let url = url else { return false }
         let ok = FileManager.default.fileExists(atPath: url.path)
@@ -200,20 +235,38 @@ class FileController: NSObject {
 extension FileController {
 
     func new() -> DocumentNewResult {
-        let folder = getWorkingFolder()
-        let doc    = FileNode()
-        doc.name   = "NewFile.swift" // TODO: default extension from config
-        doc.url    = folder?.appendingPathComponent(doc.name)
+        let emptyFile = "Empty"
+        let url  = getWorkingFolder()
+        let doc  = FileNode()
+        doc.name = "NewFile.swift" // TODO: default extension from config
+        doc.url  = url?.appendingPathComponent(doc.name)
         
         var counter = 0
         while fileExists(doc.url) {
             counter += 1
             doc.name = "NewFile\(counter).swift"
-            doc.url  = folder?.appendingPathComponent(doc.name)
+            doc.url  = url?.appendingPathComponent(doc.name)
         }
-        
+
         currentDocument = doc
-        // TODO: Add to sidebar and select
+        // TODO: catch error
+        if doc.url != nil {
+            try? emptyFile.write(to: doc.url!, atomically: false, encoding: .utf8)
+        }
+        print("New file: ", doc.url!)
+
+        // Add newfile to treeFolder under current folder
+        if let node = walkTheTree(workingFolder) {
+            if node.children == nil {
+                node.children = [FileNode]()
+            }
+            node.children!.append(doc)
+            let index = IndexSet(integer: node.childCount)
+            outlineView?.insertItems(at: index, inParent: node, withAnimation: .slideDown)
+            outlineView?.reloadItem(node, reloadChildren: true)
+            outlineView?.expandItem(node)
+            // Reload and expand nodes all the way from root to workingFolder
+        }
         
         return .ok
     }
@@ -248,7 +301,6 @@ extension FileController {
         
         do {
             try text.write(to: currentDocument.url!, atomically: false, encoding: .utf8)
-            // TODO: Add to fileController, add to UI tree
             print("Saved!")
             return .ok
         } catch {
@@ -349,12 +401,17 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
         if let view = notification.object as? NSOutlineView {
             let index = view.selectedRow
             if let file = view.item(atRow: index) as? FileNode {
+                if currentDocument.hasChanged {
+                    if save(textView?.string) != DocumentSaveResult.ok {
+                        Alert("Error saving file. Try other means or you will lose your work").show()
+                        return
+                    }
+                }
+                
                 changeWorkingFolder(file.url)
-                //saveWorkingFolder()
 
                 if !file.isFolder {
                     currentDocument = file
-                    //saveCurrentFile()
                     onSelected(file)
                 }
             }

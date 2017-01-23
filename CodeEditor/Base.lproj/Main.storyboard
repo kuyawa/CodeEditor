@@ -836,22 +836,22 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="CodeEditor" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="3000" height="397"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="0.0"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <size key="minSize" width="3000" height="397"/>
-                                                                            <size key="maxSize" width="3000" height="3000"/>
+                                                                            <size key="minSize" width="776" height="0.0"/>
+                                                                            <size key="maxSize" width="3000" height="10000000"/>
                                                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
-                                                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="bzo-GJ-Iuf">
-                                                                    <rect key="frame" x="1" y="382" width="776" height="16"/>
+                                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bzo-GJ-Iuf">
+                                                                    <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xc7-kg-tk5">
-                                                                    <rect key="frame" x="761" y="1" width="16" height="397"/>
+                                                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>

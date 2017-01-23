@@ -14,6 +14,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     var syntax = SyntaxColorizer()
 
     let hugeFileSize = 999999
+    
+    var isLoading = false
 
     
     @IBOutlet weak var mainSplitter : NSSplitView!
@@ -65,7 +67,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         syntax.setFormat("swift")  // TODO: get default syntax from settings
         
         let lastFile = filer.start()
-        filer.assignView(outlineView)
+        filer.assignTree(outlineView)
+        filer.assignEditor(textEditor)
         filer.onSelected = selectedFile
         filer.reload()
         selectedFile(lastFile)
@@ -79,6 +82,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.isAutomaticLinkDetectionEnabled      = false
         textEditor.textStorage?.font = NSFont(name: "Menlo", size: 14)
         textEditor.textStorage?.delegate = self
+
         // Horizontal scroll
         textEditor.enclosingScrollView?.hasHorizontalScroller = true
         textEditor.isHorizontallyResizable = true
@@ -89,7 +93,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         //textEditor.process(editedRange)
-        syntax.colorize(editedRange)
+        //if delta != 0 { filer.currentDocument.hasChanged = true; print("Has changed") }
+        //print("Delta \(delta) - Mask: \(editedMask.rawValue)")
+        if !isLoading && delta != 0 && editedMask.rawValue > 1 {
+            print("Colorizing...")
+            syntax.colorize(editedRange)
+        }
     }
 
     func setFileName(_ text: String) {
@@ -104,18 +113,28 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         setFileName(file.name)
         
         if file.url != nil && !file.isFolder && file.isEditable && file.size < hugeFileSize {
-            let text = try? String(contentsOf: file.url!)
+            isLoading = true // on load do not colorize in process editing
+            
+            // Remove old attributes
+            //let all  = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
+            //textEditor.textStorage?.invalidateAttributes(in: all)
+            //textEditor.textStorage?.setAttributes([:], range: all)
+            //textEditor.textStorage?.setAttributedString(NSAttributedString(string: ""))
             textEditor.string = ""
+
+            // Assign new text
+            let text = try? String(contentsOf: file.url!)
             textEditor.string = text ?? "Error loading file"
             resetEditor()
             
-            print("Colorize \(file.ext)!")
-            syntax.setFormat(file.ext) // Get syntax from list of extensions?
+            // Colorize it!
+            syntax.setFormat(file.ext)
             syntax.colorize()
+            
+            isLoading = false
         }
         
         if !file.isEditable {
-            textEditor.string = ""
             textEditor.string = "[\(file.name) is not editable]"
             resetEditor()
         }
@@ -127,11 +146,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
 
     func fileNew() {
         let result = filer.new()
-        // TODO: Add newfile to treeFolder under current folder
+
         if result == .ok {
-            setFileName(filer.currentDocument.name)
-            textEditor.string = ""
-            resetEditor()
+            selectedFile(filer.currentDocument)
+            //setFileName(filer.currentDocument.name)
+            //textEditor.string = ""
+            //resetEditor()
         }
     }
     
