@@ -1,0 +1,82 @@
+TODO:
+
+
+- dark theme
+- work on toolbar: new, open, save
+
+- load defaults from settings.yaml
+- if empty, start with blank file
+
+- enable editor commands
+
+~ create more syntax templates for html, css, js, xml, etc
+- verify syntax file does not crash the app if malformed
+x on syntax.format("swift") assign template
+
+- toolbar: project, new, open, save, find, run/stop, hide/show filer, hide/show output
+
+- build: call swift build, show progrees in output area
+  on errors show errors and allow user to jump to files and lines
+
+------------------------------------------------------------
+
+x open project (working folder)
+x scan dir, show all dirs, all files, save as default
+x on file select, if folder do nothing, if file editable show in text field
+x on load: get working folder from userDefaults
+x save last selected file in userDefaults
+x if file in userDefaults, select on load
+x save last window position, if maximized restart maximized
+x load only first node and children, load other children on expand
+x keep working folder in fileController as root or selected
+x add NewFile1.{ext} to working folder, if exists autoincrement
+x keep newfile counter in fileController
+
+x remove tabs, use single window interface
+x work on tabs for docs: name, close
+x appicon Macaw
+x edit Readme.md
+
+
+------------------------------------------------------------
+
+SAMPLE PROJECT TO TEST SYNTAXES:
+
+source
+  main.swift
+  index.swift
+  forums.swift
+  utils.swift
+views
+  index.html
+  data.xml
+public
+  logo.png
+  script.js
+  theme.css
+info.plist
+todo.txt
+readme.md
+
+------------------------------------------------------------
+
+EDITOR COMMANDS:
+
+N      new file
+O      open file
+B      open in browser
+S      save file
+R      build and run
+F      find and replace
+
+tab     if block selected, indent/unindent, else default
+D      duplicate line/block
+L      delete line/block
+del    delete to end of line
+bck    delete to begin of line
+up     move line/block up
+dn     move line/block dn
+U      toggle selected case upper/lower/camel
+
+
+END.

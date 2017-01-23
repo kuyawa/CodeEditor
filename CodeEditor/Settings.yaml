@@ -1,0 +1,20 @@
+# Macaw - Code Editor
+# Version: 1.0
+# File: Settings
+
+
+font-family : Menlo
+font-size   : 14
+word-wrap   : false
+
+indentation-char  : space
+indentation-count : 4
+
+syntax-default : swift
+syntax-unknown : txt
+syntax-plist   : xml
+
+editable-files : swift txt md html xml css js plist py php rb c h json yaml
+
+
+# End

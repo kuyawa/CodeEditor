@@ -1,0 +1,12 @@
+# syntax: test
+
+patterns:
+    comments: //.*
+
+colors:
+    green: 009900
+
+colorize:
+    comments: green
+
+#end

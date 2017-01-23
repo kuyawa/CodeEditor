@@ -1,0 +1,36 @@
+# macaw 1.0
+# syntax: xml
+# author: kuyawa@github
+
+patterns:
+    comments   : (<!--[^\b]*?-->)
+    processors : <\?(.*?)[\s|\?>]
+    templates  : <%([^\b]*?)%>
+    directives : <!([^-].*?)>
+    attributes : \s\b(.*?)\s?=
+    tags       : <([^!%?].*?)[\s|\/>|>]
+    literals   : (".*?")
+    brackets   : ([<|>])
+
+options:
+    comments  : global, multiline
+    templates : global, multiline
+
+colors:
+    red     : 990000
+    green   : 009900
+    blue    : 0000cc
+    magenta : 990099
+    cyan    : 009999
+    gray    : aaaaaa
+
+styles:
+    comments   : green
+    brackets   : gray
+    tags       : blue
+    attributes : magenta
+    literals   : cyan
+
+order: comments, brackets, tags, attributes, literals
+
+#end
