@@ -52,9 +52,16 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("VC didload")
         initialize()
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        print("VC didAppear")
+        setTheme()
+    }
+    
     override func viewWillDisappear() {
         //print("Window: ", self.view.window?.frame)
         if filer.currentDocument.hasChanged {
@@ -63,8 +70,20 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         filer.saveDefaults()
     }
     
+    func setTheme() {
+        // Dark
+        if let window = self.view.window {
+            if app.settings.isDarkTheme {
+                print("Dark theme")
+                window.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+            } else {
+                window.appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
+            }
+        }
+    }
+
     func initialize() {
-        // NSApp.loadSettings()
+        //setTheme()
         consoleArea.isHidden = true
         
         syntax.assignView(textEditor)
@@ -93,6 +112,14 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         textEditor.textContainer?.containerSize = NSSize(width: Int.max, height: Int.max)
         textEditor.textContainer?.widthTracksTextView = false
+        
+        if app.settings.isDarkTheme {
+            textEditor.backgroundColor = NSColor(hex: 0x333333)
+            textEditor.textColor = NSColor(hex: 0xeeeeee)
+        } else {
+            textEditor.backgroundColor = NSColor(hex: 0xeeeeee)
+            textEditor.textColor = NSColor(hex: 0x333333)
+        }
     }
     
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
@@ -163,6 +190,14 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         filer.open()
     }
     
+    func fileOpenByOS(_ filename: String) {
+        let openFile = filer.getFileInfo(URL(string: filename))
+        if let url = openFile.url {
+            Alert("VC Opening file \(url)").show()
+            selectedFile(openFile)
+        }
+    }
+
     func fileSave() {
         let result = filer.save()
         

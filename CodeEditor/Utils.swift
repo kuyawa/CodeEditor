@@ -14,7 +14,16 @@ typealias Dixy = [String: Any]
 
 extension NSColor {
 
-    // Use: NSColor(0xffffffff)
+    // Use: NSColor("ffffff")
+    convenience init(_ hex: String) {
+        if let hexInt = Int(hex.lowercased(), radix: 16) {
+            self.init(hex: hexInt)
+        } else {
+            self.init(hex: 0)
+        }
+    }
+
+    // Use: NSColor(hex: 0xffffffff)
     convenience init(hex: Int) {
         var opacity : CGFloat = 1.0
         if hex > 0xffffff {

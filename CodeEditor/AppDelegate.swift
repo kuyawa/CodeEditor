@@ -12,10 +12,21 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var settings = Settings()
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    
+    override init(){
+        super.init()
         print("Hello!")
         settings.load()
+    }
+
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        //Alert("APP File open: \(filename)").show()
+        guard let main = NSApp.mainWindow?.contentViewController as! ViewController? else { return true }
+        main.fileOpenByOS(filename)
+        return true
+    }
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

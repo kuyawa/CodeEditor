@@ -11,6 +11,7 @@ import Foundation
 
 struct Settings {
     var theme = "dark"
+    var isDarkTheme: Bool { return theme == "dark" }
     
     var fontFamily = "Menlo"
     var fontSize   = 14

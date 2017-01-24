@@ -1,19 +1,14 @@
 TODO:
 
 - dark theme
-x save on editor lost focus, at all times
-
-x load defaults from settings.yaml
+- show/hide filer panel, nice icon copy from xcode
 - if empty, start with blank file
-
-- enable editor commands
-x duplicate line/block
-x delete line
+- enable more editor commands
 
 ~ create more syntax templates for html, css, js, xml, etc
 - verify syntax file does not crash the app if malformed
-x on syntax.format("swift") assign template
 
+- allow to open file from OS, use App.delegate
 - allow to open file, set working folder to file's parent
 - toolbar: project, new, open, save, find, run/stop, hide/show filer, hide/show output
 
@@ -24,6 +19,11 @@ VERSION 2:
 
 ------------------------------------------------------------
 
+x save on editor lost focus, at all times
+x load defaults from settings.yaml
+x duplicate line/block
+x delete line
+x on syntax.format("swift") assign template
 x open project (working folder)
 x work on toolbar: new, open, save
 x scan dir, show all dirs, all files, save as default

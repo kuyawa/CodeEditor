@@ -3,6 +3,28 @@
 # author: kuyawa@github
 
 
+colors:
+    background : 333333
+    normal     : EEEEEE
+    red        : CC3333
+    green      : 33AA33
+    blue       : 6699DD
+    magenta    : CC66CC
+    cyan       : 33AAAA
+    orange     : DD6633
+    yellow     : EECC66
+
+styles:
+    keywords      : magenta
+    stringLiteral : yellow
+    commentLine   : green
+    commentBlock  : green
+    types         : cyan
+#   identifiers   : orange
+
+order: keywords, commentLine, commentBlock, types, stringLiteral
+
+
 patterns:
     keywords      : \b(class|deinit|enum|extension|func|import|init|let|protocol|static|struct|subscript|typealias|var|throws|rethrows|break|case|continue|default|do|else|fallthrough|if|in|for|return|switch|where|while|repeat|catch|guard|defer|try|throw|as|dynamicType|is|new|super|self|Self|Type|associativity|didSet|get|infix|inout|left|mutating|none|nonmutating|operator|override|postfix|precedence|prefix|right|set|unowned((un)?safe)?|weak|willSet|switch|case|default|where|if|else|continue|break|fallthrough|return|while|repeat|for|in|catch|do|operator|prefix|infix|postfix|open|public|internal|fileprivate|private|convenience|dynamic|final|lazy|(non)?mutating|optional|override|required|static|unowned((un)?safe)?|weak|true|false|nil)\b
     types         : \b(Int|Float|Double|String|Bool|Character|Void|U?Int(8|16|32|64)?|Array|Dictionary|(Array)(<.*>)|(Dictionary)(<.*>)|(Optional)(<.*>)|(protocol)(<.*>))\b
@@ -16,22 +38,5 @@ patterns:
 
 options:
     commentBlock : global, multiline
-
-colors:
-    normal  : 333333
-    red     : 990000
-    green   : 009900
-    blue    : 000099
-    magenta : 990099
-    cyan    : 009999
-
-styles:
-    keywords      : magenta
-    stringLiteral : red
-    commentLine   : green
-    commentBlock  : green
-#   identifiers   : cyan
-
-order: keywords, stringLiteral, commentLine, commentBlock
 
 #end

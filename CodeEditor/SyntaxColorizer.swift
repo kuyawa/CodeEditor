@@ -12,18 +12,37 @@ import Foundation
 
 class SyntaxFormatter {
     
-    var patterns = Dixy()
-    var options  = Dixy()
-    var colors   = Dixy()
-    var styles   = Dixy()
-    var order    = [String]()
+    var patterns  = Dixy()
+    var options   = Dixy()
+    var colors    = Dixy()
+    var styles    = Dixy()
+    var order     = [String]()
     
+    var colorText = NSColor("333333")
+    var colorBack = NSColor("EEEEEE")
+    
+
     func load(_ syntax: Dixy) {
+        // Defaults
+        if let app = NSApp.delegate as? AppDelegate, app.settings.isDarkTheme {
+            colorText = NSColor("EEEEEE")
+            colorBack = NSColor("333333")
+        } else {
+            colorText = NSColor("333333")
+            colorBack = NSColor("EEEEEE")
+        }
+        
+        // User defined
         colors = Dixy() // reset
         if syntax["colors"] != nil {
             for (key, val) in syntax["colors"]! as! Dixy {
-                if let hex = Int(val as! String, radix: 16) {
-                    colors[key] = NSColor(hex: hex)
+                let hex = val as! String
+                colors[key] = NSColor(hex)
+                if key=="normal" {
+                    colorText = colors[key] as! NSColor
+                }
+                if key=="background" {
+                    colorBack = colors[key] as! NSColor
                 }
             }
         }
@@ -55,7 +74,7 @@ class SyntaxColorizer {
     var isColorizable = false
 
     struct Attributes {
-        static let colorNormal = [NSForegroundColorAttributeName: NSColor.black]
+        let colorNormal: [NSAttributeDescription]   //= [NSForegroundColorAttributeName: formatter?.colorText]
     }
     
     // First assign the textView
@@ -67,9 +86,12 @@ class SyntaxColorizer {
     func setFormat(_ format: String) {
         self.format = format
         self.formatter = SyntaxFormatter() // reset
+        
+        let app = NSApp.delegate as! AppDelegate
+        let dark = app.settings.isDarkTheme ? ".dark" : ""
 
         // Get file for syntax
-        guard let url = Bundle.main.url(forResource: "Syntax.\(format)", withExtension: "yaml") else {
+        guard let url = Bundle.main.url(forResource: "Syntax.\(format)\(dark)", withExtension: "yaml") else {
             print("WARN: Syntax file for \(format) not found")
             isColorizable = false
             return
@@ -83,6 +105,7 @@ class SyntaxColorizer {
         
         let syntax = QuickYaml().parse(text)
         formatter?.load(syntax)
+        
         isColorizable = true
     }
     
@@ -117,8 +140,8 @@ class SyntaxColorizer {
         }
         
         for style in keys {
-            let colorName = styles[style]
-            if  let pattern = patterns?[style] as? String,
+            if  let colorName = styles[style],
+                let pattern = patterns?[style] as? String,
                 let color   = colors?[colorName as! String] as? NSColor
             {
                 let attribute = [NSForegroundColorAttributeName: color]
@@ -129,6 +152,7 @@ class SyntaxColorizer {
 
     func applyStyles(_ range: NSRange, _ pattern: String, _ attribute: [String: Any]) {
         guard let textView = textView else { return }
+        let colorNormal = [NSForegroundColorAttributeName: getColorNormal()]
         
         let regex = try? NSRegularExpression(pattern: pattern, options: [])
         regex?.enumerateMatches(in: textView.string!, options: [], range: range) {
@@ -139,8 +163,17 @@ class SyntaxColorizer {
             let maxRange = matchRange!.location + matchRange!.length
 
             if maxRange + 1 < (textView.textStorage?.length)! {
-                textView.textStorage?.addAttributes(Attributes.colorNormal, range: NSMakeRange(maxRange, 1))
+                textView.textStorage?.addAttributes(colorNormal, range: NSMakeRange(maxRange, 0))
             }
+        }
+    }
+    
+    func getColorNormal() -> NSColor {
+        if let normal = formatter?.colorText { return normal }
+        if let app = NSApp.delegate as? AppDelegate, app.settings.isDarkTheme {
+            return NSColor("EEEEEE")
+        } else {
+            return NSColor("333333")
         }
     }
 }
