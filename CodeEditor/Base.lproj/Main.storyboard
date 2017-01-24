@@ -166,6 +166,17 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
+                                        <menuItem title="Duplicate Line" keyEquivalent="d" id="Ggu-Ar-TpA">
+                                            <connections>
+                                                <action selector="duplicateLine:" target="Ady-hI-5gd" id="gve-zu-3f8"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete Line" keyEquivalent="l" id="TgM-bV-vZh">
+                                            <connections>
+                                                <action selector="deleteLine:" target="Ady-hI-5gd" id="iag-EP-Msd"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="s4m-ig-ASt"/>
                                         <menuItem title="Find" id="4EN-yA-p0u">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Find" id="1b7-l0-nxx">
@@ -657,7 +668,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CodeEditor" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="75" y="-105"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -836,10 +847,10 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="CodeEditor" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="397"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <size key="minSize" width="776" height="0.0"/>
+                                                                            <size key="minSize" width="776" height="397"/>
                                                                             <size key="maxSize" width="3000" height="10000000"/>
                                                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>

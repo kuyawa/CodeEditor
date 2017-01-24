@@ -10,7 +10,14 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var settings = Settings()
 
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        print("Hello!")
+        settings.load()
+    }
+    
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         print("Goodbye!")
         return true

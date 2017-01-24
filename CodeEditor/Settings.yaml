@@ -2,6 +2,7 @@
 # Version: 1.0
 # File: Settings
 
+theme: dark
 
 font-family : Menlo
 font-size   : 14

@@ -9,7 +9,6 @@
 import Cocoa
 import Foundation
 
-typealias Dixy = [String: Any]
 
 class SyntaxFormatter {
     

@@ -10,6 +10,8 @@ import Cocoa
 import Foundation
 
 
+typealias Dixy = [String: Any]
+
 extension NSColor {
 
     // Use: NSColor(0xffffffff)
@@ -39,6 +41,29 @@ extension NSColor {
     }
 
 }
+
+
+class Default {
+    static func string(_ val: Any?, _ def: String? = "") -> String {
+        return val as! String? ?? def!
+    }
+    
+    static func int(_ val: Any?, _ def: Int? = 0) -> Int {
+        let str: String = val as! String? ?? "\(def!)"
+        return Int(str) ?? def!
+    }
+    
+    static func double(_ val: Any?, _ def: Double? = 0.0) -> Double {
+        let str: String = val as! String? ?? "\(def!)"
+        return Double(str) ?? def!
+    }
+    
+    static func bool(_ val: Any?, _ def: Bool? = false) -> Bool {
+        let str: String = val as! String? ?? "\(def!)"
+        return Bool(str) ?? def!
+    }
+}
+
 
 
 /*

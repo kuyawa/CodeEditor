@@ -10,6 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegate {
 
+    let app    = NSApp.delegate as! AppDelegate
     var filer  = FileController()
     var syntax = SyntaxColorizer()
 
@@ -67,7 +68,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         consoleArea.isHidden = true
         
         syntax.assignView(textEditor)
-        syntax.setFormat("swift")  // TODO: get default syntax from settings
+        syntax.setFormat(app.settings.syntaxDefault)
         
         let lastFile = filer.start()
         filer.assignTree(outlineView)

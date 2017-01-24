@@ -104,12 +104,24 @@ class EditorController: NSTextView, NSTextViewDelegate {
         //
     }
     
-    func deleteLine() {
-        //
+    @IBAction func deleteLine(_ sender: NSMenuItem) {
+        self.selectLine(sender)
+        self.deleteBackward(sender)
     }
     
-    func duplicateLine() {
-        //
+    @IBAction func duplicateLine(_ sender: NSMenuItem) {
+        debugPrint("DUPLICATE LINE!")
+        guard self.string != nil else { return }
+        let content = self.string! as NSString
+
+        self.selectLine(sender)
+        let range = self.selectedRange()
+        let text = content.substring(with: range)
+        let newLineRange = NSRange(location: range.location + range.length, length: 0)
+        //self.smartInsert(for: text, replacing: newLineRange, before: nil, after: nil)
+        self.insertText(text, replacementRange: newLineRange)
+        self.moveToBeginningOfLine(sender)
+        self.moveDown(sender)
     }
     
     func duplicateBlock() {

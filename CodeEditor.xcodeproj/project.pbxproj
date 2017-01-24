@@ -10,6 +10,7 @@
 		3D01707D1E3252080051E778 /* Syntax.css.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D0170771E3252070051E778 /* Syntax.css.yaml */; };
 		3D01707F1E3252080051E778 /* Syntax.html.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D0170791E3252080051E778 /* Syntax.html.yaml */; };
 		3D0170821E3252080051E778 /* Syntax.swift.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D01707C1E3252080051E778 /* Syntax.swift.yaml */; };
+		3D0E322C1E36DFB900C9F71B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E322B1E36DFB900C9F71B /* Settings.swift */; };
 		3D106F361E29BFDF0081E0EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D106F351E29BFDF0081E0EC /* AppDelegate.swift */; };
 		3D106F381E29BFDF0081E0EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D106F371E29BFDF0081E0EC /* ViewController.swift */; };
 		3D106F3A1E29BFDF0081E0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D106F391E29BFDF0081E0EC /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		3D0170771E3252070051E778 /* Syntax.css.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.css.yaml; sourceTree = "<group>"; wrapsLines = 0; };
 		3D0170791E3252080051E778 /* Syntax.html.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.html.yaml; sourceTree = "<group>"; wrapsLines = 0; };
 		3D01707C1E3252080051E778 /* Syntax.swift.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.swift.yaml; sourceTree = "<group>"; wrapsLines = 0; };
+		3D0E322B1E36DFB900C9F71B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3D106F321E29BFDF0081E0EC /* CodeEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D106F351E29BFDF0081E0EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D106F371E29BFDF0081E0EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -47,7 +49,7 @@
 		3D814B751E345D4F006F0044 /* Syntax.plist.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.plist.yaml; sourceTree = "<group>"; };
 		3DA35B1A1E303D14009315C4 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; wrapsLines = 0; };
 		3DE47FEE1E3406B700BC06D1 /* Settings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.yaml; sourceTree = "<group>"; };
-		3DEBA8061E32DA1300933697 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		3DEBA8061E32DA1300933697 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				3D106F3E1E29BFDF0081E0EC /* Info.plist */,
 				3DE47FEE1E3406B700BC06D1 /* Settings.yaml */,
+				3D0E322B1E36DFB900C9F71B /* Settings.swift */,
 				3D106F351E29BFDF0081E0EC /* AppDelegate.swift */,
 				3D106F371E29BFDF0081E0EC /* ViewController.swift */,
 				3D1A8B3A1E2FEE070053EB1A /* SyntaxColorizer.swift */,
@@ -196,6 +199,7 @@
 				3D2FFB681E33A04200C309A8 /* EditorController..swift in Sources */,
 				3DEBA8071E32DA1300933697 /* Utils.swift in Sources */,
 				3D1A8B3B1E2FEE070053EB1A /* SyntaxColorizer.swift in Sources */,
+				3D0E322C1E36DFB900C9F71B /* Settings.swift in Sources */,
 				3D106F381E29BFDF0081E0EC /* ViewController.swift in Sources */,
 				3D106F361E29BFDF0081E0EC /* AppDelegate.swift in Sources */,
 			);

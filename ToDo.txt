@@ -1,21 +1,26 @@
 TODO:
 
 - dark theme
-- save on editor lost focus, at all times
+x save on editor lost focus, at all times
 
-- load defaults from settings.yaml
+x load defaults from settings.yaml
 - if empty, start with blank file
 
 - enable editor commands
+x duplicate line/block
+x delete line
 
 ~ create more syntax templates for html, css, js, xml, etc
 - verify syntax file does not crash the app if malformed
 x on syntax.format("swift") assign template
 
+- allow to open file, set working folder to file's parent
 - toolbar: project, new, open, save, find, run/stop, hide/show filer, hide/show output
 
+VERSION 2:
+- enable console
 - build: call swift build, show progrees in output area
-  on errors show errors and allow user to jump to files and lines
+- on errors show errors and allow user to jump to files and lines
 
 ------------------------------------------------------------
 
