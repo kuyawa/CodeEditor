@@ -1,8 +1,5 @@
 TODO:
 
-- "Todas las generaciones deben padecer el precio del hambre para poder apreciar el valor de la libertad"
-- "All generations must suffer the price of hunger in order to appreciate the value of liberty"
-
 - dark theme
 - save on editor lost focus, at all times
 

@@ -56,6 +56,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
 
     override func viewWillDisappear() {
         //print("Window: ", self.view.window?.frame)
+        if filer.currentDocument.hasChanged {
+            _ = filer.save()
+        }
         filer.saveDefaults()
     }
     
@@ -93,10 +96,10 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         //textEditor.process(editedRange)
-        //if delta != 0 { filer.currentDocument.hasChanged = true; print("Has changed") }
         //print("Delta \(delta) - Mask: \(editedMask.rawValue)")
         if !isLoading && delta != 0 && editedMask.rawValue > 1 {
-            print("Colorizing...")
+            print("Has changed, colorizing...")
+            filer.currentDocument.hasChanged = true
             syntax.colorize(editedRange)
         }
     }
@@ -116,8 +119,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             isLoading = true // on load do not colorize in process editing
             
             // Remove old attributes
-            //let all  = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
-            //textEditor.textStorage?.invalidateAttributes(in: all)
+            let old = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
+            textEditor.textStorage?.removeAttribute(NSForegroundColorAttributeName, range: old)
             //textEditor.textStorage?.setAttributes([:], range: all)
             //textEditor.textStorage?.setAttributedString(NSAttributedString(string: ""))
             textEditor.string = ""
@@ -160,7 +163,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func fileSave() {
-        let result = filer.save(textEditor.string)
+        let result = filer.save()
         
         switch result {
         case .emptyText   : Alert("File has no content").show()

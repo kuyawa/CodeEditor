@@ -235,6 +235,8 @@ class FileController: NSObject {
 extension FileController {
 
     func new() -> DocumentNewResult {
+        if currentDocument.hasChanged { _ = save() }
+
         let emptyFile = "Empty"
         let url  = getWorkingFolder()
         let doc  = FileNode()
@@ -272,10 +274,13 @@ extension FileController {
     }
 
     func open() {
+        if currentDocument.hasChanged { _ = save() }
+
         let dialog = NSOpenPanel()
         dialog.canChooseFiles = false
         dialog.canChooseDirectories = true
         let choice = dialog.runModal()
+        
         if choice == NSFileHandlingPanelOKButton {
             if let url = dialog.url {
                 changeRootFolder(url)
@@ -292,10 +297,10 @@ extension FileController {
         //
     }
 
-    func save(_ text: String?) -> DocumentSaveResult {
+    func save() -> DocumentSaveResult {
         print("Saving \(currentDocument.url) ...")
         
-        guard let text = text else { print("Warn: no text to save"); return .emptyText }
+        guard let text = textView?.string else { print("Warn: no text to save"); return .emptyText }
         guard currentDocument.isEditable else { print("Warn: file is not editable"); return .noEditable }
         guard currentDocument.url != nil else { print("Warn: file has invalid name"); return .invalidName }
         
@@ -402,7 +407,7 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
             let index = view.selectedRow
             if let file = view.item(atRow: index) as? FileNode {
                 if currentDocument.hasChanged {
-                    if save(textView?.string) != DocumentSaveResult.ok {
+                    if save() != DocumentSaveResult.ok {
                         Alert("Error saving file. Try other means or you will lose your work").show()
                         return
                     }
