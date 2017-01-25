@@ -1,0 +1,25 @@
+# Macaw 1.0
+# Syntax: json
+# Author: kuyawa@github
+
+
+colors:
+    red     : 990000
+    green   : 009900
+    blue    : 0000CC
+    magenta : 990099
+    cyan    : 009999
+
+styles:
+    identifiers : blue
+    literals    : cyan
+    numbers     : red
+
+order: identifiers, literals, numbers
+
+patterns:
+    identifiers : (".*?")[\s?]:
+    literals    : :[\s?](".*?")
+    numbers     : \b(\d+?)\b
+
+#end

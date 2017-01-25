@@ -1,6 +1,6 @@
-# macaw 1.0
-# syntax: swift
-# author: kuyawa@github
+# Macaw 1.0
+# Syntax: swift
+# Author: kuyawa@github
 
 
 colors:
@@ -26,7 +26,7 @@ styles:
 order: keywords, attributes, types, stringLiteral, commentLine, commentBlock
 
 patterns:
-    keywords      : \b(class|deinit|enum|extension|func|import|init|let|protocol|static|struct|subscript|typealias|var|throws|rethrows|break|case|continue|default|do|else|fallthrough|if|in|for|return|switch|where|while|repeat|catch|guard|defer|try|throw|as|dynamicType|is|new|super|self|Self|Type|associativity|didSet|get|infix|inout|left|mutating|none|nonmutating|operator|override|postfix|precedence|prefix|right|set|unowned((un)?safe)?|weak|willSet|switch|case|default|where|if|else|continue|break|fallthrough|return|while|repeat|for|in|catch|do|operator|prefix|infix|postfix|open|public|internal|fileprivate|private|convenience|dynamic|final|lazy|(non)?mutating|optional|override|required|static|unowned((un)?safe)?|weak|true|false|nil)\b
+    keywords      : \b(as|associativity|break|case|catch|class|continue|convenience|default|defer|deinit|didSet|do|dynamic|dynamicType|else|enum|extension|fallthrough|false|fileprivate|final|for|func|get|guard|if|import|in|infix|init|inout|internal|is|lazy|left|let|mutating|new|nil|none|nonmutating|open|operator|optional|override|postfix|precedence|prefix|private|protocol|public|repeat|required|rethrows|return|right|self|Self|set|static|struct|subscript|super|switch|throw|throws|true|try|Type|typealias|unowned|unsafe|var|weak|where|while|willSet)\b
     types         : \b(Int|Float|Double|String|Bool|Character|Void|U?Int(8|16|32|64)?|Array|Dictionary|(Array)(<.*>)|(Dictionary)(<.*>)|(Optional)(<.*>)|(protocol)(<.*>))\b
     stringLiteral : (".*")
     numberLiteral : \b([0-9]*(\.[0-9]*)?)\b

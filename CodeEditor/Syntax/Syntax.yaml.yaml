@@ -1,0 +1,26 @@
+# Macaw 1.0
+# Syntax: yaml
+# Author: kuyawa@github
+
+
+colors:
+    red     : 990000
+    green   : 009900
+    blue    : 0000CC
+    magenta : 990099
+    cyan    : 009999
+    yellow  : EECC66
+
+styles:
+    identifiers : blue
+    literals    : cyan
+    comments    : green
+
+order: identifiers, literals, comments
+
+patterns:
+    identifiers : [^|\b](.*?)[\s?]:
+    literals    : :\s*?(.*)
+    comments    : (#.*)
+
+#end

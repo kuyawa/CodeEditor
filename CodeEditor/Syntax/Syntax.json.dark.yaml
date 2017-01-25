@@ -1,5 +1,5 @@
 # Macaw 1.0
-# Syntax: css
+# Syntax: json
 # Author: kuyawa@github
 
 
@@ -17,19 +17,14 @@ colors:
 
 styles:
     identifiers : blue
-    attributes  : magenta
-    literals    : yellow
-    comments    : green
+    literals    : cyan
+    numbers     : red
 
-order: identifiers, literals, comments
+order: identifiers, literals, numbers
 
 patterns:
-    identifiers : (.*?)\s*?\{
-#   attributes  : [\{|;|\*/]\s*?([^\s]*?)\s*?:
-    literals    : :\s*?(.*?)[\{|;|/*|\}]
-    comments    : (/\*[^\b]*?\*/)
-
-options:
-    comments : global, multiline
+    identifiers : (".*?")[\s?]:
+    literals    : :[\s?](".*?")
+    numbers     : \b(\d+?)\b
 
 #end

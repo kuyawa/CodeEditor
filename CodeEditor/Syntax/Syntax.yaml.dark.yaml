@@ -1,5 +1,5 @@
 # Macaw 1.0
-# Syntax: css
+# Syntax: yaml
 # Author: kuyawa@github
 
 
@@ -17,19 +17,14 @@ colors:
 
 styles:
     identifiers : blue
-    attributes  : magenta
-    literals    : yellow
+    literals    : cyan
     comments    : green
 
 order: identifiers, literals, comments
 
 patterns:
-    identifiers : (.*?)\s*?\{
-#   attributes  : [\{|;|\*/]\s*?([^\s]*?)\s*?:
-    literals    : :\s*?(.*?)[\{|;|/*|\}]
-    comments    : (/\*[^\b]*?\*/)
-
-options:
-    comments : global, multiline
+    identifiers : [^|\b](.*?)[\s?]:
+    literals    : :\s*?(.*)
+    comments    : (#.*)
 
 #end
