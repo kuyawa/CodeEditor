@@ -1,8 +1,5 @@
 TODO:
 
-x dark theme
-- extract syntax files from bundle on firstTime
-~ show/hide filer panel, nice icon copy from xcode
 - toggling filer panel leaves a vertical line visible?
 - on multiline patterns, extend range to prev/next caret ie /* */
 - if empty, start with blank file
@@ -10,7 +7,6 @@ x dark theme
   - move line/block up on cmd+up
   - move line/block dn on cmd+dn
 
-- create syntax templates for yaml, js and json
 - verify syntax file does not crash the app if malformed
 
 ~ allow to open file from OS, use App.delegate
@@ -18,6 +14,10 @@ x dark theme
 
 ------------------------------------------------------------
 
+x dark theme
+x extract syntax files from bundle on firstTime
+x show/hide filer panel, add "show file panel" to main menu
+x create syntax templates for yaml, js and json
 x toolbar: project, new, open, save
 x order files folders first
 x save on editor lost focus, at all times

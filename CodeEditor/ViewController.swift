@@ -62,13 +62,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("VC didload")
         initialize()
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        print("VC didAppear")
         setTheme()
     }
     
@@ -93,7 +91,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
 
     func initialize() {
-        //setTheme()
         consoleArea.isHidden = true
         
         syntax.assignView(textEditor)
@@ -123,6 +120,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.textContainer?.containerSize = NSSize(width: Int.max, height: Int.max)
         textEditor.textContainer?.widthTracksTextView = false
         
+        // Default colors
         if app.settings.isDarkTheme {
             textEditor.backgroundColor = NSColor("333333")
             textEditor.textColor = NSColor("EEEEEE")
@@ -190,9 +188,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
 
         if result == .ok {
             selectedFile(filer.currentDocument)
-            //setFileName(filer.currentDocument.name)
-            //textEditor.string = ""
-            //resetEditor()
         }
     }
     
