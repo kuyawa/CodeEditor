@@ -165,7 +165,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
 
             // Assign new text
             let text = try? String(contentsOf: file.url!)
-            textEditor.string = text ?? "Error loading file"
+            textEditor.string = text ?? "[\(file.name) is not editable]"
             resetEditor()
             
             // Colorize it!

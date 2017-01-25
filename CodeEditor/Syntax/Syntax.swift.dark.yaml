@@ -16,13 +16,14 @@ colors:
 
 styles:
     keywords      : magenta
+    attributes    : magenta
+    types         : cyan
     stringLiteral : yellow
     commentLine   : green
     commentBlock  : green
-    types         : cyan
 #   identifiers   : orange
 
-order: keywords, types, stringLiteral, commentLine, commentBlock
+order: keywords, attributes, types, stringLiteral, commentLine, commentBlock
 
 patterns:
     keywords      : \b(class|deinit|enum|extension|func|import|init|let|protocol|static|struct|subscript|typealias|var|throws|rethrows|break|case|continue|default|do|else|fallthrough|if|in|for|return|switch|where|while|repeat|catch|guard|defer|try|throw|as|dynamicType|is|new|super|self|Self|Type|associativity|didSet|get|infix|inout|left|mutating|none|nonmutating|operator|override|postfix|precedence|prefix|right|set|unowned((un)?safe)?|weak|willSet|switch|case|default|where|if|else|continue|break|fallthrough|return|while|repeat|for|in|catch|do|operator|prefix|infix|postfix|open|public|internal|fileprivate|private|convenience|dynamic|final|lazy|(non)?mutating|optional|override|required|static|unowned((un)?safe)?|weak|true|false|nil)\b
@@ -31,9 +32,9 @@ patterns:
     numberLiteral : \b([0-9]*(\.[0-9]*)?)\b
     symbols       : (\+|-|\*|/|=|\{|\}|\[|\]|\(|\))
     identifiers   : (\B\$[0-9]+|\b[\w^\d][\w\d]*\b|\B`[\w^\d][\w\d]*`\B)
-    attributes    : ((@)(\B\$[0-9]+|\b[\w^\d][\w\d]*\b|\B`[\w^\d][\w\d]*`\B))(\()(.*)\)
+    attributes    : ((@)(\B\$[0-9]+|\b[\w^\d][\w\d]*\b|\B`[\w^\d][\w\d]*`\B))
     commentLine   : (//.*)
-    commentBlock  : (/\*.*\*/)
+    commentBlock  : (/\*.*?\*/)
 
 options:
     commentBlock : multiline

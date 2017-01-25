@@ -13,11 +13,15 @@ indentation-count : 4
 
 # Syntax templates
 
-syntax-default  : swift
-syntax-unknown  : txt
-syntax-xml      : html
-syntax-plist    : html
-syntax-xcscheme : html
+syntax-default         : swift
+syntax-unknown         : txt
+syntax-xml             : html
+syntax-plist           : html
+syntax-xcscheme        : html
+syntax-pbxproj         : swift
+syntax-xcbkptlist      : html
+syntax-storyboard      : html
+syntax-xcworkspacedata : html
 
 
 # End
