@@ -1,11 +1,12 @@
 TODO:
 
-- toggling filer panel leaves a vertical line visible?
-- on multiline patterns, extend range to prev/next caret ie /* */
-- if empty, start with blank file
 - enable more editor commands
   - move line/block up on cmd+up
   - move line/block dn on cmd+dn
+
+- toggling filer panel leaves a vertical line visible?
+- on multiline patterns, extend range to prev/next caret ie /* */
+- if empty, start with blank file
 
 - verify syntax file does not crash the app if malformed
 
