@@ -8,6 +8,7 @@ TODO:
 ~ create more syntax templates for html, css, js, xml, etc
 - verify syntax file does not crash the app if malformed
 
+- order files folders first
 - allow to open file from OS, use App.delegate
 - allow to open file, set working folder to file's parent
 - toolbar: project, new, open, save, find, run/stop, hide/show filer, hide/show output

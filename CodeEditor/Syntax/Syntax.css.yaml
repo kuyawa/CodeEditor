@@ -3,29 +3,31 @@
 # author: kuyawa@github
 
 
-patterns:
-    identifiers : (\b.*?)[\s?]\{
-    attributes  : [\{|;|\s]([\w|-]*?)\:
-    literals    : \:\s*?([^\s]*?)\s*?[;|\}]
-    comments    : (/\*[^\b]*?\*/)
-
-
-options:
-    comments : global, multiline
-
 colors:
     red     : 990000
     green   : 009900
-    blue    : 000099
+    blue    : 0000CC
     magenta : 990099
     cyan    : 009999
 
 styles:
     identifiers : blue
-    attributes  : magenta
-    literals    : cyan
+#   attributes  : cyan
+    literals    : magenta
     comments    : green
 
-order: identifiers, attributes, literals, comments
+order: identifiers, literals, comments
+
+patterns:
+    identifiers : (\b.*?)[\s?]\{
+#   attributes  : [\{|;|\s]([\w|-]*?)\:
+#   attributes  : [\{|;|\*/]\s*?([^\s]*?)\s*?:
+#   literals    : \:\s*?([^\s]*?)\s*?[\{|;|\}]
+    literals    : :\s*?(.*?)[\{|;|/*|\}]
+    comments    : (/\*[^\b]*?\*/)
+
+
+options:
+    comments : global, multiline
 
 #end

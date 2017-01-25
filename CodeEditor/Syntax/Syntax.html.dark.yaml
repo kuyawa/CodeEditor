@@ -2,6 +2,29 @@
 # syntax: html
 # author: kuyawa@github
 
+
+colors:
+    background : 333333
+    normal     : EEEEEE
+    red        : CC3333
+    green      : 33AA33
+    blue       : 6699DD
+    magenta    : CC66CC
+    cyan       : 33AAAA
+    orange     : DD6633
+    yellow     : EECC66
+    gray       : CCCCCC
+
+styles:
+    comments   : green
+    brackets   : blue
+    tags       : blue
+    templates  : blue
+    attributes : magenta
+    literals   : yellow
+
+order: comments, brackets, tags, templates, attributes, literals
+
 patterns:
     comments   : (<!--[^\b]*?-->)
     processors : <\?(.*?)[\s|\?>]
@@ -12,26 +35,8 @@ patterns:
     literals   : (".*?")
     brackets   : ([<|>])
 
-
 options:
     comments  : global, multiline
     templates : global, multiline
-
-colors:
-    red     : 990000
-    green   : 009900
-    blue    : 0000cc
-    magenta : 990099
-    cyan    : 009999
-    gray    : aaaaaa
-
-styles:
-    comments   : green
-    brackets   : gray
-    tags       : blue
-    attributes : magenta
-    literals   : cyan
-
-order: comments, brackets, tags, attributes, literals
 
 #end

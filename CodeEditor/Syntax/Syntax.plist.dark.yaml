@@ -17,9 +17,9 @@ colors:
 
 styles:
     comments   : green
-    brackets   : magenta
-    tags       : magenta
-    attributes : blue
+    brackets   : blue
+    tags       : blue
+    attributes : magenta
     literals   : yellow
 
 order: comments, tags, attributes, literals, brackets

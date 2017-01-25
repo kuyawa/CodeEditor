@@ -87,7 +87,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         
         switch indent.last {
         case "{": spaceCount += spacer
-        case "}": spaceCount -= spacer
+        case "}": spaceCount -= spacer; if spaceCount < 0 { spaceCount = 0 }
         default : break
         }
         

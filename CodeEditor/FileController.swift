@@ -190,7 +190,7 @@ class FileController: NSObject {
                 return fileError
             }
             
-            files = results.sorted(by: { $0.name < $1.name }) // sort ascending by name
+            files = results.sorted(by: { ($0.isFolder ? "0" : "1" + $0.name.lowercased()) < ($1.isFolder ? "0" : "1" + $1.name.lowercased()) }) // sort ascending by name
         }
         
         return files

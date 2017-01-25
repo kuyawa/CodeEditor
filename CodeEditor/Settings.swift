@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Settings {
-    var theme = "dark"
+    var theme = "light"
     var isDarkTheme: Bool { return theme == "dark" }
     
     var fontFamily = "Menlo"
@@ -39,7 +39,7 @@ struct Settings {
         
         let options = QuickYaml().parse(text)
 
-        theme      = Default.string(options["theme"], "dark")
+        theme      = Default.string(options["theme"], "light")
         fontFamily = Default.string(options["fontFamily"], "menlo")
         fontSize   = Default.int(options["fontSize"], 14)
         wordWrap   = Default.bool(options["x"], false)

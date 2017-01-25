@@ -19,7 +19,7 @@ class SyntaxFormatter {
     var order     = [String]()
     
     var colorText = NSColor("333333")
-    var colorBack = NSColor("EEEEEE")
+    var colorBack = NSColor("FFFFFF")
     
 
     func load(_ syntax: Dixy) {
@@ -29,7 +29,7 @@ class SyntaxFormatter {
             colorBack = NSColor("333333")
         } else {
             colorText = NSColor("333333")
-            colorBack = NSColor("EEEEEE")
+            colorBack = NSColor("FFFFFF")
         }
         
         // User defined
@@ -73,10 +73,6 @@ class SyntaxColorizer {
     var formatter : SyntaxFormatter?
     var isColorizable = false
 
-    struct Attributes {
-        let colorNormal: [NSAttributeDescription]   //= [NSForegroundColorAttributeName: formatter?.colorText]
-    }
-    
     // First assign the textView
     func assignView(_ view: NSTextView) {
         self.textView = view

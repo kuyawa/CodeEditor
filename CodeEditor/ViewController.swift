@@ -114,11 +114,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.textContainer?.widthTracksTextView = false
         
         if app.settings.isDarkTheme {
-            textEditor.backgroundColor = NSColor(hex: 0x333333)
-            textEditor.textColor = NSColor(hex: 0xeeeeee)
+            textEditor.backgroundColor = NSColor("333333")
+            textEditor.textColor = NSColor("EEEEEE")
         } else {
-            textEditor.backgroundColor = NSColor(hex: 0xeeeeee)
-            textEditor.textColor = NSColor(hex: 0x333333)
+            textEditor.backgroundColor = NSColor("FFFFFF")
+            textEditor.textColor = NSColor("333333")
         }
     }
     
