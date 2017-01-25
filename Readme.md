@@ -19,10 +19,20 @@ Syntax highlighter needs a little polish, editing commands are not developed yet
 
 Editor commands implemented:
 
-- cmd+D Duplicate line
-- cmd+L Delete line
+- cmd+N  New file
+- cmd+O  Open folder
+- cmd+S  Save file
+- cmd+F  Find in file
 
-###Version Next:
+- cmd+D   Duplicate line
+- cmd+L   Delete line
+- cmd+Bck Delete to Begin of Line
+- cmd+Del Delete to End of Line
+
+- ctl+Up Move line Up
+- ctl+Dn Move line down
+
+### Version Next:
 
 - Enable console
 - Build and Run: call swift build, show progress in console area

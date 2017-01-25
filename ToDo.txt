@@ -1,13 +1,15 @@
 TODO:
 
+- on load, show last file in tree, expanding folders if needed
 - enable more editor commands
-  - move line/block up on cmd+up
-  - move line/block dn on cmd+dn
+  - tab: indent block
+  - shf+tab unindent block
 
-- toggling filer panel leaves a vertical line visible?
+- toggling file panel leaves a vertical line visible that disappear on a small resize
 - on multiline patterns, extend range to prev/next caret ie /* */
 - if empty, start with blank file
 
+- verify empty file does not crash the app
 - verify syntax file does not crash the app if malformed
 
 ~ allow to open file from OS, use App.delegate
@@ -15,6 +17,9 @@ TODO:
 
 ------------------------------------------------------------
 
+x add black/white icon for dark/light theme selection
+x move line/block up on cmd+up
+x move line/block dn on cmd+dn
 x dark theme
 x extract syntax files from bundle on firstTime
 x show/hide filer panel, add "show file panel" to main menu

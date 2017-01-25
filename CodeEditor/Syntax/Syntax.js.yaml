@@ -17,7 +17,7 @@ colors:
 styles:
     keyword       : magenta
     identifier    : blue
-    stringLiteral : orange
+    stringLiteral : red
     commentLine   : green
     commentBlock  : green
 

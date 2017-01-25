@@ -166,6 +166,18 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
+                                        <menuItem title="Move Line Up" keyEquivalent="" id="iLy-5g-4VL">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="moveLineUp:" target="Ady-hI-5gd" id="BGY-K5-WQj"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Line Down" keyEquivalent="" id="JZ3-4q-FRA">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="moveLineDown:" target="Ady-hI-5gd" id="Ih4-sL-ltF"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Duplicate Line" keyEquivalent="d" id="Ggu-Ar-TpA">
                                             <connections>
                                                 <action selector="duplicateLine:" target="Ady-hI-5gd" id="gve-zu-3f8"/>
@@ -174,6 +186,16 @@
                                         <menuItem title="Delete Line" keyEquivalent="l" id="TgM-bV-vZh">
                                             <connections>
                                                 <action selector="deleteLine:" target="Ady-hI-5gd" id="iag-EP-Msd"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete to Begin of Line" id="PGa-Na-YKm">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                        </menuItem>
+                                        <menuItem title="Delete to End of Line" keyEquivalent="" id="hMw-4D-LKy">
+                                            <connections>
+                                                <action selector="eraseToEndOfLine:" target="Ady-hI-5gd" id="mEq-FK-5hh"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="s4m-ig-ASt"/>
@@ -825,6 +847,19 @@
                                                     <action selector="onFileOpen:" target="XfG-lQ-9wD" id="9WI-KX-brx"/>
                                                 </connections>
                                             </button>
+                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-1D-Srm">
+                                                <rect key="frame" x="185" y="473" width="24" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_dark" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8Je-nZ-cDy">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent">o</string>
+                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="onThemeToggle:" target="XfG-lQ-9wD" id="e0h-HO-Cos"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </customView>
                                     <customView fixedFrame="YES" id="3rd-wm-RzG">
@@ -858,7 +893,7 @@
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bzo-GJ-Iuf">
-                                                                    <rect key="frame" x="1" y="382" width="776" height="16"/>
+                                                                    <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xc7-kg-tk5">
@@ -959,6 +994,7 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="icon_dark" width="32" height="32"/>
         <image name="icon_menu" width="32" height="32"/>
         <image name="icon_new" width="32" height="32"/>
         <image name="icon_open" width="32" height="32"/>

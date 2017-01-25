@@ -60,6 +60,10 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         }
     }
     
+    @IBAction func onThemeToggle(_ sender: AnyObject) {
+        themeToggle()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -88,6 +92,14 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
                 window.appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
             }
         }
+    }
+    
+    func themeToggle() {
+        app.settings.isDarkTheme = !app.settings.isDarkTheme
+        setTheme()
+        // set cursor in prev position, scroll if necessary
+        // or do not reload just repaint syntax
+        selectedFile(filer.currentDocument)
     }
 
     func initialize() {

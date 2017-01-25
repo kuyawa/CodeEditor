@@ -100,13 +100,33 @@ class EditorController: NSTextView, NSTextViewDelegate {
         self.insertText(spaces, replacementRange: start)
     }
 
-    func insertLine() {
-        //
+    
+    @IBAction func moveLineUp(_ sender: NSMenuItem) {
+        self.selectLine(sender)
+        self.cut(sender)
+        self.moveUp(sender)
+        self.moveToBeginningOfLine(sender)
+        self.paste(sender)
+        self.moveUp(sender)
+    }
+    
+    @IBAction func moveLineDown(_ sender: NSMenuItem) {
+        self.selectLine(sender)
+        self.cut(sender)
+        self.moveDown(sender)
+        self.moveToBeginningOfLine(sender)
+        self.paste(sender)
+        self.moveUp(sender)
     }
     
     @IBAction func deleteLine(_ sender: NSMenuItem) {
         self.selectLine(sender)
         self.deleteBackward(sender)
+    }
+    
+    @IBAction func eraseToEndOfLine(_ sender: NSMenuItem) {
+        self.moveToEndOfLineAndModifySelection(sender)
+        self.deleteToEndOfLine(sender)
     }
     
     @IBAction func duplicateLine(_ sender: NSMenuItem) {
@@ -124,17 +144,13 @@ class EditorController: NSTextView, NSTextViewDelegate {
         self.moveDown(sender)
     }
     
-    func duplicateBlock() {
-        //
-    }
-    
     func indentBlock() {
         //
     }
     
     func unindentBlock(_ range: NSRange) {
         debugPrint("Unindent")
-        self.deleteBackward(self)
+        //self.deleteBackward(self)
     }
     
     func alignBracket(_ range: NSRange) {
@@ -167,14 +183,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
             debugPrint("Bracket in position")
         }
         */
-    }
-    
-    func deleteToBeginOfLine() {
-        //
-    }
-    
-    func deleteToEndOfLine() {
-        //
     }
     
     
