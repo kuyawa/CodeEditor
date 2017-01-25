@@ -31,12 +31,12 @@ patterns:
     templates  : <%([^\b]*?)%>
     directives : <!([^-].*?)>
     attributes : \s\b(.*?)\s?=
-    tags       : <([^!%?].*?)[\s|\/>|>]
+    tags       : <([^!%\?].*?)[\s|\/>|>]
     literals   : (".*?")
     brackets   : ([<|>])
 
 options:
-    comments  : global, multiline
-    templates : global, multiline
+    comments  : multiline
+    templates : multiline
 
 #end

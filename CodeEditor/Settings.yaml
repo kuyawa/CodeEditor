@@ -15,8 +15,9 @@ indentation-count : 4
 
 syntax-default  : swift
 syntax-unknown  : txt
-syntax-plist    : xml
-syntax-xcscheme : xml
+syntax-xml      : html
+syntax-plist    : html
+syntax-xcscheme : html
 
 
 # End

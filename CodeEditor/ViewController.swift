@@ -50,6 +50,16 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         fileSave()
     }
     
+    @IBAction func onFilePanel(_ sender: AnyObject) {
+        fileArea.isHidden = !fileArea.isHidden
+        mainSplitter.adjustSubviews()
+        
+        // Change mark in menu item
+        if let menuItem = sender as? NSMenuItem {
+            menuItem.state = fileArea.isHidden ? 0 : 1
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("VC didload")

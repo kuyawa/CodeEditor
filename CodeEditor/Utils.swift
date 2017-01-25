@@ -12,6 +12,50 @@ import Foundation
 
 typealias Dixy = [String: Any]
 
+extension String {
+    
+    func subtext(from pos: Int) -> String {
+        guard pos >= 0 else { return "" }
+        
+        if pos > self.characters.count { return  "" }
+        
+        let first = self.index(self.startIndex, offsetBy: pos)
+        let text  = self.substring(from: first)
+        
+        return text
+    }
+
+    func subtext(to pos: Int) -> String {
+        var end = pos
+        
+        if pos > self.characters.count { end = self.characters.count }
+        
+        let last = self.index(self.startIndex, offsetBy: end)
+        let text = self.substring(to: last)
+        
+        return text
+    }
+
+    func subtext(from ini: Int, to end: Int) -> String {
+        guard ini >= 0 else { return "" }
+        guard end >= 0 else { return "" }
+        
+        var fin = end
+        
+        if ini > self.characters.count { return  "" }
+        if end > self.characters.count { fin = self.characters.count }
+        
+        let first = self.index(self.startIndex, offsetBy: ini)
+        let last  = self.index(self.startIndex, offsetBy: fin)
+        let range = first ..< last
+        let text  = self.substring(with: range)
+        
+        return text
+    }
+
+}
+
+
 extension NSColor {
 
     // Use: NSColor("ffffff")

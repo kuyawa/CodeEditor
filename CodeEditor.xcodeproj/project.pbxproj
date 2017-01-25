@@ -21,9 +21,6 @@
 		3D2E8ADE1E3538C900AF14FC /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E8ADD1E3538C900AF14FC /* FileNode.swift */; };
 		3D2FFB681E33A04200C309A8 /* EditorController..swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2FFB671E33A04200C309A8 /* EditorController..swift */; };
 		3D3E2A5B1E379D4A00FFE466 /* Syntax.swift.dark.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D3E2A5A1E379D4900FFE466 /* Syntax.swift.dark.yaml */; };
-		3D3E2A5D1E37A92900FFE466 /* Syntax.plist.dark.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D3E2A5C1E37A92900FFE466 /* Syntax.plist.dark.yaml */; };
-		3D814B741E345D1F006F0044 /* Syntax.xml.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D814B731E345D1F006F0044 /* Syntax.xml.yaml */; };
-		3D814B761E345D4F006F0044 /* Syntax.plist.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D814B751E345D4F006F0044 /* Syntax.plist.yaml */; };
 		3D9D80491E3812A4001E6EF9 /* Syntax.css.dark.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D9D80471E3812A4001E6EF9 /* Syntax.css.dark.yaml */; };
 		3D9D804A1E3812A4001E6EF9 /* Syntax.html.dark.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3D9D80481E3812A4001E6EF9 /* Syntax.html.dark.yaml */; };
 		3DA35B1B1E303D14009315C4 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DA35B1A1E303D14009315C4 /* Sample.txt */; };
@@ -49,10 +46,7 @@
 		3D28D9251E31C3970014C41E /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		3D2E8ADD1E3538C900AF14FC /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D2FFB671E33A04200C309A8 /* EditorController..swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorController..swift; sourceTree = "<group>"; wrapsLines = 0; };
-		3D3E2A5A1E379D4900FFE466 /* Syntax.swift.dark.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.swift.dark.yaml; sourceTree = "<group>"; };
-		3D3E2A5C1E37A92900FFE466 /* Syntax.plist.dark.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.plist.dark.yaml; sourceTree = "<group>"; };
-		3D814B731E345D1F006F0044 /* Syntax.xml.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.xml.yaml; sourceTree = "<group>"; };
-		3D814B751E345D4F006F0044 /* Syntax.plist.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.plist.yaml; sourceTree = "<group>"; };
+		3D3E2A5A1E379D4900FFE466 /* Syntax.swift.dark.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.swift.dark.yaml; sourceTree = "<group>"; wrapsLines = 0; };
 		3D9D80471E3812A4001E6EF9 /* Syntax.css.dark.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.css.dark.yaml; sourceTree = "<group>"; };
 		3D9D80481E3812A4001E6EF9 /* Syntax.html.dark.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Syntax.html.dark.yaml; sourceTree = "<group>"; };
 		3DA35B1A1E303D14009315C4 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; wrapsLines = 0; };
@@ -78,11 +72,8 @@
 				3D9D80471E3812A4001E6EF9 /* Syntax.css.dark.yaml */,
 				3D0170791E3252080051E778 /* Syntax.html.yaml */,
 				3D9D80481E3812A4001E6EF9 /* Syntax.html.dark.yaml */,
-				3D814B751E345D4F006F0044 /* Syntax.plist.yaml */,
-				3D3E2A5C1E37A92900FFE466 /* Syntax.plist.dark.yaml */,
 				3D01707C1E3252080051E778 /* Syntax.swift.yaml */,
 				3D3E2A5A1E379D4900FFE466 /* Syntax.swift.dark.yaml */,
-				3D814B731E345D1F006F0044 /* Syntax.xml.yaml */,
 			);
 			path = Syntax;
 			sourceTree = "<group>";
@@ -195,9 +186,6 @@
 				3D01707F1E3252080051E778 /* Syntax.html.yaml in Resources */,
 				3DE47FEF1E3406B700BC06D1 /* Settings.yaml in Resources */,
 				3DA35B1B1E303D14009315C4 /* Sample.txt in Resources */,
-				3D814B741E345D1F006F0044 /* Syntax.xml.yaml in Resources */,
-				3D814B761E345D4F006F0044 /* Syntax.plist.yaml in Resources */,
-				3D3E2A5D1E37A92900FFE466 /* Syntax.plist.dark.yaml in Resources */,
 				3D3E2A5B1E379D4A00FFE466 /* Syntax.swift.dark.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

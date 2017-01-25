@@ -1,6 +1,7 @@
 TODO:
 
-- dark theme
+x dark theme
+- extract syntax files from bundle on firstTime
 - show/hide filer panel, nice icon copy from xcode
 - if empty, start with blank file
 - enable more editor commands
@@ -8,18 +9,13 @@ TODO:
 ~ create more syntax templates for html, css, js, xml, etc
 - verify syntax file does not crash the app if malformed
 
-- order files folders first
 - allow to open file from OS, use App.delegate
 - allow to open file, set working folder to file's parent
 - toolbar: project, new, open, save, find, run/stop, hide/show filer, hide/show output
 
-VERSION 2:
-- enable console
-- build: call swift build, show progrees in output area
-- on errors show errors and allow user to jump to files and lines
-
 ------------------------------------------------------------
 
+x order files folders first
 x save on editor lost focus, at all times
 x load defaults from settings.yaml
 x duplicate line/block
@@ -83,6 +79,15 @@ tab     if block selected, indent/unindent, else default
 up     move line/block up
 dn     move line/block dn
 U      toggle selected case upper/lower/camel
+
+
+------------------------------------------------------------
+
+VERSION 2:
+
+- enable console
+- build: call swift build, show progrees in output area
+- on errors show errors and allow user to jump to files and lines
 
 
 END.

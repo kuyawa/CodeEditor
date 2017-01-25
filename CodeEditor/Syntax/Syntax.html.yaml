@@ -2,22 +2,28 @@
 # syntax: html
 # author: kuyawa@github
 
+
 colors:
-    red     : 990000
-    green   : 009900
-    blue    : 0000CC
-    magenta : 990099
-    cyan    : 009999
-    gray    : AAAAAA
+    background : 333333
+    normal     : EEEEEE
+    red        : 990000
+    green      : 009900
+    blue       : 0000CC
+    magenta    : 990099
+    cyan       : 009999
+    orange     : DD6633
+    yellow     : EECC66
+    gray       : AAAAAA
 
 styles:
     comments   : green
     brackets   : gray
     tags       : blue
+    templates  : blue
     attributes : magenta
     literals   : cyan
 
-order: comments, brackets, tags, attributes, literals
+order: comments, brackets, tags, templates, attributes, literals
 
 patterns:
     comments   : (<!--[^\b]*?-->)
@@ -25,7 +31,7 @@ patterns:
     templates  : <%([^\b]*?)%>
     directives : <!([^-].*?)>
     attributes : \s\b(.*?)\s?=
-    tags       : <([^!%?].*?)[\s|\/>|>]
+    tags       : <([^!%\?].*?)[\s|\/>|>]
     literals   : (".*?")
     brackets   : ([<|>])
 

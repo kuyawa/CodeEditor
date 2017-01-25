@@ -51,8 +51,8 @@ struct Settings {
         syntaxUnknown = Default.string(options["syntax-unknown"], "txt")
         
         for (key, val) in options {
-            if key.hasPrefix("syntax") {
-                syntaxList[key] = Default.string(val)
+            if key.hasPrefix("syntax-") {
+                syntaxList[key.subtext(from: 7)] = Default.string(val)
             }
         }
     }

@@ -69,6 +69,7 @@ class SyntaxFormatter {
 
 class SyntaxColorizer {
     var textView  : NSTextView?
+    var fileExt   : String = "swift"
     var format    : String = "swift"
     var formatter : SyntaxFormatter?
     var isColorizable = false
@@ -79,15 +80,25 @@ class SyntaxColorizer {
     }
     
     // Second assign the syntax format and load the formatter from syntax file
-    func setFormat(_ format: String) {
-        self.format = format
-        self.formatter = SyntaxFormatter() // reset
+    func setFormat(_ ext: String) {
+        self.fileExt = ext
         
         let app = NSApp.delegate as! AppDelegate
         let dark = app.settings.isDarkTheme ? ".dark" : ""
 
         // Get file for syntax
-        guard let url = Bundle.main.url(forResource: "Syntax.\(format)\(dark)", withExtension: "yaml") else {
+        var name = ""
+        if let format = app.settings.syntaxList[ext] {
+            name = "Syntax.\(format)\(dark)"
+            self.format = format
+        } else {
+            name = "Syntax.\(ext)\(dark)"
+            self.format = ext
+        }
+
+        self.formatter = SyntaxFormatter() // reset
+        
+        guard let url = Bundle.main.url(forResource: name, withExtension: "yaml") else {
             print("WARN: Syntax file for \(format) not found")
             isColorizable = false
             return
@@ -121,8 +132,9 @@ class SyntaxColorizer {
         guard let textView = textView else { return }
         guard let styles = formatter?.styles, styles.count > 0 else { return }
         
+        let colors   = formatter?.colors
         let patterns = formatter?.patterns
-        let colors = formatter?.colors
+        let options  = formatter?.options
         
         var extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(range.location, 0)))
             extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(NSMaxRange(range), 0)))
@@ -141,16 +153,23 @@ class SyntaxColorizer {
                 let color   = colors?[colorName as! String] as? NSColor
             {
                 let attribute = [NSForegroundColorAttributeName: color]
-                applyStyles(extended, pattern, attribute)
+                var option: NSRegularExpression.Options = []
+                let styleopt = options?[style] as? String
+                if let multi = styleopt, multi == "multiline" {
+                    //print("Multiline: \(style) \(styleopt)")
+                    option = [.dotMatchesLineSeparators]
+                }
+                applyStyles(extended, pattern, option, attribute)
             }
         }
     }
 
-    func applyStyles(_ range: NSRange, _ pattern: String, _ attribute: [String: Any]) {
+    func applyStyles(_ range: NSRange, _ pattern: String, _ options: NSRegularExpression.Options, _ attribute: [String: Any]) {
         guard let textView = textView else { return }
-        let colorNormal = [NSForegroundColorAttributeName: getColorNormal()]
         
-        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        let colorNormal = [NSForegroundColorAttributeName: getColorNormal()]
+        let regex = try? NSRegularExpression(pattern: pattern, options: options)
+        
         regex?.enumerateMatches(in: textView.string!, options: [], range: range) {
             match, flags, stop in
 

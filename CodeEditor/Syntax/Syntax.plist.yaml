@@ -2,19 +2,6 @@
 # syntax: plist
 # author: kuyawa@github
 
-patterns:
-    comments   : (<!--[^\b]*?-->)
-    processors : <\?(.*?)[\s|\?>]
-    templates  : <%([^\b]*?)%>
-    directives : <!([^-].*?)>
-    attributes : \s\b(.*?)\s?=
-    tags       : <([^!%\?].*?)[\s|\/>|>]
-    literals   : (".*?")
-    brackets   : ([<|>])
-
-options:
-    comments  : global, multiline
-    templates : global, multiline
 
 colors:
     red     : 990000
@@ -32,5 +19,19 @@ styles:
     literals   : cyan
 
 order: comments, brackets, tags, attributes, literals
+
+patterns:
+    comments   : (<!--[^\b]*?-->)
+    processors : <\?(.*?)[\s|\?>]
+    templates  : <%([^\b]*?)%>
+    directives : <!([^-].*?)>
+    attributes : \s\b(.*?)\s?=
+    tags       : <([^!%\?].*?)[\s|\/>|>]
+    literals   : (".*?")
+    brackets   : ([<|>])
+
+options:
+    comments  : multiline
+    templates : multiline
 
 #end

@@ -28,6 +28,6 @@ patterns:
 
 
 options:
-    comments : global, multiline
+    comments : multiline
 
 #end

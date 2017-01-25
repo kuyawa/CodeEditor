@@ -607,10 +607,10 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                        <menuItem title="Show File Panel" state="on" keyEquivalent="t" id="JEF-Km-zCc">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="onFilePanel:" target="Ady-hI-5gd" id="Ysi-GL-wNi"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -695,11 +695,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <splitView identifier="mainSplitter" fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6P-xY-RPe">
+                            <splitView identifier="mainSplitter" fixedFrame="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6P-xY-RPe">
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="500"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView autoresizesSubviews="NO" fixedFrame="YES" id="N7K-3Y-vcm">
+                                    <customView fixedFrame="YES" id="N7K-3Y-vcm">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
@@ -858,7 +858,7 @@
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bzo-GJ-Iuf">
-                                                                    <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                                                                    <rect key="frame" x="1" y="382" width="776" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xc7-kg-tk5">
@@ -906,7 +906,7 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <size key="minSize" width="776" height="68"/>
-                                                                            <size key="maxSize" width="780" height="10000000"/>
+                                                                            <size key="maxSize" width="996" height="10000000"/>
                                                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
                                                                     </subviews>
