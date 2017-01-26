@@ -37,26 +37,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
                     // Copy syntax files to appFolder
                     let files = [
-                        "Settings",
-                        "Syntax.css",
-                        "Syntax.css.dark",
-                        "Syntax.html",
-                        "Syntax.html.dark",
-                        "Syntax.js",
-                        "Syntax.js.dark",
-                        "Syntax.json",
-                        "Syntax.json.dark",
-                        "Syntax.swift",
-                        "Syntax.swift.dark",
-                        "Syntax.yaml",
-                        "Syntax.yaml.dark"
+                        "Settings.yaml",
+                        "css.default.yaml",
+                        "html.default.yaml",
+                        "js.default.yaml",
+                        "json.default.yaml",
+                        "swift.default.yaml",
+                        "xml.default.yaml",
+                        "yaml.default.yaml"
                     ]
                     
                     print("Copying syntax files to app folder")
 
                     for item in files {
-                        if  let source = Bundle.main.url(forResource: item, withExtension: "yaml"),
-                            let target = appFolderUrl?.appendingPathComponent(item).appendingPathExtension("yaml")
+                        if  let source = Bundle.main.url(file: item),
+                            let target = appFolderUrl?.appendingPathComponent(item)
                         {
                             //print("Copying file \(source) to \(target)")
                             try filer.copyItem(at: source, to: target)

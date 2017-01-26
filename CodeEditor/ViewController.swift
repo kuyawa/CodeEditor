@@ -83,10 +83,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func setTheme() {
-        // Dark
         if let window = self.view.window {
             if app.settings.isDarkTheme {
-                print("Dark theme")
                 window.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
             } else {
                 window.appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
@@ -194,6 +192,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     func showOptions() {
         // TODO:
     }
+    
+    
+    //---- File methods
 
     func fileNew() {
         let result = filer.new()
@@ -208,11 +209,23 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func fileOpenByOS(_ filename: String) {
-        let openFile = filer.getFileInfo(URL(string: filename))
-        if let url = openFile.url {
-            Alert("VC Opening file \(url)").show()
+        guard let fileUrl = URL(string: "file://"+filename) else {
+            Alert("File \(filename) is not accessible").show()
+            return
+        }
+        
+        let openFile = filer.getFileInfo(fileUrl)
+
+        if openFile.url == nil {
+            Alert("File \(filename) could not be opened").show()
+        } else {
+            filer.changeRootFolder(fileUrl.deletingLastPathComponent())
+            filer.changeWorkingFolder(fileUrl)
+            filer.currentDocument = openFile
+            filer.reload()
             selectedFile(openFile)
         }
+        
     }
 
     func fileSave() {

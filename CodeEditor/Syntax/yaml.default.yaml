@@ -4,17 +4,23 @@
 
 
 colors:
-    red     : 990000
-    green   : 009900
-    blue    : 0000CC
-    magenta : 990099
-    cyan    : 009999
-    yellow  : EECC66
+    green       : 009900
+    blue        : 0000CC
+    cyan        : 009999
+
+    lite-green  : 33AA33
+    lite-blue   : 6699DD
+    lite-cyan   : 33AAAA
 
 styles:
     identifiers : blue
     literals    : cyan
     comments    : green
+
+styles-dark:
+    identifiers : lite-blue
+    literals    : lite-cyan
+    comments    : lite-green
 
 order: identifiers, literals, comments
 

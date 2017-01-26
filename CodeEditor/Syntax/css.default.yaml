@@ -1,0 +1,48 @@
+# Macaw 1.0
+# Syntax: css
+# Author: kuyawa@github
+
+
+colors:
+    red          : 990000
+    green        : 009900
+    blue         : 0000CC
+    magenta      : 990099
+    purple       : 999900
+    cyan         : 009999
+    orange       : DD6633
+    yellow       : EECC66
+
+    lite-red     : CC3333
+    lite-green   : 33AA33
+    lite-blue    : 6699DD
+    lite-magenta : CC66CC
+    lite-purple  : AAAA33
+    lite-cyan    : 33AAAA
+
+styles:
+    identifiers : blue
+    attributes  : cyan
+    literals    : magenta
+    comments    : green
+
+styles-dark:
+    identifiers : lite-blue
+    attributes  : lite-magenta
+    literals    : yellow
+    comments    : lite-green
+
+order: identifiers, literals, comments
+
+patterns:
+    identifiers : (\b.*?)[\s?]\{
+#   attributes  : [\{|;|\s]([\w|-]*?)\:
+#   attributes  : [\{|;|\*/]\s*?([^\s]*?)\s*?:
+#   literals    : \:\s*?([^\s]*?)\s*?[\{|;|\}]
+    literals    : :\s*?(.*?)[\{|;|/*|\}]
+    comments    : (/\*[^\b]*?\*/)
+
+options:
+    comments : multiline
+
+#end

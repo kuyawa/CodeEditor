@@ -12,38 +12,26 @@ import Foundation
 
 class SyntaxFormatter {
     
-    var patterns  = Dixy()
-    var options   = Dixy()
-    var colors    = Dixy()
-    var styles    = Dixy()
-    var order     = [String]()
+    var colors     = Dixy()
+    var styles     = Dixy()
+    var stylesDark = Dixy()
+    var patterns   = Dixy()
+    var options    = Dixy()
+    var order      = [String]()
     
-    var colorText = NSColor("333333")
-    var colorBack = NSColor("FFFFFF")
+    var colorTextLite = NSColor("333333")
+    var colorBackLite = NSColor("FFFFFF")
+    var colorTextDark = NSColor("EEEEEE")
+    var colorBackDark = NSColor("333333")
     
 
     func load(_ syntax: Dixy) {
-        // Defaults
-        if let app = NSApp.delegate as? AppDelegate, app.settings.isDarkTheme {
-            colorText = NSColor("EEEEEE")
-            colorBack = NSColor("333333")
-        } else {
-            colorText = NSColor("333333")
-            colorBack = NSColor("FFFFFF")
-        }
-        
         // User defined
         colors = Dixy() // reset
         if syntax["colors"] != nil {
             for (key, val) in syntax["colors"]! as! Dixy {
                 let hex = val as! String
                 colors[key] = NSColor(hex)
-                if key=="normal" {
-                    colorText = colors[key] as! NSColor
-                }
-                if key=="background" {
-                    colorBack = colors[key] as! NSColor
-                }
             }
         }
 
@@ -58,6 +46,22 @@ class SyntaxFormatter {
         
         if syntax["styles"] != nil {
             styles = syntax["styles"]! as! Dixy
+            if let fore = styles["foreground"] {
+                colorTextLite = colors[fore as! String] as! NSColor
+            }
+            if let back = styles["background"] {
+                colorBackLite = colors[back as! String] as! NSColor
+            }
+        }
+        
+        if syntax["styles-dark"] != nil {
+            stylesDark = syntax["styles-dark"]! as! Dixy
+            if let fore = stylesDark["foreground"] {
+                colorTextDark = colors[fore as! String] as! NSColor
+            }
+            if let back = stylesDark["background"] {
+                colorBackDark = colors[back as! String] as! NSColor
+            }
         }
         
         if syntax["order"] != nil {
@@ -72,6 +76,7 @@ class SyntaxColorizer {
     var fileExt   : String = "swift"
     var format    : String = "swift"
     var formatter : SyntaxFormatter?
+    var isDark = false
     var isColorizable = false
 
     // First assign the textView
@@ -81,38 +86,51 @@ class SyntaxColorizer {
     
     // Second assign the syntax format and load the formatter from syntax file
     func setFormat(_ ext: String) {
-        self.fileExt = ext
+        fileExt = ext
+        isColorizable = false
         
         let app = NSApp.delegate as! AppDelegate
-        let dark = app.settings.isDarkTheme ? ".dark" : ""
+        isDark  = app.settings.isDarkTheme
 
-        // Get file for syntax
+        // Get syntax file
         var name = ""
-        if let format = app.settings.syntaxList[ext] {
-            name = "Syntax.\(format)\(dark)"
-            self.format = format
+        if let syntax = app.settings.syntaxList[ext] {
+            name   = syntax
+            format = syntax
         } else {
-            name = "Syntax.\(ext)\(dark)"
-            self.format = ext
+            name   = "\(ext).default.yaml"
+            format = ext
         }
 
         self.formatter = SyntaxFormatter() // reset
         
-        guard let url = Bundle.main.url(forResource: name, withExtension: "yaml") else {
-            print("WARN: Syntax file for \(format) not found")
-            isColorizable = false
+        // First get syntax from app folder, if not found then use from bundle
+        let filer = FileManager.default
+        var url = app.appFolderUrl?.appendingPathComponent(name)
+
+        if url == nil {
+            url = Bundle.main.url(file: name)
+        }
+        
+        if url == nil {
+            print("WARN: Syntax file for \(ext) not accessible")
             return
         }
         
-        guard let text = try? String(contentsOf: url) else {
-            print("ERROR: Syntax file for \(format) could not be loaded")
-            isColorizable = false
+        if !filer.fileExists(atPath: url!.path) {
+            print("WARN: Syntax file for \(ext) not found")
+            return
+        }
+        
+        guard let text = try? String(contentsOf: url!) else {
+            print("ERROR: Syntax file for \(ext) could not be loaded")
             return
         }
         
         let syntax = QuickYaml().parse(text)
-        formatter?.load(syntax)
         
+        formatter?.load(syntax)
+        textView?.backgroundColor = getBackgroundColor()
         isColorizable = true
     }
     
@@ -130,31 +148,44 @@ class SyntaxColorizer {
     func colorize(_ range: NSRange) {
         guard isColorizable else { return }
         guard let textView = textView else { return }
-        guard let styles = formatter?.styles, styles.count > 0 else { return }
+        guard let formatter = formatter else { return }
+
+        var styles = Dixy()
+
+        if isDark {
+            styles = formatter.stylesDark
+        } else {
+            styles = formatter.styles
+        }
         
-        let colors   = formatter?.colors
-        let patterns = formatter?.patterns
-        let options  = formatter?.options
+        if styles.count < 1 { return }
+        
+        let colors   = formatter.colors
+        let patterns = formatter.patterns
+        let options  = formatter.options
         
         var extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(range.location, 0)))
             extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(NSMaxRange(range), 0)))
 
         // Loop order.array to apply styles in order
         var keys = [String]()
-        if let order = formatter?.order, order.count > 0 {
+        let order = formatter.order
+        
+        if order.count > 0 {
             keys = order
         } else {
             keys = styles.keys.map{ $0 as String }
         }
         
+        // Now apply styles
         for style in keys {
             if  let colorName = styles[style],
-                let pattern = patterns?[style] as? String,
-                let color   = colors?[colorName as! String] as? NSColor
+                let pattern   = patterns[style] as? String,
+                let color     = colors[colorName as! String] as? NSColor
             {
                 let attribute = [NSForegroundColorAttributeName: color]
                 var option: NSRegularExpression.Options = []
-                let styleopt = options?[style] as? String
+                let styleopt = options[style] as? String
                 if let multi = styleopt, multi == "multiline" {
                     //print("Multiline: \(style) \(styleopt)")
                     option = [.dotMatchesLineSeparators]
@@ -184,11 +215,23 @@ class SyntaxColorizer {
     }
     
     func getColorNormal() -> NSColor {
-        if let normal = formatter?.colorText { return normal }
-        if let app = NSApp.delegate as? AppDelegate, app.settings.isDarkTheme {
+        // If defined use it, else use defaults
+        if isDark {
+            if let color = formatter?.colorTextDark { return color }
             return NSColor("EEEEEE")
         } else {
+            if let color = formatter?.colorTextLite { return color }
             return NSColor("333333")
+        }
+    }
+    func getBackgroundColor() -> NSColor {
+        // If defined use it, else use defaults
+        if isDark {
+            if let color = formatter?.colorBackDark { return color }
+            return NSColor("333333")
+        } else {
+            if let color = formatter?.colorBackLite { return color }
+            return NSColor("FFFFFF")
         }
     }
 }

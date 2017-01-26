@@ -1,0 +1,66 @@
+# Macaw 1.0
+# Syntax: html
+# Author: kuyawa@github
+
+
+colors:
+    red          : 990000
+    green        : 009900
+    blue         : 0000CC
+    magenta      : 990099
+    purple       : 999900
+    cyan         : 009999
+    orange       : DD6633
+    yellow       : EECC66
+
+    lite-red     : CC3333
+    lite-green   : 33AA33
+    lite-blue    : 6699DD
+    lite-magenta : CC66CC
+    lite-purple  : AAAA33
+    lite-cyan    : 33AAAA
+
+    white        : FFFFFF
+    snow         : EEEEEE
+    lite-gray    : CCCCCC
+    gray         : AAAAAA
+    dark-gray    : 333333
+    black        : 000000
+
+styles:
+    background : white
+    foreground : dark-gray
+    comments   : green
+    brackets   : gray
+    tags       : blue
+    templates  : blue
+    attributes : magenta
+    literals   : cyan
+
+styles-dark:
+    background : dark-gray
+    foreground : snow
+    comments   : lite-green
+    brackets   : lite-blue
+    tags       : lite-blue
+    templates  : lite-blue
+    attributes : lite-magenta
+    literals   : yellow
+
+order: comments, brackets, tags, templates, attributes, literals
+
+patterns:
+    comments   : (<!--[^\b]*?-->)
+    processors : <\?(.*?)[\s|\?>]
+    templates  : <%([^\b]*?)%>
+    directives : <!([^-].*?)>
+    attributes : \s\b(.*?)\s?=
+    tags       : <([^!%\?].*?)[\s|\/>|>]
+    literals   : (".*?")
+    brackets   : ([<|>])
+
+options:
+    comments  : multiline
+    templates : multiline
+
+#end

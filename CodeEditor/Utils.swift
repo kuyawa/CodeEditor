@@ -55,6 +55,14 @@ extension String {
 
 }
 
+extension Bundle {
+    func url(file: String) -> URL? {
+        let name = NSString(string: file).deletingPathExtension
+        let ext  = NSString(string: file).pathExtension
+        let url  = Bundle.main.url(forResource: name, withExtension: ext)
+        return url
+    }
+}
 
 extension NSColor {
 

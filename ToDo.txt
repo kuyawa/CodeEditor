@@ -7,16 +7,18 @@ TODO:
 
 - toggling file panel leaves a vertical line visible that disappear on a small resize
 - on multiline patterns, extend range to prev/next caret ie /* */
-- if empty, start with blank file
 
-- verify empty file does not crash the app
+- on load if empty last file, start with blank file
+- verify new empty file does not crash the app
 - verify syntax file does not crash the app if malformed
-
-~ allow to open file from OS, use App.delegate
-- on opening file from OS, set working folder to file's parent
 
 ------------------------------------------------------------
 
+x allow to open file from OS, use App.delegate
+x on opening file from OS, set working folder to file's parent
+x rethink syntax naming to have both themes in one file
+x use styles-dark instead of loading a different scheme
+x use syntax files from app folder, if not found use from bundle
 x add black/white icon for dark/light theme selection
 x move line/block up on cmd+up
 x move line/block dn on cmd+dn

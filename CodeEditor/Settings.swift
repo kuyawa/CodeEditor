@@ -13,7 +13,10 @@ struct Settings {
     var theme = "light"
     var isDarkTheme: Bool {
         get { return theme == "dark" }
-        set { theme = newValue ? "dark" : "light" }
+        set {
+            theme = newValue ? "dark" : "light"
+            UserDefaults.standard.set(theme, forKey: "theme")
+        }
     }
     
     var fontFamily = "Menlo"
@@ -43,9 +46,9 @@ struct Settings {
         let options = QuickYaml().parse(text)
 
         theme      = Default.string(options["theme"], "light")
-        fontFamily = Default.string(options["fontFamily"], "menlo")
-        fontSize   = Default.int(options["fontSize"], 14)
-        wordWrap   = Default.bool(options["x"], false)
+        fontFamily = Default.string(options["font-family"], "menlo")
+        fontSize   = Default.int(options["font-size"], 14)
+        wordWrap   = Default.bool(options["word-wrap"], false)
         
         indentationChar  = Default.string(options["indentation-char"], "space")
         indentationCount = Default.int(options["indentation-count"], 4)
@@ -53,12 +56,31 @@ struct Settings {
         syntaxDefault = Default.string(options["syntax-default"], "swift")
         syntaxUnknown = Default.string(options["syntax-unknown"], "txt")
         
-        for (key, val) in options {
-            if key.hasPrefix("syntax-") {
-                syntaxList[key.subtext(from: 7)] = Default.string(val)
-            }
+        if let exts = options["extensions"] as? Dixy {
+            syntaxList = exts as! [String : String]
+        }
+        
+        // Theme from user defaults if changed
+        if let userTheme = UserDefaults.standard.value(forKey: "theme") as? String {
+            theme = userTheme
         }
     }
+    
+    /*
+    func save() {
+        guard let url = Bundle.main.url(forResource: "Settings", withExtension: "yaml") else {
+            print("WARN: Settings file not found")
+            return
+        }
+
+        let text = "" //QuickYaml.toString(self)
+        
+        if (try? text.write(to: url, atomically: false, encoding: .utf8)) != nil {
+            print("ERROR: Settings file could not be saved")
+            return
+        }
+    }
+    */
 }
 
 

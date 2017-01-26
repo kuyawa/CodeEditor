@@ -1,0 +1,57 @@
+# Macaw 1.0
+# Syntax: js
+# Author: kuyawa@github
+
+
+colors:
+    red          : 990000
+    green        : 009900
+    blue         : 0000CC
+    magenta      : 990099
+    purple       : 999900
+    cyan         : 009999
+    orange       : DD6633
+    yellow       : EECC66
+
+    lite-red     : CC3333
+    lite-green   : 33AA33
+    lite-blue    : 6699DD
+    lite-magenta : CC66CC
+    lite-purple  : AAAA33
+    lite-cyan    : 33AAAA
+
+    white        : FFFFFF
+    snow         : EEEEEE
+    lite-gray    : CCCCCC
+    gray         : AAAAAA
+    dark-gray    : 333333
+    black        : 000000
+
+styles:
+    keyword       : magenta
+    identifier    : blue
+    stringLiteral : red
+    commentLine   : green
+    commentBlock  : green
+
+styles-dark:
+    keyword       : lite-magenta
+    identifier    : lite-blue
+    stringLiteral : orange
+    commentLine   : lite-green
+    commentBlock  : lite-green
+
+order: keyword, identifier, stringLiteral, numberLiteral, commentLine, commentBlock
+
+patterns:
+    keyword       : \b(var|function|class|prototype|break|case|continue|if|else|in|for|return|switch|while|try|catch|new|this|window|navigator|true|false|null)\b
+    identifier    : function\s*(\w*)\b
+    stringLiteral : (".*?"|'.*?')
+    numberLiteral : \b([0-9]*(\.[0-9]*)?)\b
+    commentLine   : (//.*)
+    commentBlock  : (/\*.*?\*/)
+
+options:
+    commentBlock : multiline
+
+#end

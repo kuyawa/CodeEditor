@@ -2,7 +2,7 @@
 # Version: 1.0
 # File: Settings
 
-#theme: dark
+theme: light
 
 font-family : Menlo
 font-size   : 14
@@ -11,17 +11,24 @@ word-wrap   : false
 indentation-char  : space
 indentation-count : 4
 
-# Syntax templates
+syntax-default: swift
+syntax-unknown: txt
 
-syntax-default         : swift
-syntax-unknown         : txt
-syntax-xml             : html
-syntax-plist           : html
-syntax-xcscheme        : html
-syntax-pbxproj         : swift
-syntax-xcbkptlist      : html
-syntax-storyboard      : html
-syntax-xcworkspacedata : html
+# Syntax files for extensions
 
+extensions:
+    css             : css.default.yaml
+    html            : html.default.yaml
+    js              : js.default.yaml
+    json            : json.default.yaml
+    pbxproj         : swift.default.yaml
+    plist           : xml.default.yaml
+    storyboard      : xml.default.yaml
+    swift           : swift.default.yaml
+    xcbkptlist      : xml.default.yaml
+    xcscheme        : xml.default.yaml
+    xcworkspacedata : xml.default.yaml
+    xml             : xml.default.yaml
+    yaml            : yaml.default.yaml
 
 # End
