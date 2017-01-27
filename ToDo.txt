@@ -1,6 +1,6 @@
 TODO:
 
-- on load, show last file in tree, expanding folders if needed
+- make editable tree to rename files
 - enable more editor commands
   - tab: indent block
   - shf+tab unindent block
@@ -14,6 +14,7 @@ TODO:
 
 ------------------------------------------------------------
 
+x on load, show last file in tree, expanding folders if needed
 x allow to open file from OS, use App.delegate
 x on opening file from OS, set working folder to file's parent
 x rethink syntax naming to have both themes in one file

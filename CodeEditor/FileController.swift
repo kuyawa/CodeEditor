@@ -95,6 +95,7 @@ class FileController: NSObject {
             root = getFileInfo(FileManager.default.homeDirectoryForCurrentUser)
         }
         
+        root.children = listFolder(root.url)
     }
     
     func changeWorkingFolder(_ url: URL?) {
@@ -234,6 +235,73 @@ class FileController: NSObject {
 // Document Extension
 extension FileController {
 
+    func findNode(_ node: FileNode) -> FileNode? {
+        guard let rootUrl = root.url else { return nil }
+        guard let fileUrl = node.url else { return nil }
+        //print("Finding: ", fileUrl.path)
+        
+        var row = 0
+        var found: FileNode? = nil
+        
+        // Walk the folders
+        func walkTheFolder(_ folder: FileNode) -> FileNode? {
+            //print("Walking: ", folder.url?.path)
+            
+            folder.children = listFolder(folder.url)
+            if let children = folder.children {
+                for item in children {
+                    //print("Checking: ", item.url?.path)
+                    if fileUrl == item.url { return item /* Found! */ }
+                    row += 1
+                    if item.isFolder && item.url != nil && fileUrl.path.hasPrefix(item.url!.deletingLastPathComponent().path) {
+                        // Expand folder
+                        outlineView?.expandItem(item)
+                        found = walkTheFolder(item)
+                        if found != nil { break }
+                    }
+                }
+            }
+            
+            return found
+        }
+
+        // Start from the root
+        var path = fileUrl.path
+        
+        if !node.isFolder {
+            path = fileUrl.deletingLastPathComponent().path
+        }
+        
+        if path.hasPrefix(rootUrl.path) {
+            // if it's contained in root, walk the tree
+            for item in files {
+                //print("Checking: ", item.url?.path)
+                if fileUrl == item.url! { found = item; break }
+                row += 1
+                if item.isFolder && item.url != nil && fileUrl.path.hasPrefix(item.url!.path) {
+                    // Expand folder
+                    outlineView?.expandItem(item)
+                    found = walkTheFolder(item)
+                    if found != nil { break }
+                }
+            }
+            
+            if found != nil {
+                //print("Found: ", found!.name)
+                let index = IndexSet(integer: row)
+                outlineView?.selectRowIndexes(index, byExtendingSelection: false)
+            } else {
+                print("Not found ", fileUrl.path)
+            }
+        } /* TODO: else change root? */
+        
+        return found
+    }
+    
+    func findCurrent() {
+        _ = findNode(currentDocument)
+    }
+    
     func new() -> DocumentNewResult {
         if currentDocument.hasChanged { _ = save() }
 
@@ -257,19 +325,34 @@ extension FileController {
         }
         print("New file: ", doc.url!)
 
+        files = listFolder(root.url)
+        outlineView?.reloadData()
+        findCurrent()
+
+/*
         // Add newfile to treeFolder under current folder
-        if let node = walkTheTree(workingFolder) {
-            if node.children == nil {
-                node.children = [FileNode]()
+        if root.url == workingFolder.url {
+            // TODO: Add to root
+            //files.append(currentDocument)
+            files = listFolder(root.url)
+            outlineView?.reloadData()
+            findCurrent()
+        } else {
+            if let node = findNode(workingFolder) {
+                if node.children == nil {
+                    node.children = [FileNode]()
+                }
+                node.children!.append(currentDocument)
+                //let index = IndexSet(integer: 0)
+                //outlineView?.insertItems(at: index, inParent: node, withAnimation: .slideDown)
+                outlineView?.reloadItem(node, reloadChildren: false)
+                //outlineView?.expandItem(node)
+                findCurrent()
+                //outlineView?.selectRowIndexes(index, byExtendingSelection: false)
+                // Reload and expand nodes all the way from root to workingFolder
             }
-            node.children!.append(doc)
-            let index = IndexSet(integer: node.childCount)
-            outlineView?.insertItems(at: index, inParent: node, withAnimation: .slideDown)
-            outlineView?.reloadItem(node, reloadChildren: true)
-            outlineView?.expandItem(node)
-            // Reload and expand nodes all the way from root to workingFolder
         }
-        
+*/
         return .ok
     }
 

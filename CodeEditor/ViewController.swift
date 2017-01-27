@@ -111,6 +111,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         filer.assignEditor(textEditor)
         filer.onSelected = selectedFile
         filer.reload()
+        filer.findCurrent()
         selectedFile(lastFile)
     }
     
@@ -200,6 +201,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         let result = filer.new()
 
         if result == .ok {
+            filer.findCurrent()
             selectedFile(filer.currentDocument)
         }
     }
@@ -223,7 +225,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             filer.changeWorkingFolder(fileUrl)
             filer.currentDocument = openFile
             filer.reload()
-            selectedFile(openFile)
+            filer.findCurrent()
+            //selectedFile(openFile)
         }
         
     }
