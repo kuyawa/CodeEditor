@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var appFolderName = "MacawEditor"
     var appFolderUrl: URL?
+    var filename: String = ""
     var settings = Settings()
     
     override init(){
@@ -21,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupAppFolder()
         settings.load()
     }
+    
     
     func setupAppFolder() {
         
@@ -68,15 +70,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Alert("Error accessing app folder. Syntax files not loaded. Verify you have permissions to read from folder ~/Library/Application Support/").show()
         }
     }
-
+    
+    
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-        //Alert("APP File open: \(filename)").show()
+        self.filename = filename
         guard let main = NSApp.mainWindow?.contentViewController as! ViewController? else { return true }
         main.fileOpenByOS(filename)
         return true
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        //
+    }
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        //
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -86,3 +94,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
+
+// End

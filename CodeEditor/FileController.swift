@@ -293,7 +293,34 @@ extension FileController {
             } else {
                 print("Not found ", fileUrl.path)
             }
-        } /* TODO: else change root? */
+        } else { /* change root? */
+            var newRoot = fileUrl
+            if !fileUrl.hasDirectoryPath {
+                newRoot = fileUrl.deletingLastPathComponent()
+            }
+            changeRootFolder(newRoot)
+            saveRootFolder()
+            changeWorkingFolder(newRoot)
+            saveWorkingFolder()
+            files = listFolder(newRoot)
+            reload()
+            
+            // Walk first level only, file is in root
+            for item in files {
+                if fileUrl == item.url! {
+                    found = item
+                    break
+                }
+                row += 1
+            }
+            
+            if found != nil {
+                let index = IndexSet(integer: row)
+                outlineView?.selectRowIndexes(index, byExtendingSelection: false)
+            } else {
+                print("Not found ", fileUrl.path)
+            }
+        }
         
         return found
     }

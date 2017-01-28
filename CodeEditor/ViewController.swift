@@ -111,8 +111,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         filer.assignEditor(textEditor)
         filer.onSelected = selectedFile
         filer.reload()
-        filer.findCurrent()
-        selectedFile(lastFile)
+        if app.filename.isEmpty {
+            filer.findCurrent()
+            selectedFile(lastFile)
+        } else {
+            // will open file passed by OS
+        }
     }
     
     func resetEditor() {
@@ -212,22 +216,21 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     func fileOpenByOS(_ filename: String) {
         guard let fileUrl = URL(string: "file://"+filename) else {
-            Alert("File \(filename) is not accessible").show()
             return
         }
         
         let openFile = filer.getFileInfo(fileUrl)
 
-        if openFile.url == nil {
-            Alert("File \(filename) could not be opened").show()
-        } else {
+        if openFile.url != nil {
             filer.changeRootFolder(fileUrl.deletingLastPathComponent())
             filer.changeWorkingFolder(fileUrl)
             filer.currentDocument = openFile
             filer.reload()
             filer.findCurrent()
-            //selectedFile(openFile)
+            selectedFile(openFile)
         }
+        
+        app.filename = "" // reset
         
     }
 

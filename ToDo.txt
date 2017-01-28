@@ -1,5 +1,6 @@
 TODO:
 
+- find better icons just like xcode, thinner, cooler
 - make editable tree to rename files
 - enable more editor commands
   - tab: indent block
