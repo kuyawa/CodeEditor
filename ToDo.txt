@@ -1,6 +1,5 @@
 TODO:
 
-- find better icons just like xcode, thinner, cooler
 - enable more editor commands
   - tab: indent block
   - shf+tab unindent block
@@ -14,6 +13,9 @@ TODO:
 
 ------------------------------------------------------------
 
+x allow to delete files
+x Lite buttons for dark theme
+x find better icons just like xcode, thinner, cooler
 x allow to open files, use folder as root
 x enable editable tree to rename files
 x on load, show last file in tree, expanding folders if needed

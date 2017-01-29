@@ -13,10 +13,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     let app    = NSApp.delegate as! AppDelegate
     var filer  = FileController()
     var syntax = SyntaxColorizer()
-
-    let hugeFileSize = 9999999
-    
     var isLoading = false
+    let hugeFileSize = 9999999  // 10 mbs ?
 
     
     @IBOutlet weak var mainSplitter : NSSplitView!
@@ -28,45 +26,28 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     @IBOutlet weak var consoleArea  : NSView!
     @IBOutlet weak var editorArea   : NSView!
     @IBOutlet weak var editorTitle  : NSTextField!
-    @IBOutlet weak var buttonSave   : NSButton!
     
     @IBOutlet var textEditor        : EditorController!
     @IBOutlet var outlineView       : NSOutlineView!
     
+    @IBOutlet weak var buttonMenu   : NSButton!
+    @IBOutlet weak var buttonNew    : NSButton!
+    @IBOutlet weak var buttonOpen   : NSButton!
+    @IBOutlet weak var buttonTheme  : NSButton!
+    @IBOutlet weak var buttonSave   : NSButton!
+    @IBOutlet weak var buttonTrash  : NSButton!
     
-    @IBAction func onOptionsShow(_ sender: AnyObject) {
-        showOptions()
-    }
     
-    @IBAction func onFileNew(_ sender: AnyObject) {
-        fileNew()
-    }
+    @IBAction func onOptionsShow(_ sender: AnyObject) { showOptions() }
+    @IBAction func onFileNew(_ sender: AnyObject) { fileNew() }
+    @IBAction func onFileOpen(_ sender: AnyObject) { fileOpen() }
+    @IBAction func onFileOpenInBrowser(_ sender: AnyObject) { fileOpenInBrowser() }
+    @IBAction func onFileSave(_ sender: AnyObject) { fileSave() }
+    @IBAction func onFileDelete(_ sender: AnyObject) { fileDelete() }
+    @IBAction func onSidebarToggle(_ sender: AnyObject) { sidebarToggle(sender) }
+    @IBAction func onConsoleToggle(_ sender: AnyObject) { consoleToggle(sender) }
+    @IBAction func onThemeToggle(_ sender: AnyObject) { themeToggle() }
     
-    @IBAction func onFileOpen(_ sender: AnyObject) {
-        fileOpen()
-    }
-    
-    @IBAction func onFileOpenInBrowser(_ sender: AnyObject) {
-        fileOpenInBrowser()
-    }
-    
-    @IBAction func onFileSave(_ sender: AnyObject) {
-        fileSave()
-    }
-    
-    @IBAction func onFilePanel(_ sender: AnyObject) {
-        fileArea.isHidden = !fileArea.isHidden
-        mainSplitter.adjustSubviews()
-        
-        // Change mark in menu item
-        if let menuItem = sender as? NSMenuItem {
-            menuItem.state = fileArea.isHidden ? 0 : 1
-        }
-    }
-    
-    @IBAction func onThemeToggle(_ sender: AnyObject) {
-        themeToggle()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,11 +69,37 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     func setTheme() {
         if let window = self.view.window {
-            if app.settings.isDarkTheme {
-                window.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
-            } else {
-                window.appearance = NSAppearance(named: NSAppearanceNameVibrantLight)
-            }
+            let goDark = app.settings.isDarkTheme
+            window.appearance = NSAppearance(named: goDark ? NSAppearanceNameVibrantDark : NSAppearanceNameVibrantLight)
+            buttonMenu.image  = NSImage(named: goDark ? "icon_menu2"  : "icon_menu")
+            buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
+            buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
+            buttonTheme.image = NSImage(named: goDark ? "icon_dark2"  : "icon_dark")
+            buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
+            buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
+        }
+    }
+    
+    func sidebarToggle(_ sender: AnyObject) {
+        fileArea.isHidden = !fileArea.isHidden
+        mainSplitter.adjustSubviews()
+        
+        // Change mark in menu item
+        if let menuItem = sender as? NSMenuItem {
+            menuItem.state = fileArea.isHidden ? 0 : 1
+        }
+        
+        // FIX: Repaint view to remove buggy vertical line
+        // WTF?
+    }
+
+    func consoleToggle(_ sender: AnyObject) {
+        consoleArea.isHidden = !consoleArea.isHidden
+        fileSplitter.adjustSubviews()
+        
+        // Change mark in menu item
+        if let menuItem = sender as? NSMenuItem {
+            menuItem.state = consoleArea.isHidden ? 0 : 1
         }
     }
     
@@ -153,7 +160,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         //textEditor.process(editedRange)
         //print("Delta \(delta) - Mask: \(editedMask.rawValue)")
         if !isLoading && delta != 0 && editedMask.rawValue > 1 {
-            print("Has changed, colorizing...")
+            //print("Has changed, colorizing...")
             filer.currentDocument.hasChanged = true
             syntax.colorize(editedRange)
         }
@@ -172,6 +179,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         
         if file.size > hugeFileSize {
             Alert("File size is too big").show()
+            file.canSave = false
+            textEditor.string = "[\(file.name) is not editable]"
+            resetEditor()
             return
         }
         
@@ -186,19 +196,28 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             textEditor.string = ""
 
             // Assign new text
-            let text = try? String(contentsOf: file.url!)
-            textEditor.string = text ?? "[\(file.name) is not editable]"
-            resetEditor()
+            do {
+                var text = try String(contentsOf: file.url!)
+                if text.isEmpty { text = " " }
+                textEditor.string = text
+                resetEditor()
+
+                // Colorize it!
+                syntax.setFormat(file.ext)
+                syntax.colorize()
+            } catch {
+                print("Error loading file ", file.url)
+                textEditor.string = "[\(file.name) is not editable]"
+                resetEditor()
+            }
             
-            // Colorize it!
-            syntax.setFormat(file.ext)
-            syntax.colorize()
             
             isLoading = false
         }
         
         if !file.isEditable {
             textEditor.string = "[\(file.name) is not editable]"
+            file.canSave = false
             resetEditor()
         }
     }
@@ -248,21 +267,31 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func savingFile() {
-        buttonSave.title = "Saving..."
+        buttonSave.title = "Saving"
 
         let timer1: DispatchTime = .now() + .milliseconds(1000)
         let timer2: DispatchTime = .now() + .milliseconds(4000)
         
         DispatchQueue.main.asyncAfter(deadline: timer1) {
-            self.buttonSave.image = NSImage(named: "icon_saved")
+            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_saved2" : "icon_saved"))
             self.buttonSave.title = "Saved"
         }
 
         DispatchQueue.main.asyncAfter(deadline: timer2) {
-            self.buttonSave.image = NSImage(named: "icon_save")
+            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_save2" : "icon_save"))
             self.buttonSave.title = "Save"
         }
         
+    }
+    
+    func fileDelete() {
+        guard let url = filer.currentDocument.url else { return }
+        
+        let ok = Dialog("File: \(url.lastPathComponent)\nThis file will be deleted. Do you want to proceed?").show()
+        
+        if ok {
+            filer.delete()
+        }
     }
 
 }

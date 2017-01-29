@@ -197,8 +197,8 @@ class Toast {
 /*
  Use:
  
- Dialog("Everything is OK?").choice()
- Dialog(title:"Warning", info:"The file will be deleted!").choice()
+ Dialog("Everything is OK?").show()
+ Dialog(title:"Warning", info:"The file will be deleted!").show()
  
  */
 class Dialog {
@@ -214,7 +214,7 @@ class Dialog {
         self.info  = info
     }
     
-    func choice() -> Bool{
+    func show() -> Bool{
         var ok = false
         let alert  = NSAlert()
         

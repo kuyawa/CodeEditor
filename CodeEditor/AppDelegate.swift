@@ -23,7 +23,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         settings.load()
     }
     
-    
     func setupAppFolder() {
         
         let filer = FileManager.default

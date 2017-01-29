@@ -2,7 +2,7 @@
 
 # Macaw - Code Editor in Swift
 
-Macaw Editor is a simple code editor for Swift specially designed for ease of use without all the bloat of Xcode, just ten megs instead of four gigs. Ideal for coding server apps in Swift, html, css and js. Of course there is no Interface Builder and all the fancy toys, just an editor for quick hacks.
+**Macaw Editor** is a simple code editor for Swift specially designed for ease of use without all the bloat of Xcode, just ten megs instead of four gigs. Ideal for coding server apps in Swift, html, css and js. Of course there is no Interface Builder and all the fancy toys, just an editor for quick hacks.
 
 ### Screenshot:
 

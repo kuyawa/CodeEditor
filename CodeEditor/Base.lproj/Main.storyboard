@@ -535,6 +535,25 @@ CA
                                                             <action selector="alignRight:" target="Ady-hI-5gd" id="r48-bG-YeY"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="CoS-LT-9X3"/>
+                                                    <menuItem title="Indent" id="zaA-4Q-FCf">
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+CQ
+</string>
+                                                        <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                                        <connections>
+                                                            <action selector="indentBlock:" target="Ady-hI-5gd" id="9t3-GK-X6J"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Unindent" id="4rN-hs-8vS">
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+GQ
+</string>
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES"/>
+                                                        <connections>
+                                                            <action selector="unindentBlock:" target="Ady-hI-5gd" id="9De-rA-Qnq"/>
+                                                        </connections>
+                                                    </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="4s2-GY-VfK"/>
                                                     <menuItem title="Writing Direction" id="H1b-Si-o9J">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
@@ -621,23 +640,16 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="BXY-wc-z0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show File Panel" state="on" keyEquivalent="t" id="JEF-Km-zCc">
+                                        <menuItem title="Show Sidebar" state="on" keyEquivalent="s" id="JEF-Km-zCc">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
-                                                <action selector="onFilePanel:" target="Ady-hI-5gd" id="Ysi-GL-wNi"/>
+                                                <action selector="onSidebarToggle:" target="Ady-hI-5gd" id="jds-ZL-vWR"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show Console" keyEquivalent="c" id="1WN-RT-XDU">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="onConsoleToggle:" target="Ady-hI-5gd" id="iVY-Cs-fVV"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -701,7 +713,7 @@ CA
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Macaw - Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" id="IQv-IB-iLA">
+                    <window key="window" title="Macaw Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1000" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -815,8 +827,8 @@ CA
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
-                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="obZ-1b-pHR">
-                                                <rect key="frame" x="9" y="473" width="24" height="24"/>
+                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obZ-1b-pHR">
+                                                <rect key="frame" x="9" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_menu" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eHG-rO-GZa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -826,8 +838,8 @@ CA
                                                     <action selector="onOptionsShow:" target="XfG-lQ-9wD" id="hGn-Al-av3"/>
                                                 </connections>
                                             </button>
-                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="ZIU-IA-JYa">
-                                                <rect key="frame" x="51" y="473" width="24" height="24"/>
+                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIU-IA-JYa">
+                                                <rect key="frame" x="47" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_new" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="kHm-jI-9r0">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -839,8 +851,8 @@ CA
                                                     <action selector="onFileNew:" target="XfG-lQ-9wD" id="pYf-eH-e0N"/>
                                                 </connections>
                                             </button>
-                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="RYf-QJ-kJ2">
-                                                <rect key="frame" x="93" y="473" width="24" height="24"/>
+                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYf-QJ-kJ2">
+                                                <rect key="frame" x="85" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_open" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YIv-VH-iIH">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -852,8 +864,8 @@ CA
                                                     <action selector="onFileOpen:" target="XfG-lQ-9wD" id="9WI-KX-brx"/>
                                                 </connections>
                                             </button>
-                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-1D-Srm">
-                                                <rect key="frame" x="185" y="473" width="24" height="24"/>
+                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-1D-Srm">
+                                                <rect key="frame" x="189" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_dark" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8Je-nZ-cDy">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -897,7 +909,7 @@ CA
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
-                                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bzo-GJ-Iuf">
+                                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bzo-GJ-Iuf">
                                                                     <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
@@ -906,17 +918,8 @@ CA
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-aY-scr">
-                                                                <rect key="frame" x="503" y="404" width="257" height="18"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="7Qi-4H-DAR">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                            <button fixedFrame="YES" alphaValue="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="PWd-fV-DYu">
-                                                                <rect key="frame" x="8" y="397" width="100" height="32"/>
+                                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWd-fV-DYu">
+                                                                <rect key="frame" x="11" y="403" width="100" height="20"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" image="icon_save" imagePosition="left" alignment="left" imageScaling="proportionallyUpOrDown" inset="2" id="7zG-ug-kiw">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -928,6 +931,26 @@ CA
                                                                     <action selector="onFileSave:" target="XfG-lQ-9wD" id="6wt-YF-ju1"/>
                                                                 </connections>
                                                             </button>
+                                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PqP-7k-9Iz">
+                                                                <rect key="frame" x="749" y="403" width="20" height="20"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_trash" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="EA2-yK-Gxr">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="onFileDelete:" target="XfG-lQ-9wD" id="fIb-aZ-iYb"/>
+                                                                </connections>
+                                                            </button>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-aY-scr">
+                                                                <rect key="frame" x="78" y="404" width="304" height="18"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="7Qi-4H-DAR">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
                                                         </subviews>
                                                     </customView>
                                                     <customView fixedFrame="YES" id="eeW-ol-2YG">
@@ -973,14 +996,19 @@ CA
                                     </customView>
                                 </subviews>
                                 <holdingPriorities>
-                                    <real value="220"/>
+                                    <real value="250"/>
                                     <real value="250"/>
                                 </holdingPriorities>
                             </splitView>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="buttonMenu" destination="obZ-1b-pHR" id="az2-Wl-AE4"/>
+                        <outlet property="buttonNew" destination="ZIU-IA-JYa" id="Mzt-jN-i7h"/>
+                        <outlet property="buttonOpen" destination="RYf-QJ-kJ2" id="Aq1-6Q-wdc"/>
                         <outlet property="buttonSave" destination="PWd-fV-DYu" id="N6a-qb-cdc"/>
+                        <outlet property="buttonTheme" destination="a4Q-1D-Srm" id="JUk-PZ-fRy"/>
+                        <outlet property="buttonTrash" destination="PqP-7k-9Iz" id="0vg-AI-Aqp"/>
                         <outlet property="consoleArea" destination="eeW-ol-2YG" id="pph-tD-IpD"/>
                         <outlet property="editorArea" destination="0dD-US-7Ap" id="xoU-Ep-JLz"/>
                         <outlet property="editorTitle" destination="P5l-aY-scr" id="fxc-WW-Msn"/>
@@ -994,15 +1022,16 @@ CA
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="927"/>
+            <point key="canvasLocation" x="75" y="957"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="icon_dark" width="32" height="32"/>
-        <image name="icon_menu" width="32" height="32"/>
-        <image name="icon_new" width="32" height="32"/>
-        <image name="icon_open" width="32" height="32"/>
-        <image name="icon_save" width="32" height="32"/>
+        <image name="icon_dark" width="50" height="50"/>
+        <image name="icon_menu" width="50" height="50"/>
+        <image name="icon_new" width="50" height="50"/>
+        <image name="icon_open" width="50" height="50"/>
+        <image name="icon_save" width="50" height="50"/>
+        <image name="icon_trash" width="50" height="50"/>
     </resources>
 </document>

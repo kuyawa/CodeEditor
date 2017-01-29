@@ -432,6 +432,7 @@ extension FileController {
         
         guard let text = textView?.string else { print("Warn: no text to save"); return .emptyText }
         guard currentDocument.isEditable else { print("Warn: file is not editable"); return .noEditable }
+        guard currentDocument.canSave else { print("Warn: file is not editable"); return .noEditable }
         guard currentDocument.url != nil else { print("Warn: file has invalid name"); return .invalidName }
         
         do {
@@ -456,6 +457,42 @@ extension FileController {
 
     func rename() {
         //
+    }
+    
+    func delete() {
+        guard let url = currentDocument.url else { return }
+        print("Deleting file \(currentDocument.url)...")
+        
+        guard var row = outlineView?.row(forItem: currentDocument) else { return }
+        let index = IndexSet(integer: row)
+        
+        do {
+            //try FileManager.default.removeItem(at: url)
+            try FileManager.default.removeItem(atPath: url.path)
+            //files.remove(at: row)
+            outlineView?.removeItems(at: index, inParent: nil, withAnimation: .slideUp)
+
+            // Keep it inside bounds
+            let numRows = outlineView?.numberOfRows ?? 0
+            if row >= numRows {
+                row = numRows - 1
+                if row < 0 { row = 0 }
+            }
+            
+            //textView?.string = ""
+            outlineView?.selectRowIndexes(index, byExtendingSelection: false)
+            //guard let item = outlineView?.item(atRow: row) as? FileNode else { return }
+
+            //if !item.isFolder {
+            //    currentDocument = item
+            //    onSelected(item)
+            //}
+            
+        } catch {
+            Alert("File could not be deleted").show()
+            return
+        }
+        
     }
 
 }

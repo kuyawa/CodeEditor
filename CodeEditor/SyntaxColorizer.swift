@@ -138,9 +138,9 @@ class SyntaxColorizer {
     func colorize() {
         guard isColorizable else { return }
         guard let textView = textView else { return }
+        guard let all = textView.string else { return }
 
-        let all = textView.string ?? ""
-        let range = NSString(string: textView.string!).range(of: all)
+        let range = NSString(string: all).range(of: all)
         colorize(range)
     }
     
@@ -148,7 +148,9 @@ class SyntaxColorizer {
     func colorize(_ range: NSRange) {
         guard isColorizable else { return }
         guard let textView = textView else { return }
+        guard let text = textView.string else { return }
         guard let formatter = formatter else { return }
+        guard !text.isEmpty else { return }
 
         var styles = Dixy()
 
@@ -164,8 +166,8 @@ class SyntaxColorizer {
         let patterns = formatter.patterns
         let options  = formatter.options
         
-        var extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(range.location, 0)))
-            extended = NSUnionRange(range, NSString(string: textView.string!).lineRange(for: NSMakeRange(NSMaxRange(range), 0)))
+        var extended = NSUnionRange(range, NSString(string: text).lineRange(for: NSMakeRange(range.location, 0)))
+            extended = NSUnionRange(range, NSString(string: text).lineRange(for: NSMakeRange(NSMaxRange(range), 0)))
 
         // Loop order.array to apply styles in order
         var keys = [String]()
@@ -224,6 +226,7 @@ class SyntaxColorizer {
             return NSColor("333333")
         }
     }
+    
     func getBackgroundColor() -> NSColor {
         // If defined use it, else use defaults
         if isDark {

@@ -144,13 +144,12 @@ class EditorController: NSTextView, NSTextViewDelegate {
         self.moveDown(sender)
     }
     
-    func indentBlock() {
-        //
+    @IBAction func indentBlock(_ sender: NSMenuItem) {
+        debugPrint("Indent")
     }
     
-    func unindentBlock(_ range: NSRange) {
+    @IBAction func unindentBlock(_ sender: NSMenuItem) {
         debugPrint("Unindent")
-        //self.deleteBackward(self)
     }
     
     func alignBracket(_ range: NSRange) {
