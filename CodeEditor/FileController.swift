@@ -36,6 +36,7 @@ class FileController: NSObject {
     var outlineView : NSOutlineView?
     var onSelected  : (_ file: FileNode) -> Void = { file in }
     
+    var oldName = "" // save while editing cell
     
     func start() -> FileNode {
         let lastRoot   = UserDefaults.standard.url(forKey: FileKey.root.rawValue)
@@ -508,6 +509,7 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
         
         result?.textField?.stringValue = file.name
         result?.imageView?.image = file.getFileImage()
+        result?.textField?.delegate = self
         //print("Result: ", result)
         return result
     }
@@ -533,6 +535,92 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
         }
     }
     
+    // Edit cell?
+    /*
+    func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {
+        print("Tree setObjectValue")
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: Any) -> Bool {
+        print("Tree shoudlEdit")
+        return true
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        print("Tree objectValue")
+        return ""
+    }
+    
+    override func didChangeValue(forKey key: String, withSetMutation mutationKind: NSKeyValueSetMutationKind, using objects: Set<AnyHashable>) {
+        print("DidChanegValue")
+    }
+    */
+}
+
+
+
+extension FileController: NSTextFieldDelegate {
+    
+    override func controlTextDidBeginEditing(_ obj: Notification) {
+        //super.controlTextDidBeginEditing(obj)
+        //print("Control beginEditing")
+        if let field = obj.object as? NSTextField {
+            oldName = field.stringValue
+            //print("Old name: ", oldName)
+        }
+    }
+    
+    /* Not used but good to know they exist
+
+    override func controlTextDidChange(_ obj: Notification) {
+        print("Control didChange")
+    }
+    
+    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+        print("Control shouldEndEditing")
+        return true
+    }
+     
+    */
+    
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        //print("Control endEditing")
+
+        if let field = obj.object as? NSTextField {
+            let newName = field.stringValue
+            if newName.isEmpty {
+                // do not allow empty names, revert to old name
+                field.stringValue = oldName
+                return
+            } else {
+                // Rename file
+                if let index = outlineView?.selectedRow {
+                    if let item = outlineView?.item(atRow: index) as? FileNode {
+                        if item.isFolder {
+                            // Don't allow folders to be renamed for now
+                            field.stringValue = oldName
+                            return
+                        }
+                        
+                        // If everything ok, rename it
+                        do {
+                            let source = item.url
+                            let target = item.url?.deletingLastPathComponent().appendingPathComponent(newName)
+                            print("Rename from source \(source!) to target \(target!)")
+                            try FileManager.default.moveItem(at: source!, to: target!)
+                            item.url = target
+                            item.name = newName
+                        } catch {
+                            // Revert to old name
+                            field.stringValue = oldName
+                        }
+                        
+                        return
+                    }
+                }
+            }
+        }
+    }
 }
 
 

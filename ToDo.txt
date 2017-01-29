@@ -1,7 +1,6 @@
 TODO:
 
 - find better icons just like xcode, thinner, cooler
-- make editable tree to rename files
 - enable more editor commands
   - tab: indent block
   - shf+tab unindent block
@@ -15,6 +14,7 @@ TODO:
 
 ------------------------------------------------------------
 
+x enable editable tree to rename files
 x on load, show last file in tree, expanding folders if needed
 x allow to open file from OS, use App.delegate
 x on opening file from OS, set working folder to file's parent
@@ -78,20 +78,20 @@ readme.md
 
 EDITOR COMMANDS:
 
-N      new file
-O      open file
+N    x new file
+O    x open file
 B      open in browser
-S      save file
+S    x save file
 R      build and run
-F      find and replace
+F    x find and replace
 
 tab     if block selected, indent/unindent, else default
-D      duplicate line/block
-L      delete line/block
-del    delete to end of line
-bck    delete to begin of line
-up     move line/block up
-dn     move line/block dn
+D    x duplicate line/block
+L    x delete line/block
+del  x delete to end of line
+bck  x delete to begin of line
+up   x move line/block up
+dn   x move line/block dn
 U      toggle selected case upper/lower/camel
 
 
@@ -100,8 +100,10 @@ tab     if block selected, indent/unindent, else default
 VERSION 2:
 
 - enable console
-- build: call swift build, show progrees in output area
+- build: call swift build, show progress in output area
 - on errors show errors and allow user to jump to files and lines
-
+- show images in image viewer
+- show pdf in pdf viewer
+- research quick view functionality
 
 END.
