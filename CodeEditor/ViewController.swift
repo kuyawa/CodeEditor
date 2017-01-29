@@ -14,7 +14,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     var filer  = FileController()
     var syntax = SyntaxColorizer()
 
-    let hugeFileSize = 999999
+    let hugeFileSize = 9999999
     
     var isLoading = false
 
@@ -44,6 +44,10 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     
     @IBAction func onFileOpen(_ sender: AnyObject) {
         fileOpen()
+    }
+    
+    @IBAction func onFileOpenInBrowser(_ sender: AnyObject) {
+        fileOpenInBrowser()
     }
     
     @IBAction func onFileSave(_ sender: AnyObject) {
@@ -166,7 +170,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
 
         setFileName(file.name)
         
-        if file.url != nil && !file.isFolder && file.isEditable && file.size < hugeFileSize {
+        if file.size > hugeFileSize {
+            Alert("File size is too big").show()
+            return
+        }
+        
+        if file.url != nil && !file.isFolder && file.isEditable {
             isLoading = true // on load do not colorize in process editing
             
             // Remove old attributes
@@ -215,25 +224,17 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func fileOpenByOS(_ filename: String) {
-        guard let fileUrl = URL(string: "file://"+filename) else {
-            return
-        }
-        
-        let openFile = filer.getFileInfo(fileUrl)
-
-        if openFile.url != nil {
-            filer.changeRootFolder(fileUrl.deletingLastPathComponent())
-            filer.changeWorkingFolder(fileUrl)
-            filer.currentDocument = openFile
-            filer.reload()
-            filer.findCurrent()
-            selectedFile(openFile)
-        }
-        
+        filer.load(filename)
         app.filename = "" // reset
-        
     }
-
+    
+    func fileOpenInBrowser() {
+        if let url = filer.currentDocument.url {
+            //print("Open in Browser: ", url)
+            NSWorkspace.shared().open(url)
+        }
+    }
+    
     func fileSave() {
         let result = filer.save()
         

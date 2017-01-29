@@ -111,6 +111,7 @@ class FileController: NSObject {
             folder = folder.deletingLastPathComponent()  // remove file name if any
         }
         
+        workingFolder.url  = folder
         workingFolder.name = folder.lastPathComponent
         workingFolder.path = folder.path
         workingFolder.isFolder = folder.hasDirectoryPath
@@ -388,26 +389,44 @@ extension FileController {
         if currentDocument.hasChanged { _ = save() }
 
         let dialog = NSOpenPanel()
-        dialog.canChooseFiles = false
+        dialog.canChooseFiles = true
         dialog.canChooseDirectories = true
         let choice = dialog.runModal()
         
         if choice == NSFileHandlingPanelOKButton {
             if let url = dialog.url {
-                changeRootFolder(url)
-                saveRootFolder()
                 changeWorkingFolder(url)
                 saveWorkingFolder()
-                files = listFolder(url)
+                changeRootFolder(workingFolder.url)
+                saveRootFolder()
+                files = listFolder(root.url)
                 reload()
+                if !url.hasDirectoryPath {
+                    currentDocument = getFileInfo(url)
+                    findCurrent()
+                    onSelected(currentDocument)
+                }
             }
         }
     }
     
-    func load() {
-        //
+    func load(_ filename: String) {
+        guard let fileUrl = URL(string: "file://"+filename) else {
+            return
+        }
+        
+        let openFile = getFileInfo(fileUrl)
+        
+        if openFile.url != nil {
+            changeRootFolder(fileUrl.deletingLastPathComponent())
+            changeWorkingFolder(fileUrl)
+            currentDocument = openFile
+            reload()
+            findCurrent()
+            onSelected(openFile)
+        }
     }
-
+    
     func save() -> DocumentSaveResult {
         print("Saving \(currentDocument.url) ...")
         

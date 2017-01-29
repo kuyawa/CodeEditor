@@ -14,6 +14,7 @@ TODO:
 
 ------------------------------------------------------------
 
+x allow to open files, use folder as root
 x enable editable tree to rename files
 x on load, show last file in tree, expanding folders if needed
 x allow to open file from OS, use App.delegate
