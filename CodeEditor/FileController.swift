@@ -36,8 +36,6 @@ class FileController: NSObject {
     var outlineView : NSOutlineView?
     var onSelected  : (_ file: FileNode) -> Void = { file in }
     
-    var oldName = "" // save while editing cell
-    
     func start() -> FileNode {
         let lastRoot   = UserDefaults.standard.url(forKey: FileKey.root.rawValue)
         let lastFolder = UserDefaults.standard.url(forKey: FileKey.folder.rawValue)
@@ -617,15 +615,6 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
 
 extension FileController: NSTextFieldDelegate {
     
-    override func controlTextDidBeginEditing(_ obj: Notification) {
-        //super.controlTextDidBeginEditing(obj)
-        //print("Control beginEditing")
-        if let field = obj.object as? NSTextField {
-            oldName = field.stringValue
-            //print("Old name: ", oldName)
-        }
-    }
-    
     /* Not used but good to know they exist
 
     override func controlTextDidChange(_ obj: Notification) {
@@ -646,7 +635,7 @@ extension FileController: NSTextFieldDelegate {
             let newName = field.stringValue
             if newName.isEmpty {
                 // do not allow empty names, revert to old name
-                field.stringValue = oldName
+                field.undoManager?.undo()
                 return
             } else {
                 // Rename file
@@ -654,7 +643,7 @@ extension FileController: NSTextFieldDelegate {
                     if let item = outlineView?.item(atRow: index) as? FileNode {
                         if item.isFolder {
                             // Don't allow folders to be renamed for now
-                            field.stringValue = oldName
+                            field.undoManager?.undo()
                             return
                         }
                         
@@ -668,7 +657,7 @@ extension FileController: NSTextFieldDelegate {
                             item.name = newName
                         } catch {
                             // Revert to old name
-                            field.stringValue = oldName
+                            field.undoManager?.undo()
                         }
                         
                         return
