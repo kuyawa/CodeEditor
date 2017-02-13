@@ -43,4 +43,4 @@ Editor commands implemented:
 
 If you like what you see, [hire me!](mailto:haxapp@gmail.com)
 
-Or collaborate via [Patreon](https://www.patreon.com/kuyawa) so I can develop more projects you like!
+Or donate via [Patreon](https://www.patreon.com/kuyawa) so I can develop more projects you like!
