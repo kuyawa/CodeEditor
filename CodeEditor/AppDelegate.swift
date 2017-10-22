@@ -45,6 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         "json.default.yaml",
                         "swift.default.yaml",
                         "xml.default.yaml",
+                        "php.default.yaml",
                         "yaml.default.yaml"
                     ]
                     

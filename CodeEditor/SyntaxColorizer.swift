@@ -118,7 +118,7 @@ class SyntaxColorizer {
         }
         
         if !filer.fileExists(atPath: url!.path) {
-            print("WARN: Syntax file for \(ext) not found")
+            print("WARN: Syntax file for \(ext) not found at \(url!.path)")
             return
         }
         

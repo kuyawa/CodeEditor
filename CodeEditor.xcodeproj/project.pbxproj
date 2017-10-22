@@ -26,6 +26,7 @@
 		3DD010EA1E392595006DE3EF /* yaml.default.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DD010E41E392595006DE3EF /* yaml.default.yaml */; };
 		3DE47FEF1E3406B700BC06D1 /* Settings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DE47FEE1E3406B700BC06D1 /* Settings.yaml */; };
 		3DEBA8071E32DA1300933697 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEBA8061E32DA1300933697 /* Utils.swift */; };
+		DEB9CCF61F9D250F00559ED4 /* php.default.yaml in Resources */ = {isa = PBXBuildFile; fileRef = DE4AB1AB1F9D1E76006B16FA /* php.default.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 			buildPhases = (
 				3D106F2E1E29BFDE0081E0EC /* Sources */,
 				3D106F2F1E29BFDE0081E0EC /* Frameworks */,
+				DEB9CCF71F9D25A000559ED4 /* ShellScript */,
 				3D106F301E29BFDE0081E0EC /* Resources */,
 			);
 			buildRules = (
@@ -186,6 +188,7 @@
 				3D01707D1E3252080051E778 /* css.default.yaml in Resources */,
 				3D0170821E3252080051E778 /* swift.default.yaml in Resources */,
 				3DD010EA1E392595006DE3EF /* yaml.default.yaml in Resources */,
+				DEB9CCF61F9D250F00559ED4 /* php.default.yaml in Resources */,
 				3D01707F1E3252080051E778 /* html.default.yaml in Resources */,
 				3DE47FEF1E3406B700BC06D1 /* Settings.yaml in Resources */,
 				3DD010E61E392595006DE3EF /* js.default.yaml in Resources */,
@@ -194,6 +197,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DEB9CCF71F9D25A000559ED4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3D106F2E1E29BFDE0081E0EC /* Sources */ = {
@@ -341,7 +360,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Armonia.CodeEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -355,7 +374,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Armonia.CodeEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
