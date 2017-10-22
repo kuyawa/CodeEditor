@@ -41,7 +41,7 @@ class FileNode: NSObject {
     var isEditable : Bool {
         get {
             //let valid = "swift txt md html xml css js plist py php rb c h json yaml sql"
-            let invalid = "exe bin app"
+            let invalid = "exe bin app zip rar tar gz 7z dmg"
             return !invalid.contains(ext)
         }
     }
