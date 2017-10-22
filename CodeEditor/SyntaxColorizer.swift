@@ -138,7 +138,7 @@ class SyntaxColorizer {
     func colorize() {
         guard isColorizable else { return }
         guard let textView = textView else { return }
-        guard let all = textView.string else { return }
+        let all = textView.string // Non-optional, so no guard
 
         let range = NSString(string: all).range(of: all)
         colorize(range)
@@ -148,7 +148,7 @@ class SyntaxColorizer {
     func colorize(_ range: NSRange) {
         guard isColorizable else { return }
         guard let textView = textView else { return }
-        guard let text = textView.string else { return }
+        let text = textView.string // Non-optional, so no guard
         guard let formatter = formatter else { return }
         guard !text.isEmpty else { return }
 
@@ -185,7 +185,7 @@ class SyntaxColorizer {
                 let pattern   = patterns[style] as? String,
                 let color     = colors[colorName as! String] as? NSColor
             {
-                let attribute = [NSForegroundColorAttributeName: color]
+                let attribute = [NSAttributedStringKey.foregroundColor: color]
                 var option: NSRegularExpression.Options = []
                 let styleopt = options[style] as? String
                 if let multi = styleopt, multi == "multiline" {
@@ -197,16 +197,16 @@ class SyntaxColorizer {
         }
     }
 
-    func applyStyles(_ range: NSRange, _ pattern: String, _ options: NSRegularExpression.Options, _ attribute: [String: Any]) {
+    func applyStyles(_ range: NSRange, _ pattern: String, _ options: NSRegularExpression.Options, _ attribute: [NSAttributedStringKey: Any]) {
         guard let textView = textView else { return }
         
-        let colorNormal = [NSForegroundColorAttributeName: getColorNormal()]
+        let colorNormal = [NSAttributedStringKey.foregroundColor: getColorNormal()]
         let regex = try? NSRegularExpression(pattern: pattern, options: options)
         
-        regex?.enumerateMatches(in: textView.string!, options: [], range: range) {
+        regex?.enumerateMatches(in: textView.string, options: [], range: range) {
             match, flags, stop in
 
-            let matchRange = match?.rangeAt(1)
+            let matchRange = match?.range(at: 1)
             textView.textStorage?.addAttributes(attribute, range: matchRange!)
             let maxRange = matchRange!.location + matchRange!.length
 

@@ -20,9 +20,9 @@ extension String {
         if pos > self.characters.count { return  "" }
         
         let first = self.index(self.startIndex, offsetBy: pos)
-        let text  = self.substring(from: first)
+        let text  = self[first...]
         
-        return text
+        return String(text)
     }
 
     func subtext(to pos: Int) -> String {
@@ -31,9 +31,9 @@ extension String {
         if pos > self.characters.count { end = self.characters.count }
         
         let last = self.index(self.startIndex, offsetBy: end)
-        let text = self.substring(to: last)
+        let text = self[...last]
         
-        return text
+        return String(text)
     }
 
     func subtext(from ini: Int, to end: Int) -> String {
@@ -48,9 +48,9 @@ extension String {
         let first = self.index(self.startIndex, offsetBy: ini)
         let last  = self.index(self.startIndex, offsetBy: fin)
         let range = first ..< last
-        let text  = self.substring(with: range)
+        let text  = self[range]
         
-        return text
+        return String(text)
     }
 
 }
@@ -222,7 +222,7 @@ class Dialog {
         alert.informativeText = info
         alert.addButton(withTitle: "NO")
         alert.addButton(withTitle: "YES")
-        ok = (alert.runModal() == NSAlertSecondButtonReturn)
+        ok = (alert.runModal() == NSApplication.ModalResponse.alertSecondButtonReturn)
         
         return ok
     }

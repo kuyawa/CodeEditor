@@ -27,7 +27,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
     func process(_ range: NSRange) {
         guard self.string != nil else { return }
 
-        let content = (self.string! as NSString)
+        let content = (self.string as NSString)
         let cursor  = range.location
         let index   = NSRange(location: cursor, length: 0)
         
@@ -52,7 +52,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         guard cursor != NSNotFound else { return }
 
         guard self.string != nil else { return }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         guard let indent = getPrevLineIndent(range) else { return }
         let currentLineRange = content.lineRange(for: NSRange(location: cursor, length: 0))
@@ -132,7 +132,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
     @IBAction func duplicateLine(_ sender: NSMenuItem) {
         debugPrint("DUPLICATE LINE!")
         guard self.string != nil else { return }
-        let content = self.string! as NSString
+        let content = self.string as NSString
 
         self.selectLine(sender)
         let range = self.selectedRange()
@@ -192,7 +192,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         guard cursor != NSNotFound else { return nil }
 
         guard self.string != nil else { return nil }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         let currentLineRange  = content.lineRange(for: NSRange(location: cursor, length: 0))
         let previousLineRange = content.lineRange(for: NSRange(location: currentLineRange.location - 1, length: 0))
@@ -225,7 +225,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         guard cursor != NSNotFound else { return nil }
         
         guard self.string != nil else { return nil }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         let currentLineRange = content.lineRange(for: NSRange(location: cursor, length: 0))
         let currentLineText  = content.substring(with: currentLineRange)
