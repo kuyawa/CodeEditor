@@ -25,8 +25,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
     typealias IndentInfo = (count: Int, stop: Bool, last: Character)
     
     func process(_ range: NSRange) {
-        guard self.string != nil else { return }
-
         let content = (self.string as NSString)
         let cursor  = range.location
         let index   = NSRange(location: cursor, length: 0)
@@ -51,7 +49,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return }
 
-        guard self.string != nil else { return }
         let content = self.string as NSString
         
         guard let indent = getPrevLineIndent(range) else { return }
@@ -131,7 +128,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
     
     @IBAction func duplicateLine(_ sender: NSMenuItem) {
         debugPrint("DUPLICATE LINE!")
-        guard self.string != nil else { return }
         let content = self.string as NSString
 
         self.selectLine(sender)
@@ -191,7 +187,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return nil }
 
-        guard self.string != nil else { return nil }
         let content = self.string as NSString
         
         let currentLineRange  = content.lineRange(for: NSRange(location: cursor, length: 0))
@@ -224,7 +219,6 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return nil }
         
-        guard self.string != nil else { return nil }
         let content = self.string as NSString
         
         let currentLineRange = content.lineRange(for: NSRange(location: cursor, length: 0))
