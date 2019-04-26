@@ -17,7 +17,7 @@ extension String {
     func subtext(from pos: Int) -> String {
         guard pos >= 0 else { return "" }
         
-        if pos > self.characters.count { return  "" }
+        if pos > self.count { return  "" }
         
         let first = self.index(self.startIndex, offsetBy: pos)
         let text  = self[first...]
@@ -28,7 +28,7 @@ extension String {
     func subtext(to pos: Int) -> String {
         var end = pos
         
-        if pos > self.characters.count { end = self.characters.count }
+        if pos > self.count { end = self.count }
         
         let last = self.index(self.startIndex, offsetBy: end)
         let text = self[...last]
@@ -42,8 +42,8 @@ extension String {
         
         var fin = end
         
-        if ini > self.characters.count { return  "" }
-        if end > self.characters.count { fin = self.characters.count }
+        if ini > self.count { return  "" }
+        if end > self.count { fin = self.count }
         
         let first = self.index(self.startIndex, offsetBy: ini)
         let last  = self.index(self.startIndex, offsetBy: fin)

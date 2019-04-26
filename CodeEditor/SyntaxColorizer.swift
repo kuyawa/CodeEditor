@@ -185,7 +185,7 @@ class SyntaxColorizer {
                 let pattern   = patterns[style] as? String,
                 let color     = colors[colorName as! String] as? NSColor
             {
-                let attribute = [NSAttributedStringKey.foregroundColor: color]
+                let attribute = [NSAttributedString.Key.foregroundColor: color]
                 var option: NSRegularExpression.Options = []
                 let styleopt = options[style] as? String
                 if let multi = styleopt, multi == "multiline" {
@@ -197,10 +197,10 @@ class SyntaxColorizer {
         }
     }
 
-    func applyStyles(_ range: NSRange, _ pattern: String, _ options: NSRegularExpression.Options, _ attribute: [NSAttributedStringKey: Any]) {
+    func applyStyles(_ range: NSRange, _ pattern: String, _ options: NSRegularExpression.Options, _ attribute: [NSAttributedString.Key: Any]) {
         guard let textView = textView else { return }
         
-        let colorNormal = [NSAttributedStringKey.foregroundColor: getColorNormal()]
+        let colorNormal = [NSAttributedString.Key.foregroundColor: getColorNormal()]
         let regex = try? NSRegularExpression(pattern: pattern, options: options)
         
         regex?.enumerateMatches(in: textView.string, options: [], range: range) {

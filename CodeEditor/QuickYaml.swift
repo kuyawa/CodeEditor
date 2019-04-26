@@ -54,7 +54,7 @@ class QuickYaml {
         var val = (parts.last ?? "").trimmingCharacters(in: .whitespaces)
         
         if parts.count > 2 { /* colons in value? */
-            let index = text.characters.index(of: ":")
+            let index = text.firstIndex(of: ":")
             let position = text.index(index!, offsetBy: 1)
             val = text[position...].trimmingCharacters(in: .whitespaces)
             //print("Colons \(parts.count) - position: \(position) - text: \(val)")

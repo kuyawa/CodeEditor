@@ -628,7 +628,7 @@ extension FileController: NSTextFieldDelegate {
      
     */
     
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         //print("Control endEditing")
 
         if let field = obj.object as? NSTextField {

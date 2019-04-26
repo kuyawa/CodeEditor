@@ -71,12 +71,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         if let window = self.view.window {
             let goDark = app.settings.isDarkTheme
             window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
-            buttonMenu.image  = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_menu2"  : "icon_menu"))
-            buttonNew.image   = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_new2"   : "icon_new"))
-            buttonOpen.image  = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_open2"  : "icon_open"))
-            buttonTheme.image = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_dark2"  : "icon_dark"))
-            buttonSave.image  = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_save2"  : "icon_save"))
-            buttonTrash.image = NSImage(named: NSImage.Name(rawValue: goDark ? "icon_trash2" : "icon_trash"))
+            buttonMenu.image  = NSImage(named: goDark ? "icon_menu2"  : "icon_menu")
+            buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
+            buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
+            buttonTheme.image = NSImage(named: goDark ? "icon_dark2"  : "icon_dark")
+            buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
+            buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
         }
     }
     
@@ -190,7 +190,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             
             // Remove old attributes
             let old = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
-            textEditor.textStorage?.removeAttribute(NSAttributedStringKey.foregroundColor, range: old)
+            textEditor.textStorage?.removeAttribute(NSAttributedString.Key.foregroundColor, range: old)
             //textEditor.textStorage?.setAttributes([:], range: all)
             //textEditor.textStorage?.setAttributedString(NSAttributedString(string: ""))
             textEditor.string = ""
@@ -273,12 +273,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         let timer2: DispatchTime = .now() + .milliseconds(4000)
         
         DispatchQueue.main.asyncAfter(deadline: timer1) {
-            self.buttonSave.image = NSImage(named: (NSImage.Name(rawValue: self.app.settings.isDarkTheme ? "icon_saved2" : "icon_saved")))
+            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_saved2" : "icon_saved"))
             self.buttonSave.title = "Saved"
         }
 
         DispatchQueue.main.asyncAfter(deadline: timer2) {
-            self.buttonSave.image = NSImage(named: (NSImage.Name(rawValue: self.app.settings.isDarkTheme ? "icon_save2" : "icon_save")))
+            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_save2" : "icon_save"))
             self.buttonSave.title = "Save"
         }
         
