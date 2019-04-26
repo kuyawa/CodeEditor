@@ -553,18 +553,13 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        //print("Column item: ", item)
         guard let file = item as? FileNode else { return nil }
-        //print("Identifier: ", (tableColumn?.identifier)!)
-        
-        //let cellId = "filename"
         let cellId = "DataCell"
         let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self) as? NSTableCellView
         
         result?.textField?.stringValue = file.name
-        result?.imageView?.image = file.getFileImage()
+        result?.imageView?.image = file.getFileImage(fileExt: file.ext)
         result?.textField?.delegate = self
-        //print("Result: ", result)
         return result
     }
     

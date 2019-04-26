@@ -56,23 +56,14 @@ class FileNode: NSObject {
     
     func isLeaf() -> Bool {
         return !isFolder
-        //return (childCount == 0)
     }
     
-    func getFileImage() -> NSImage {
-        //let fileType = self.type!
-        //print("Type ", fileType)
-        /*
-         switch ext {
-         case ?
-         }
-         */
-        
+    func getFileImage(fileExt: String) -> NSImage {
         if isFolder {
             return NSImage(named: NSImage.folderName)!
         }
         
-        return NSImage(named: NSImage.multipleDocumentsName)!
+        return NSWorkspace.shared.icon(forFileType: fileExt)
     }
     
     
