@@ -70,7 +70,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     func setTheme() {
         if let window = self.view.window {
             let goDark = app.settings.isDarkTheme
-            window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
+            if #available(OSX 10.14, *) {
+                NSApp.appearance = NSAppearance(named: .darkAqua)
+            } else {
+                // Fallback on earlier versions
+                window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
+            }
             buttonMenu.image  = NSImage(named: goDark ? "icon_menu2"  : "icon_menu")
             buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
             buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
