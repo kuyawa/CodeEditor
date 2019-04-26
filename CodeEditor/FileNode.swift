@@ -69,10 +69,10 @@ class FileNode: NSObject {
          */
         
         if isFolder {
-            return NSImage(named: NSImage.Name.folder)!
+            return NSImage(named: NSImage.folderName)!
         }
         
-        return NSImage(named: NSImage.Name.multipleDocuments)!
+        return NSImage(named: NSImage.multipleDocumentsName)!
     }
     
     

@@ -195,7 +195,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         
         // get the current indent
         let indentInfo = (count: 0, stop: false, last: Character(" "))
-        let indent = previousLineText.characters.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
+        let indent = previousLineText.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
             guard info.stop == false
             else {
                 // remember the last non-whitespace char
@@ -226,7 +226,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
 
         // get the current indent
         let indentInfo = (count: 0, stop: false, last: Character(" "))
-        let indent = currentLineText.characters.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
+        let indent = currentLineText.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
             guard info.stop == false
                 else {
                     // remember the last non-whitespace char
