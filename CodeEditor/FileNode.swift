@@ -58,15 +58,12 @@ class FileNode: NSObject {
         return !isFolder
     }
     
-    func getFileImage(fileExt: String) -> NSImage {
+    func getFileImage() -> NSImage {
         if isFolder {
             return NSImage(named: NSImage.folderName)!
-        }
-        
-        return NSWorkspace.shared.icon(forFileType: fileExt)
+        }        
+        return NSWorkspace.shared.icon(forFileType: ext)
     }
-    
-    
 }
 
 
