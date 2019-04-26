@@ -12,7 +12,9 @@ import Foundation
 struct Settings {
     var theme = "light"
     var isDarkTheme: Bool {
-        get { return theme == "dark" }
+        get {
+            return theme == "dark"
+        }
         set {
             theme = newValue ? "dark" : "light"
             UserDefaults.standard.set(theme, forKey: "theme")

@@ -29,9 +29,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         var installError = false
         let filer = FileManager.default
         
-        if let libFolder = filer.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+        if let libFolder = filer.urls(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask
+            ).first {
             
-            appFolderUrl = libFolder.appendingPathComponent(appFolderName, isDirectory: true)
+            appFolderUrl = libFolder.appendingPathComponent(
+                appFolderName, isDirectory: true
+            )
             
             if let lastInstall = UserDefaults.standard.object(forKey: "installed") {
                 if Int(lastInstall as! Int) < currentBuild {
