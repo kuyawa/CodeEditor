@@ -25,9 +25,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
     typealias IndentInfo = (count: Int, stop: Bool, last: Character)
     
     func process(_ range: NSRange) {
-        guard self.string != nil else { return }
-
-        let content = (self.string! as NSString)
+        let content = (self.string as NSString)
         let cursor  = range.location
         let index   = NSRange(location: cursor, length: 0)
         
@@ -51,8 +49,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return }
 
-        guard self.string != nil else { return }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         guard let indent = getPrevLineIndent(range) else { return }
         let currentLineRange = content.lineRange(for: NSRange(location: cursor, length: 0))
@@ -131,8 +128,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
     
     @IBAction func duplicateLine(_ sender: NSMenuItem) {
         debugPrint("DUPLICATE LINE!")
-        guard self.string != nil else { return }
-        let content = self.string! as NSString
+        let content = self.string as NSString
 
         self.selectLine(sender)
         let range = self.selectedRange()
@@ -191,8 +187,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return nil }
 
-        guard self.string != nil else { return nil }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         let currentLineRange  = content.lineRange(for: NSRange(location: cursor, length: 0))
         let previousLineRange = content.lineRange(for: NSRange(location: currentLineRange.location - 1, length: 0))
@@ -200,7 +195,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
         
         // get the current indent
         let indentInfo = (count: 0, stop: false, last: Character(" "))
-        let indent = previousLineText.characters.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
+        let indent = previousLineText.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
             guard info.stop == false
             else {
                 // remember the last non-whitespace char
@@ -224,15 +219,14 @@ class EditorController: NSTextView, NSTextViewDelegate {
         let cursor = range.location
         guard cursor != NSNotFound else { return nil }
         
-        guard self.string != nil else { return nil }
-        let content = self.string! as NSString
+        let content = self.string as NSString
         
         let currentLineRange = content.lineRange(for: NSRange(location: cursor, length: 0))
         let currentLineText  = content.substring(with: currentLineRange)
 
         // get the current indent
         let indentInfo = (count: 0, stop: false, last: Character(" "))
-        let indent = currentLineText.characters.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
+        let indent = currentLineText.reduce(indentInfo) { (info: IndentInfo, char) -> IndentInfo in
             guard info.stop == false
                 else {
                     // remember the last non-whitespace char

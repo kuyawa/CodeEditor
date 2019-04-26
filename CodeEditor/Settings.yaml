@@ -30,5 +30,5 @@ extensions:
     xcworkspacedata : xml.default.yaml
     xml             : xml.default.yaml
     yaml            : yaml.default.yaml
-
+    php             : php.default.yaml
 # End

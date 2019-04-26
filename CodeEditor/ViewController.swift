@@ -70,7 +70,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     func setTheme() {
         if let window = self.view.window {
             let goDark = app.settings.isDarkTheme
-            window.appearance = NSAppearance(named: goDark ? NSAppearanceNameVibrantDark : NSAppearanceNameVibrantLight)
+            window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
             buttonMenu.image  = NSImage(named: goDark ? "icon_menu2"  : "icon_menu")
             buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
             buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
@@ -86,7 +86,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         
         // Change mark in menu item
         if let menuItem = sender as? NSMenuItem {
-            menuItem.state = fileArea.isHidden ? 0 : 1
+            menuItem.state = NSControl.StateValue(rawValue: fileArea.isHidden ? 0 : 1)
         }
         
         // FIX: Repaint view to remove buggy vertical line
@@ -99,7 +99,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         
         // Change mark in menu item
         if let menuItem = sender as? NSMenuItem {
-            menuItem.state = consoleArea.isHidden ? 0 : 1
+            menuItem.state = NSControl.StateValue(rawValue: consoleArea.isHidden ? 0 : 1)
         }
     }
     
@@ -142,7 +142,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         // Horizontal scroll
         textEditor.enclosingScrollView?.hasHorizontalScroller = true
         textEditor.isHorizontallyResizable = true
-        textEditor.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+        textEditor.autoresizingMask = [NSView.AutoresizingMask.width, NSView.AutoresizingMask.height]
         textEditor.textContainer?.containerSize = NSSize(width: Int.max, height: Int.max)
         textEditor.textContainer?.widthTracksTextView = false
         
@@ -190,7 +190,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             
             // Remove old attributes
             let old = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
-            textEditor.textStorage?.removeAttribute(NSForegroundColorAttributeName, range: old)
+            textEditor.textStorage?.removeAttribute(NSAttributedString.Key.foregroundColor, range: old)
             //textEditor.textStorage?.setAttributes([:], range: all)
             //textEditor.textStorage?.setAttributedString(NSAttributedString(string: ""))
             textEditor.string = ""
@@ -206,7 +206,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
                 syntax.setFormat(file.ext)
                 syntax.colorize()
             } catch {
-                print("Error loading file ", file.url)
+                print("Error loading file ", file.url ?? "No file")
                 textEditor.string = "[\(file.name) is not editable]"
                 resetEditor()
             }
@@ -250,7 +250,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     func fileOpenInBrowser() {
         if let url = filer.currentDocument.url {
             //print("Open in Browser: ", url)
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
     

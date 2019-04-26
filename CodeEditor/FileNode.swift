@@ -41,7 +41,7 @@ class FileNode: NSObject {
     var isEditable : Bool {
         get {
             //let valid = "swift txt md html xml css js plist py php rb c h json yaml sql"
-            let invalid = "exe bin app"
+            let invalid = "exe bin app zip rar tar gz 7z dmg"
             return !invalid.contains(ext)
         }
     }
@@ -50,7 +50,7 @@ class FileNode: NSObject {
     
     override var description: String {
         get {
-            return "\n Name: \(name)\n Path: \(path)\n Type: \(type)\n Date: \(date)\n Size: \(size)\n isFolder: \(isFolder)\n "
+            return "\n Name: \(name)\n Path: \(path)\n Type: \(String(describing: type))\n Date: \(date)\n Size: \(size)\n isFolder: \(isFolder)\n "
         }
     }
     
@@ -69,10 +69,10 @@ class FileNode: NSObject {
          */
         
         if isFolder {
-            return NSImage(named: NSImageNameFolder)!
+            return NSImage(named: NSImage.folderName)!
         }
         
-        return NSImage(named: NSImageNameMultipleDocuments)!
+        return NSImage(named: NSImage.multipleDocumentsName)!
     }
     
     
