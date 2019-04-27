@@ -90,11 +90,11 @@ class SyntaxColorizer {
         isColorizable = false
         
         let app = NSApp.delegate as! AppDelegate
-        isDark  = app.settings.isDarkTheme
+        isDark  = Settings.shared.isDarkTheme
 
         // Get syntax file
         var name = ""
-        if let syntax = app.settings.syntaxList[ext] {
+        if let syntax = Settings.shared.syntaxList[ext] {
             name   = syntax
             format = syntax
         } else {

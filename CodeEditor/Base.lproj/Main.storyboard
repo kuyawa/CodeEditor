@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +23,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferences:" target="Voe-Tx-rLC" id="f7E-Bm-TiN"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -718,7 +723,11 @@ GQ
                         <rect key="contentRect" x="196" y="240" width="1000" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
+<<<<<<< HEAD
                             <outlet property="delegate" destination="B8D-0N-5wS" id="TbT-ax-Sqw"/>
+=======
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="gs8-47-7ND"/>
+>>>>>>> 6276bbe... Add preferences window
                         </connections>
                     </window>
                     <connections>
@@ -830,19 +839,8 @@ GQ
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
-                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obZ-1b-pHR">
-                                                <rect key="frame" x="9" y="475" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_menu" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eHG-rO-GZa">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="onOptionsShow:" target="XfG-lQ-9wD" id="hGn-Al-av3"/>
-                                                </connections>
-                                            </button>
                                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIU-IA-JYa">
-                                                <rect key="frame" x="47" y="475" width="20" height="20"/>
+                                                <rect key="frame" x="9" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_new" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="kHm-jI-9r0">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -855,7 +853,7 @@ GQ
                                                 </connections>
                                             </button>
                                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYf-QJ-kJ2">
-                                                <rect key="frame" x="85" y="475" width="20" height="20"/>
+                                                <rect key="frame" x="47" y="475" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_open" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="YIv-VH-iIH">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -865,19 +863,6 @@ GQ
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="onFileOpen:" target="XfG-lQ-9wD" id="9WI-KX-brx"/>
-                                                </connections>
-                                            </button>
-                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-1D-Srm">
-                                                <rect key="frame" x="189" y="475" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icon_dark" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8Je-nZ-cDy">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                    <string key="keyEquivalent">o</string>
-                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="onThemeToggle:" target="XfG-lQ-9wD" id="e0h-HO-Cos"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -983,7 +968,11 @@ GQ
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="g82-Ii-LuR">
+<<<<<<< HEAD
                                                                     <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+=======
+                                                                    <rect key="frame" x="761" y="1" width="16" height="68"/>
+>>>>>>> 6276bbe... Add preferences window
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
@@ -1006,11 +995,9 @@ GQ
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="buttonMenu" destination="obZ-1b-pHR" id="az2-Wl-AE4"/>
                         <outlet property="buttonNew" destination="ZIU-IA-JYa" id="Mzt-jN-i7h"/>
                         <outlet property="buttonOpen" destination="RYf-QJ-kJ2" id="Aq1-6Q-wdc"/>
                         <outlet property="buttonSave" destination="PWd-fV-DYu" id="N6a-qb-cdc"/>
-                        <outlet property="buttonTheme" destination="a4Q-1D-Srm" id="JUk-PZ-fRy"/>
                         <outlet property="buttonTrash" destination="PqP-7k-9Iz" id="0vg-AI-Aqp"/>
                         <outlet property="consoleArea" destination="eeW-ol-2YG" id="pph-tD-IpD"/>
                         <outlet property="editorArea" destination="0dD-US-7Ap" id="xoU-Ep-JLz"/>
@@ -1030,8 +1017,6 @@ GQ
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="icon_dark" width="50" height="50"/>
-        <image name="icon_menu" width="50" height="50"/>
         <image name="icon_new" width="50" height="50"/>
         <image name="icon_open" width="50" height="50"/>
         <image name="icon_save" width="50" height="50"/>

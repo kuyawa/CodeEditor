@@ -10,12 +10,16 @@ import Foundation
 import Cocoa
 
 struct Settings {
+    
+    // Singleton
+    static var shared = Settings()
+    
     var theme = "system"
     var isDarkTheme: Bool {
         get {
             if (theme == "system") {
                 if #available(OSX 10.14, *) {
-                    return NSApp.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+                    return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
                 }
                 else {
                     return false
@@ -23,10 +27,6 @@ struct Settings {
             }
 
             return theme == "dark"
-        }
-        set {
-            theme = newValue ? "dark" : "light"
-            UserDefaults.standard.set(theme, forKey: "theme")
         }
     }
     

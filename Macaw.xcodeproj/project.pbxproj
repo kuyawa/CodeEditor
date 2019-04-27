@@ -26,6 +26,9 @@
 		3DD010EA1E392595006DE3EF /* yaml.default.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DD010E41E392595006DE3EF /* yaml.default.yaml */; };
 		3DE47FEF1E3406B700BC06D1 /* Settings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DE47FEE1E3406B700BC06D1 /* Settings.yaml */; };
 		3DEBA8071E32DA1300933697 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEBA8061E32DA1300933697 /* Utils.swift */; };
+		BC59EB402274715900880767 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC59EB3F2274715900880767 /* Preferences.storyboard */; };
+		BC59EB42227472DB00880767 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59EB41227472DB00880767 /* PreferencesViewController.swift */; };
+		BC59EB442274741F00880767 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59EB432274741F00880767 /* PreferencesWindowController.swift */; };
 		DEB9CCF61F9D250F00559ED4 /* php.default.yaml in Resources */ = {isa = PBXBuildFile; fileRef = DE4AB1AB1F9D1E76006B16FA /* php.default.yaml */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,9 @@
 		3DD010E41E392595006DE3EF /* yaml.default.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yaml.default.yaml; sourceTree = "<group>"; };
 		3DE47FEE1E3406B700BC06D1 /* Settings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.yaml; sourceTree = "<group>"; };
 		3DEBA8061E32DA1300933697 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		BC59EB3F2274715900880767 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		BC59EB41227472DB00880767 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		BC59EB432274741F00880767 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		DE4AB1AB1F9D1E76006B16FA /* php.default.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = php.default.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +93,7 @@
 			children = (
 				3D28D9251E31C3970014C41E /* Readme.md */,
 				3D106F441E29C4380081E0EC /* ToDo.txt */,
+				BC59EB3E2274713800880767 /* PreferencesWindow */,
 				3D106F341E29BFDF0081E0EC /* CodeEditor */,
 				3D106F331E29BFDF0081E0EC /* Products */,
 			);
@@ -119,6 +126,16 @@
 				3D0170761E3252070051E778 /* Syntax */,
 			);
 			path = CodeEditor;
+			sourceTree = "<group>";
+		};
+		BC59EB3E2274713800880767 /* PreferencesWindow */ = {
+			isa = PBXGroup;
+			children = (
+				BC59EB3F2274715900880767 /* Preferences.storyboard */,
+				BC59EB432274741F00880767 /* PreferencesWindowController.swift */,
+				BC59EB41227472DB00880767 /* PreferencesViewController.swift */,
+			);
+			path = PreferencesWindow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +202,7 @@
 				3D106F3A1E29BFDF0081E0EC /* Assets.xcassets in Resources */,
 				3D18F6DB1E3A95B60090F499 /* xml.default.yaml in Resources */,
 				3D106F3D1E29BFDF0081E0EC /* Main.storyboard in Resources */,
+				BC59EB402274715900880767 /* Preferences.storyboard in Resources */,
 				3D01707D1E3252080051E778 /* css.default.yaml in Resources */,
 				3D0170821E3252080051E778 /* swift.default.yaml in Resources */,
 				3DD010EA1E392595006DE3EF /* yaml.default.yaml in Resources */,
@@ -220,10 +238,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D28D9241E31643D0014C41E /* FileController.swift in Sources */,
+				BC59EB442274741F00880767 /* PreferencesWindowController.swift in Sources */,
 				3D2E8ADE1E3538C900AF14FC /* FileNode.swift in Sources */,
 				3D126D2A1E32962600929E24 /* QuickYaml.swift in Sources */,
 				3D2FFB681E33A04200C309A8 /* EditorController.swift in Sources */,
 				3DEBA8071E32DA1300933697 /* Utils.swift in Sources */,
+				BC59EB42227472DB00880767 /* PreferencesViewController.swift in Sources */,
 				3D1A8B3B1E2FEE070053EB1A /* SyntaxColorizer.swift in Sources */,
 				3D0E322C1E36DFB900C9F71B /* Settings.swift in Sources */,
 				3D106F381E29BFDF0081E0EC /* ViewController.swift in Sources */,
