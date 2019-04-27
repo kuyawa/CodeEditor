@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -11,11 +11,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="CodeEditor" id="1Xt-HY-uBw">
+                            <menuItem title="Macaw" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="CodeEditor" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Macaw" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About CodeEditor" id="5kV-Vb-QxS">
+                                        <menuItem title="About Macaw" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -29,7 +29,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide CodeEditor" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide Macaw" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -47,7 +47,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit CodeEditor" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit Macaw" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -690,7 +690,7 @@ GQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="CodeEditor Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Macaw Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -713,10 +713,13 @@ GQ
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Macaw Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" id="IQv-IB-iLA">
+                    <window key="window" title="Macaw Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1000" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="TbT-ax-Sqw"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -747,7 +750,7 @@ GQ
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="FQ2-Yn-rCc">
                                                     <rect key="frame" x="1" y="1" width="218" height="468"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <outlineView identifier="outlineView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="rBd-sQ-Rp2" id="bJ0-zc-tsl">
                                                             <rect key="frame" x="0.0" y="0.0" width="218" height="468"/>
@@ -818,11 +821,11 @@ GQ
                                                     </subviews>
                                                     <nil key="backgroundColor"/>
                                                 </clipView>
-                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="AKW-73-sxE">
+                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="AKW-73-sxE">
                                                     <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
-                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="rrp-xr-ykP">
+                                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="rrp-xr-ykP">
                                                     <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
@@ -880,7 +883,7 @@ GQ
                                         </subviews>
                                     </customView>
                                     <customView fixedFrame="YES" id="3rd-wm-RzG">
-                                        <rect key="frame" x="221" y="0.0" width="779" height="500"/>
+                                        <rect key="frame" x="1" y="0.0" width="779" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView identifier="fileSplitter" fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-vz-d55">
@@ -894,26 +897,26 @@ GQ
                                                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" translatesAutoresizingMaskIntoConstraints="NO" id="T5j-u3-fBY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="778" height="399"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <clipView key="contentView" ambiguous="YES" id="v9N-eL-FFN">
+                                                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="v9N-eL-FFN">
                                                                     <rect key="frame" x="1" y="1" width="776" height="397"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="CodeEditor" customModuleProvider="target">
+                                                                        <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="CodeEditor" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="776" height="397"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <size key="minSize" width="776" height="397"/>
                                                                             <size key="maxSize" width="3000" height="10000000"/>
                                                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
-                                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bzo-GJ-Iuf">
+                                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="bzo-GJ-Iuf">
                                                                     <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
-                                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xc7-kg-tk5">
+                                                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Xc7-kg-tk5">
                                                                     <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
@@ -954,33 +957,33 @@ GQ
                                                         </subviews>
                                                     </customView>
                                                     <customView fixedFrame="YES" id="eeW-ol-2YG">
-                                                        <rect key="frame" x="0.0" y="430" width="778" height="70"/>
+                                                        <rect key="frame" x="0.0" y="1" width="778" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView wantsLayer="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izg-xq-WBt">
                                                                 <rect key="frame" x="0.0" y="0.0" width="778" height="70"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                <clipView key="contentView" ambiguous="YES" id="XUJ-QY-63B">
+                                                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="XUJ-QY-63B">
                                                                     <rect key="frame" x="1" y="1" width="776" height="68"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <textView ambiguous="YES" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Bfh-fE-MT4">
+                                                                        <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Bfh-fE-MT4">
                                                                             <rect key="frame" x="0.0" y="0.0" width="776" height="68"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <size key="minSize" width="776" height="68"/>
                                                                             <size key="maxSize" width="996" height="10000000"/>
                                                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </clipView>
-                                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="W8X-s6-U2V">
+                                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="W8X-s6-U2V">
                                                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
-                                                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="g82-Ii-LuR">
-                                                                    <rect key="frame" x="761" y="1" width="16" height="68"/>
+                                                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="g82-Ii-LuR">
+                                                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>

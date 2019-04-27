@@ -34,7 +34,7 @@
 		3D0170791E3252080051E778 /* html.default.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = html.default.yaml; sourceTree = "<group>"; wrapsLines = 0; };
 		3D01707C1E3252080051E778 /* swift.default.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swift.default.yaml; sourceTree = "<group>"; wrapsLines = 0; };
 		3D0E322B1E36DFB900C9F71B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		3D106F321E29BFDF0081E0EC /* CodeEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D106F321E29BFDF0081E0EC /* Macaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D106F351E29BFDF0081E0EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D106F371E29BFDF0081E0EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3D106F391E29BFDF0081E0EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		3D106F331E29BFDF0081E0EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3D106F321E29BFDF0081E0EC /* CodeEditor.app */,
+				3D106F321E29BFDF0081E0EC /* Macaw.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3D106F311E29BFDE0081E0EC /* CodeEditor */ = {
+		3D106F311E29BFDE0081E0EC /* Macaw */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3D106F411E29BFDF0081E0EC /* Build configuration list for PBXNativeTarget "CodeEditor" */;
+			buildConfigurationList = 3D106F411E29BFDF0081E0EC /* Build configuration list for PBXNativeTarget "Macaw" */;
 			buildPhases = (
 				3D106F2E1E29BFDE0081E0EC /* Sources */,
 				3D106F2F1E29BFDE0081E0EC /* Frameworks */,
@@ -137,9 +137,9 @@
 			);
 			dependencies = (
 			);
-			name = CodeEditor;
+			name = Macaw;
 			productName = CodeEditor;
-			productReference = 3D106F321E29BFDF0081E0EC /* CodeEditor.app */;
+			productReference = 3D106F321E29BFDF0081E0EC /* Macaw.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -159,7 +159,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3D106F2D1E29BFDE0081E0EC /* Build configuration list for PBXProject "CodeEditor" */;
+			buildConfigurationList = 3D106F2D1E29BFDE0081E0EC /* Build configuration list for PBXProject "Macaw" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -172,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3D106F311E29BFDE0081E0EC /* CodeEditor */,
+				3D106F311E29BFDE0081E0EC /* Macaw */,
 			);
 		};
 /* End PBXProject section */
@@ -393,7 +393,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3D106F2D1E29BFDE0081E0EC /* Build configuration list for PBXProject "CodeEditor" */ = {
+		3D106F2D1E29BFDE0081E0EC /* Build configuration list for PBXProject "Macaw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3D106F3F1E29BFDF0081E0EC /* Debug */,
@@ -402,7 +402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3D106F411E29BFDF0081E0EC /* Build configuration list for PBXNativeTarget "CodeEditor" */ = {
+		3D106F411E29BFDF0081E0EC /* Build configuration list for PBXNativeTarget "Macaw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3D106F421E29BFDF0081E0EC /* Debug */,
