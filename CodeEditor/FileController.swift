@@ -67,7 +67,6 @@ class FileController: NSObject {
     
     func reload() {
         outlineView?.reloadData()
-        //outlineView?.expandItem(nil, expandChildren: true) // expand all
     }
     
     func getWorkingFolder() -> URL? {
@@ -553,18 +552,13 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        //print("Column item: ", item)
         guard let file = item as? FileNode else { return nil }
-        //print("Identifier: ", (tableColumn?.identifier)!)
-        
-        //let cellId = "filename"
         let cellId = "DataCell"
         let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self) as? NSTableCellView
         
         result?.textField?.stringValue = file.name
         result?.imageView?.image = file.getFileImage()
         result?.textField?.delegate = self
-        //print("Result: ", result)
         return result
     }
     
@@ -647,6 +641,15 @@ extension FileController: NSTextFieldDelegate {
                             return
                         }
                         
+                        /*
+ 
+ let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self) as? NSTableCellView
+ 
+ result?.textField?.stringValue = file.name
+ result?.imageView?.image = file.getFileImage(fileExt: file.ext)
+ result?.textField?.delegate = self
+ */
+                        
                         // If everything ok, rename it
                         do {
                             let source = item.url
@@ -655,6 +658,10 @@ extension FileController: NSTextFieldDelegate {
                             try FileManager.default.moveItem(at: source!, to: target!)
                             item.url = target
                             item.name = newName
+                            
+                            // Update image
+                            let tableCellView = outlineView?.rowView(atRow: index, makeIfNecessary: false)?.view(atColumn: 0) as? NSTableCellView
+                            tableCellView?.imageView?.image = item.getFileImage()
                         } catch {
                             // Revert to old name
                             field.undoManager?.undo()
