@@ -38,9 +38,3 @@ Editor commands implemented:
 - Enable console
 - Build and Run: call swift build, show progress in console area
 - Show errors and allow user to jump to files and lines
-
-### Available
-
-If you like what you see, [hire me!](mailto:haxapp@gmail.com)
-
-Or donate via [Patreon](https://www.patreon.com/kuyawa) so I can develop more projects you like!

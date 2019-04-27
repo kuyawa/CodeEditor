@@ -7,12 +7,21 @@
 //
 
 import Foundation
-
+import Cocoa
 
 struct Settings {
-    var theme = "light"
+    var theme = "system"
     var isDarkTheme: Bool {
         get {
+            if (theme == "system") {
+                if #available(OSX 10.14, *) {
+                    return NSApp.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+                }
+                else {
+                    return false
+                }
+            }
+
             return theme == "dark"
         }
         set {
@@ -47,7 +56,7 @@ struct Settings {
         
         let options = QuickYaml().parse(text)
 
-        theme      = Default.string(options["theme"], "light")
+        theme      = Default.string(options["theme"], "system")
         fontFamily = Default.string(options["font-family"], "menlo")
         fontSize   = Default.int(options["font-size"], 14)
         wordWrap   = Default.bool(options["word-wrap"], false)
@@ -67,22 +76,6 @@ struct Settings {
             theme = userTheme
         }
     }
-    
-    /*
-    func save() {
-        guard let url = Bundle.main.url(forResource: "Settings", withExtension: "yaml") else {
-            print("WARN: Settings file not found")
-            return
-        }
-
-        let text = "" //QuickYaml.toString(self)
-        
-        if (try? text.write(to: url, atomically: false, encoding: .utf8)) != nil {
-            print("ERROR: Settings file could not be saved")
-            return
-        }
-    }
-    */
 }
 
 
