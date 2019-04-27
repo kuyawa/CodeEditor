@@ -2,7 +2,7 @@
 # Version: 1.0
 # File: Settings
 
-theme: light
+theme: system
 
 font-family : Menlo
 font-size   : 14

@@ -19,7 +19,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init(){
         super.init()
-        print("Hello!")
         setupAppFolder()
         settings.load()
     }
@@ -119,7 +118,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        print("Goodbye!")
         return true
     }
 
