@@ -723,11 +723,7 @@ GQ
                         <rect key="contentRect" x="196" y="240" width="1000" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
-<<<<<<< HEAD
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="TbT-ax-Sqw"/>
-=======
                             <outlet property="delegate" destination="B8D-0N-5wS" id="gs8-47-7ND"/>
->>>>>>> 6276bbe... Add preferences window
                         </connections>
                     </window>
                     <connections>
@@ -968,11 +964,7 @@ GQ
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="g82-Ii-LuR">
-<<<<<<< HEAD
-                                                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
-=======
                                                                     <rect key="frame" x="761" y="1" width="16" height="68"/>
->>>>>>> 6276bbe... Add preferences window
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
