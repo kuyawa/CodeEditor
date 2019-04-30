@@ -14,13 +14,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var appFolderName = "MacawEditor"
     var appFolderUrl: URL?
     var filename: String = ""
-    var settings = Settings()
     var currentBuild = Int(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)!
+    var preferencesController: NSWindowController?
     
     override init(){
         super.init()
         setupAppFolder()
-        settings.load()
+        Settings.shared.load()
     }
     
     func setupAppFolder() {
@@ -108,7 +108,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         main.fileOpenByOS(filename)
         return true
     }
-
+    
+    @IBAction func showPreferences(_ sender: Any) {
+        if (preferencesController == nil) {
+            let storyboard = NSStoryboard(name: NSStoryboard.Name("Preferences"), bundle: nil)
+            preferencesController = storyboard.instantiateInitialController() as? NSWindowController
+        }
+        
+        if (preferencesController != nil) {
+            preferencesController!.showWindow(sender)
+        }
+    }
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         //
     }

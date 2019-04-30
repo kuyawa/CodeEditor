@@ -73,3 +73,4 @@ fastlane/test_output
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+CodeEditor/Assets.xcassets/.DS_Store

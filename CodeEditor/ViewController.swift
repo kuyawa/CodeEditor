@@ -30,10 +30,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     @IBOutlet var textEditor        : EditorController!
     @IBOutlet var outlineView       : NSOutlineView!
     
-    @IBOutlet weak var buttonMenu   : NSButton!
     @IBOutlet weak var buttonNew    : NSButton!
     @IBOutlet weak var buttonOpen   : NSButton!
-    @IBOutlet weak var buttonTheme  : NSButton!
     @IBOutlet weak var buttonSave   : NSButton!
     @IBOutlet weak var buttonTrash  : NSButton!
     
@@ -46,7 +44,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     @IBAction func onFileDelete(_ sender: AnyObject) { fileDelete() }
     @IBAction func onSidebarToggle(_ sender: AnyObject) { sidebarToggle(sender) }
     @IBAction func onConsoleToggle(_ sender: AnyObject) { consoleToggle(sender) }
-    @IBAction func onThemeToggle(_ sender: AnyObject) { themeToggle() }
     
     
     override func viewDidLoad() {
@@ -60,29 +57,26 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     override func viewWillDisappear() {
-        //print("Window: ", self.view.window?.frame)
         if filer.currentDocument.hasChanged {
             _ = filer.save()
         }
         filer.saveDefaults()
     }
     
-    func setTheme() {
-        if let window = self.view.window {
-            let goDark = app.settings.isDarkTheme
-            if #available(OSX 10.14, *) {
-                NSApp.appearance = NSAppearance(named: .darkAqua)
-            } else {
-                // Fallback on earlier versions
+    @objc func setTheme() {
+        let goDark = Settings.shared.isDarkTheme
+        if #available(OSX 10.14, *) {
+            NSApp.appearance = NSAppearance(named: goDark ? .darkAqua : .aqua)
+        } else {
+            // Fallback on earlier versions
+            for window in NSApp.windows {
                 window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
             }
-            buttonMenu.image  = NSImage(named: goDark ? "icon_menu2"  : "icon_menu")
-            buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
-            buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
-            buttonTheme.image = NSImage(named: goDark ? "icon_dark2"  : "icon_dark")
-            buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
-            buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
         }
+        buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
+        buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
+        buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
+        buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
     }
     
     func sidebarToggle(_ sender: AnyObject) {
@@ -107,20 +101,13 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             menuItem.state = NSControl.StateValue(rawValue: consoleArea.isHidden ? 0 : 1)
         }
     }
-    
-    func themeToggle() {
-        app.settings.isDarkTheme = !app.settings.isDarkTheme
-        setTheme()
-        // set cursor in prev position, scroll if necessary
-        // or do not reload just repaint syntax
-        selectedFile(filer.currentDocument)
-    }
 
     func initialize() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setTheme), name: NSNotification.Name(rawValue: "updateTheme"), object: nil);
         consoleArea.isHidden = true
         
         syntax.assignView(textEditor)
-        syntax.setFormat(app.settings.syntaxDefault)
+        syntax.setFormat(Settings.shared.syntaxDefault)
         
         let lastFile = filer.start()
         filer.assignTree(outlineView)
@@ -152,7 +139,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.textContainer?.widthTracksTextView = false
         
         // Default colors
-        if app.settings.isDarkTheme {
+        if Settings.shared.isDarkTheme {
             textEditor.backgroundColor = NSColor("333333")
             textEditor.textColor = NSColor("EEEEEE")
         } else {
@@ -278,12 +265,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         let timer2: DispatchTime = .now() + .milliseconds(4000)
         
         DispatchQueue.main.asyncAfter(deadline: timer1) {
-            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_saved2" : "icon_saved"))
+            self.buttonSave.image = NSImage(named: (Settings.shared.isDarkTheme ? "icon_saved2" : "icon_saved"))
             self.buttonSave.title = "Saved"
         }
 
         DispatchQueue.main.asyncAfter(deadline: timer2) {
-            self.buttonSave.image = NSImage(named: (self.app.settings.isDarkTheme ? "icon_save2" : "icon_save"))
+            self.buttonSave.image = NSImage(named: (Settings.shared.isDarkTheme ? "icon_save2" : "icon_save"))
             self.buttonSave.title = "Save"
         }
         
