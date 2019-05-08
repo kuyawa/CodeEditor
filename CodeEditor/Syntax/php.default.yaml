@@ -49,10 +49,10 @@ styles-dark:
 order: keywords, attributes, identifiers, types, stringLiteral, commentLine, commentBlock
 
 patterns:
-    keywords      : \b(as|associativity|break|case|catch|class|continue|convenience|default|defer|deinit|didSet|do|dynamic|dynamicType|else|enum|extension|fallthrough|false|fileprivate|final|for|func|get|guard|if|import|in|infix|init|inout|internal|is|lazy|left|let|mutating|new|nil|none|nonmutating|open|operator|optional|override|postfix|precedence|prefix|private|protocol|public|repeat|required|rethrows|return|right|self|Self|set|static|struct|subscript|super|switch|throw|throws|true|try|Type|typealias|unowned|unsafe|var|weak|where|while|willSet)\b
+    keywords      : \b(and|list|abstract|global|private|echo|interface|as|static|endswitch|array|null|if|endwhile|or|const|for|endforeach|self|var|while|isset|public|protected|exit|foreach|throw|elseif|include|__FILE__|empty|do|xor|return|parent|clone|use|__CLASS__|__LINE__|else|break|print|eval|new|catch|__METHOD__|case|exception|default|die|__FUNCTION__|enddeclare|final|try|switch|continue|endfor|endif|declare|unset|true|false|trait|goto|instanceof|insteadof|__DIR__|__NAMESPACE__|yield|finally)\b
     attributes    : ((@)(\B\$[0-9]+|\b[\w^\d][\w\d]*\b|\B`[\w^\d][\w\d]*`\B))
-    identifiers   : (?<=import|class|struct|enum|func|extension|protocol|var|let)\s*(\w*)
-    types         : \b(Int|Float|Double|String|Bool|Character|Void|U?Int(8|16|32|64)?|Array|Dictionary|(Array)(<.*>)|(Dictionary)(<.*>)|(Optional)(<.*>)|(protocol)(<.*>))\b
+    identifiers   : (?<=include_once|require_once|include|require|class|struct|enum|function|extension|protocol|var|let)\s*(\w*)
+    types         : \b(Int|Float|Double|String|Bool)\b
     stringLiteral : (".*")
     numberLiteral : \b([0-9]*(\.[0-9]*)?)\b
     commentLine   : (//.*)
