@@ -1,4 +1,4 @@
-![Macaw](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/CodeEditor/Assets.xcassets/AppIcon.appiconset/macaweditor128.png)
+![Macaw](https://raw.githubusercontent.com/wdg/CodeEditor/master/CodeEditor/Assets.xcassets/AppIcon.appiconset/macaweditor128.png)
 
 # Macaw - Code Editor in Swift
 
@@ -6,16 +6,16 @@
 
 ### Screenshot:
 
-![Screenshot](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/Screenshots/Screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/wdg/CodeEditor/master/Screenshots/Screenshot.jpg)
 
 ### Dark theme
 
-![Screenshot](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/Screenshots/Screenshot2.jpg)
+![Screenshot](https://raw.githubusercontent.com/wdg/CodeEditor/master/Screenshots/Screenshot2.jpg)
 
 
 ### Version 1.0:
 
-Syntax highlighter needs a little polish, some editor commands are ready.
+The syntax highlighter needs a little polish.
 
 Editor commands implemented:
 
@@ -32,9 +32,3 @@ Editor commands implemented:
 
 - ctl+Up Move line Up
 - ctl+Dn Move line down
-
-### Version Next:
-
-- Enable console
-- Build and Run: call swift build, show progress in console area
-- Show errors and allow user to jump to files and lines
