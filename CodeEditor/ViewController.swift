@@ -36,6 +36,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     @IBOutlet weak var buttonTrash  : NSButton!
     
     
+    
     @IBAction func onOptionsShow(_ sender: AnyObject) { showOptions() }
     @IBAction func onFileNew(_ sender: AnyObject) { fileNew() }
     @IBAction func onFileOpen(_ sender: AnyObject) { fileOpen() }

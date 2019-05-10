@@ -1,5 +1,5 @@
 //
-//  EditorController..swift
+//  EditorController.swift
 //  CodeEditor
 //
 //  Created by Mac Mini on 1/21/17.
