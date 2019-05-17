@@ -9,43 +9,89 @@
 import Cocoa
 
 class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegate {
-
-    let app    = NSApp.delegate as! AppDelegate
-    var filer  = FileController()
+    /// Appdelegate
+    let app = NSApp.delegate as! AppDelegate
+    
+    /// File Controller
+    var filer = FileController()
+    
+    /// Syntax highlighter
     var syntax = SyntaxColorizer()
+    
+    /// Is the system loading?
     var isLoading = false
-    let hugeFileSize = 9999999  // 10 mbs ?
+    
+    /// Maximum file size.
+    let hugeFileSize = 9999999 // 10 mb
+    
+    /// main screen splitter
+    @IBOutlet weak var mainSplitter: NSSplitView!
+    
+    /// File splitter
+    @IBOutlet weak var fileSplitter: NSSplitView!
+    
+    /// Main View
+    @IBOutlet weak var mainArea: NSView!
+    
+    /// Filetree view
+    @IBOutlet weak var fileArea: NSView!
+    
+    /// Console view
+    @IBOutlet weak var consoleArea: NSView!
+    
+    /// Editor view
+    @IBOutlet weak var editorArea: NSView!
+    
+    /// Editor title
+    @IBOutlet weak var editorTitle: NSTextField!
+    
+    /// Text Editor
+    @IBOutlet var textEditor: EditorController!
+    
+    /// Outline view
+    @IBOutlet var outlineView: NSOutlineView!
+    
+    /// New file button
+    @IBOutlet weak var buttonNew: NSButton!
+    
+    /// Open (file) button
+    @IBOutlet weak var buttonOpen: NSButton!
+    
+    /// Save file button
+    @IBOutlet weak var buttonSave: NSButton!
+    
+    /// Trash file button
+    @IBOutlet weak var buttonTrash: NSButton!
+    
+    /// Show options
+    @IBAction func onOptionsShow(_ sender: AnyObject) {
+        showOptions()
+    }
+    
+    @IBAction func onFileNew(_ sender: AnyObject) {
+        fileNew()
+    }
+    
+    @IBAction func onFileOpen(_ sender: AnyObject) {
+        fileOpen()
+    }
+    
+    @IBAction func onFileSave(_ sender: AnyObject) {
+        fileSave()
+    }
+    
+    @IBAction func onFileDelete(_ sender: AnyObject) {
+        fileDelete()
+    }
+    
+    @IBAction func onSidebarToggle(_ sender: AnyObject) {
+        sidebarToggle(sender)
+    }
+    
+    @IBAction func onConsoleToggle(_ sender: AnyObject) {
+        consoleToggle(sender)
+    }
 
-    
-    @IBOutlet weak var mainSplitter : NSSplitView!
-    @IBOutlet weak var fileSplitter : NSSplitView!
-    
-    @IBOutlet weak var mainArea     : NSView!
-    @IBOutlet weak var fileArea     : NSView!
-    
-    @IBOutlet weak var consoleArea  : NSView!
-    @IBOutlet weak var editorArea   : NSView!
-    @IBOutlet weak var editorTitle  : NSTextField!
-    
-    @IBOutlet var textEditor        : EditorController!
-    @IBOutlet var outlineView       : NSOutlineView!
-    
-    @IBOutlet weak var buttonNew    : NSButton!
-    @IBOutlet weak var buttonOpen   : NSButton!
-    @IBOutlet weak var buttonSave   : NSButton!
-    @IBOutlet weak var buttonTrash  : NSButton!
-    
-    
-    
-    @IBAction func onOptionsShow(_ sender: AnyObject) { showOptions() }
-    @IBAction func onFileNew(_ sender: AnyObject) { fileNew() }
-    @IBAction func onFileOpen(_ sender: AnyObject) { fileOpen() }
-    @IBAction func onFileSave(_ sender: AnyObject) { fileSave() }
-    @IBAction func onFileDelete(_ sender: AnyObject) { fileDelete() }
-    @IBAction func onSidebarToggle(_ sender: AnyObject) { sidebarToggle(sender) }
-    @IBAction func onConsoleToggle(_ sender: AnyObject) { consoleToggle(sender) }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -73,9 +119,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
                 window.appearance = NSAppearance(named: goDark ? NSAppearance.Name.vibrantDark : NSAppearance.Name.vibrantLight)
             }
         }
-        buttonNew.image   = NSImage(named: goDark ? "icon_new2"   : "icon_new")
-        buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
-        buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
+        buttonNew.image = NSImage(named: goDark ? "icon_new2"   : "icon_new")
+        buttonOpen.image = NSImage(named: goDark ? "icon_open2"  : "icon_open")
+        buttonSave.image = NSImage(named: goDark ? "icon_save2"  : "icon_save")
         buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
         
         // Fix textview color.
@@ -127,12 +173,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func resetEditor() {
-        textEditor.font = NSFont(name: "Menlo", size: 14) // TODO: Get from defaults
+        textEditor.font = NSFont(name: Settings.shared.fontFamily, size: Settings.shared.fontSize)
         textEditor.isAutomaticQuoteSubstitutionEnabled  = false
-        textEditor.isAutomaticDashSubstitutionEnabled   = false
+        textEditor.isAutomaticDashSubstitutionEnabled = false
         textEditor.isAutomaticSpellingCorrectionEnabled = false
-        textEditor.isAutomaticLinkDetectionEnabled      = false
-        textEditor.textStorage?.font = NSFont(name: "Menlo", size: 14)
+        textEditor.isAutomaticLinkDetectionEnabled = false
+        textEditor.textStorage?.font = NSFont(name: Settings.shared.fontFamily, size: Settings.shared.fontSize)
         textEditor.textStorage?.delegate = self
 
         // Horizontal scroll
