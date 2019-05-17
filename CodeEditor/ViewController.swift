@@ -77,6 +77,10 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         buttonOpen.image  = NSImage(named: goDark ? "icon_open2"  : "icon_open")
         buttonSave.image  = NSImage(named: goDark ? "icon_save2"  : "icon_save")
         buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
+        
+        // Fix textview color.
+        textEditor.backgroundColor = goDark ? NSColor("333333") : NSColor("FFFFFF")
+        textEditor.textColor = goDark ? NSColor("EEEEEE") : NSColor("333333")
     }
     
     func sidebarToggle(_ sender: AnyObject) {
