@@ -23,6 +23,14 @@ class WindowController: NSWindowController {
                 if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/Makefile") {
                     _ = Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
                 }
+                else {
+                    let alert = NSAlert()
+                    alert.messageText = "We can not build."
+                    alert.informativeText = "Sorry, but we don't detect a supported build system."
+                    alert.alertStyle = .informational
+                    alert.addButton(withTitle: "OK")
+                    alert.runModal()
+                }
             }
         }
     }

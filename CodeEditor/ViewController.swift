@@ -40,7 +40,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     @IBAction func onOptionsShow(_ sender: AnyObject) { showOptions() }
     @IBAction func onFileNew(_ sender: AnyObject) { fileNew() }
     @IBAction func onFileOpen(_ sender: AnyObject) { fileOpen() }
-    @IBAction func onFileOpenInBrowser(_ sender: AnyObject) { fileOpenInBrowser() }
     @IBAction func onFileSave(_ sender: AnyObject) { fileSave() }
     @IBAction func onFileDelete(_ sender: AnyObject) { fileDelete() }
     @IBAction func onSidebarToggle(_ sender: AnyObject) { sidebarToggle(sender) }
@@ -238,13 +237,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     func fileOpenByOS(_ filename: String) {
         filer.load(filename)
         app.filename = "" // reset
-    }
-    
-    func fileOpenInBrowser() {
-        if let url = filer.currentDocument.url {
-            //print("Open in Browser: ", url)
-            NSWorkspace.shared.open(url)
-        }
     }
     
     func fileSave() {

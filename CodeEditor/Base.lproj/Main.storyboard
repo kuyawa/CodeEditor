@@ -87,11 +87,6 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Open in Browser" keyEquivalent="b" id="k8y-vl-LKV">
-                                            <connections>
-                                                <action selector="onFileOpenInBrowser:" target="Ady-hI-5gd" id="Fqp-9L-Zbg"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
