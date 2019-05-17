@@ -9,6 +9,31 @@
 import Cocoa
 import Foundation
 
+class Utils {
+    /*
+     Use:
+     
+     Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
+     
+     */
+    
+    static func shell(launchPath path: String, arguments args: [String]) -> String {
+        let task = Process()
+        task.launchPath = path
+        task.arguments = args
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        task.waitUntilExit()
+        
+        return(output!)
+    }
+}
 
 typealias Dixy = [String: Any]
 
@@ -124,8 +149,6 @@ class Default {
         return Bool(str) ?? def!
     }
 }
-
-
 
 /*
  Use:

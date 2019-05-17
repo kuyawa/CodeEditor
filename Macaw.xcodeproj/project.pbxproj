@@ -26,6 +26,7 @@
 		3DD010EA1E392595006DE3EF /* yaml.default.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DD010E41E392595006DE3EF /* yaml.default.yaml */; };
 		3DE47FEF1E3406B700BC06D1 /* Settings.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 3DE47FEE1E3406B700BC06D1 /* Settings.yaml */; };
 		3DEBA8071E32DA1300933697 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEBA8061E32DA1300933697 /* Utils.swift */; };
+		BC07E07C2285A38200BEDA2C /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC07E07B2285A38200BEDA2C /* WindowController.swift */; };
 		BC59EB402274715900880767 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC59EB3F2274715900880767 /* Preferences.storyboard */; };
 		BC59EB42227472DB00880767 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59EB41227472DB00880767 /* PreferencesViewController.swift */; };
 		BC59EB442274741F00880767 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC59EB432274741F00880767 /* PreferencesWindowController.swift */; };
@@ -56,6 +57,7 @@
 		3DD010E41E392595006DE3EF /* yaml.default.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yaml.default.yaml; sourceTree = "<group>"; };
 		3DE47FEE1E3406B700BC06D1 /* Settings.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.yaml; sourceTree = "<group>"; };
 		3DEBA8061E32DA1300933697 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		BC07E07B2285A38200BEDA2C /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		BC59EB3F2274715900880767 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		BC59EB41227472DB00880767 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		BC59EB432274741F00880767 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				3DE47FEE1E3406B700BC06D1 /* Settings.yaml */,
 				3D0E322B1E36DFB900C9F71B /* Settings.swift */,
 				3D106F351E29BFDF0081E0EC /* AppDelegate.swift */,
+				BC07E07B2285A38200BEDA2C /* WindowController.swift */,
 				3D106F371E29BFDF0081E0EC /* ViewController.swift */,
 				3D1A8B3A1E2FEE070053EB1A /* SyntaxColorizer.swift */,
 				3D2FFB671E33A04200C309A8 /* EditorController.swift */,
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D28D9241E31643D0014C41E /* FileController.swift in Sources */,
+				BC07E07C2285A38200BEDA2C /* WindowController.swift in Sources */,
 				BC59EB442274741F00880767 /* PreferencesWindowController.swift in Sources */,
 				3D2E8ADE1E3538C900AF14FC /* FileNode.swift in Sources */,
 				3D126D2A1E32962600929E24 /* QuickYaml.swift in Sources */,

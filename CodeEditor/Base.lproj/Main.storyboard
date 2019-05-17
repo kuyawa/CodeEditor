@@ -87,11 +87,6 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Open in Browser" keyEquivalent="b" id="k8y-vl-LKV">
-                                            <connections>
-                                                <action selector="onFileOpenInBrowser:" target="Ady-hI-5gd" id="Fqp-9L-Zbg"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
@@ -709,7 +704,7 @@ GQ
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CodeEditor" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Macaw" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="-105"/>
@@ -717,11 +712,38 @@ GQ
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Macaw Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" id="IQv-IB-iLA">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="Macaw" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Macaw Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MacawEditor" animationBehavior="default" tabbingIdentifier="MacawEditor" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1000" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="CFA1739C-5C85-48DA-AD1B-4EF67D270168" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="AYl-Lp-qUD">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="CA58FC7B-1D4E-4C82-88C3-7DA9E2DFAE96" label="Build" paletteLabel="Build" sizingBehavior="auto" id="0DJ-NE-1FU">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="1S8-b6-i2c">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Build" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OY5-U1-mUw">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="onBuild:" target="B8D-0N-5wS" id="I3K-sW-rFc"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="fWf-Ju-o4D"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="hZ6-nO-pwL"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="0DJ-NE-1FU"/>
+                                <toolbarItem reference="hZ6-nO-pwL"/>
+                            </defaultToolbarItems>
+                            <connections>
+                                <outlet property="delegate" destination="IQv-IB-iLA" id="0ah-hg-Mtw"/>
+                            </connections>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="gs8-47-7ND"/>
                         </connections>
@@ -737,7 +759,7 @@ GQ
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="CodeEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Macaw" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -755,7 +777,7 @@ GQ
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="FQ2-Yn-rCc">
                                                     <rect key="frame" x="1" y="1" width="218" height="468"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <outlineView identifier="outlineView" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="rBd-sQ-Rp2" id="bJ0-zc-tsl">
                                                             <rect key="frame" x="0.0" y="0.0" width="218" height="468"/>
@@ -864,7 +886,7 @@ GQ
                                         </subviews>
                                     </customView>
                                     <customView fixedFrame="YES" id="3rd-wm-RzG">
-                                        <rect key="frame" x="1" y="0.0" width="779" height="500"/>
+                                        <rect key="frame" x="221" y="0.0" width="779" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView identifier="fileSplitter" fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="eGc-vz-d55">
@@ -880,9 +902,9 @@ GQ
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="v9N-eL-FFN">
                                                                     <rect key="frame" x="1" y="1" width="776" height="397"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="CodeEditor" customModuleProvider="target">
+                                                                        <textView ambiguous="YES" importsGraphics="NO" horizontallyResizable="YES" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" textReplacement="YES" smartInsertDelete="YES" id="jQx-m4-t0d" customClass="EditorController" customModule="Macaw" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="776" height="397"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -938,7 +960,7 @@ GQ
                                                         </subviews>
                                                     </customView>
                                                     <customView fixedFrame="YES" id="eeW-ol-2YG">
-                                                        <rect key="frame" x="0.0" y="1" width="778" height="70"/>
+                                                        <rect key="frame" x="0.0" y="430" width="778" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView wantsLayer="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izg-xq-WBt">
@@ -946,7 +968,7 @@ GQ
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="XUJ-QY-63B">
                                                                     <rect key="frame" x="1" y="1" width="776" height="68"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Bfh-fE-MT4">
                                                                             <rect key="frame" x="0.0" y="0.0" width="776" height="68"/>
