@@ -51,6 +51,11 @@ class WindowController: NSWindowController {
                         ]
                     )
                     
+                    /*
+                        [17/5/2019 19:35.48] /usr/local/bin/npm: line 2: syntax error near unexpected token `;'
+                        /usr/local/bin/npm: line 2: `;(function () { // wrapper in case we're in module_context mode'
+                     */
+                    
                     viewController.appendToConsole(retVal)
                 }
                 else {

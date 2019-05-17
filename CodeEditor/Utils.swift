@@ -8,6 +8,7 @@
 
 import Cocoa
 import Foundation
+import Darwin
 
 class Utils {
     /*
@@ -32,6 +33,20 @@ class Utils {
         task.waitUntilExit()
         
         return(output!)
+    }
+    
+    static func runCommand(_ cmd: String) -> Int32 {
+        var pid: Int32 = 0
+        let args = ["/bin/sh", "-c", cmd]
+        let argv: [UnsafeMutablePointer<CChar>?] = args.map{ $0.withCString(strdup) }
+        defer { for case let arg? in argv { free(arg) } }
+        if posix_spawn(&pid, argv[0], nil, nil, argv + [nil], environ) < 0 {
+            print("ERROR: Unable to spawn")
+            return 1
+        }
+        var status: Int32 = 0
+        _ = waitpid(pid, &status, 0)
+        return status
     }
 }
 
