@@ -18,18 +18,9 @@ class WindowController: NSWindowController {
     
     func build() {
         if let viewController = self.contentViewController as? ViewController {
-            
             if viewController.filer.root.isFolder {
-                //print(viewController.filer.root.path)
-                
-                // NodeJS - npm
-                if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/package.json") {
-                    
-                    //let res = Utils.shell(launchPath: "/usr/bin/env", arguments: ["npm", "-v" /*"install", "-C", viewController.filer.root.path*/])
-                    // Error: env: npm: No such file or directory
-                }
                 // C & C++ Makefile
-                else if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/Makefile") {
+                if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/Makefile") {
                     _ = Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
                 }
             }
