@@ -103,7 +103,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
 
     func initialize() {
-        NotificationCenter.default.addObserver(self, selector: #selector(setTheme), name: NSNotification.Name(rawValue: "updateTheme"), object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(setTheme), name: .updateTheme, object: nil);
         consoleArea.isHidden = true
         
         syntax.assignView(textEditor)

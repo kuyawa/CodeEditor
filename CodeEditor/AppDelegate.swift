@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import NotificationCenter
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -19,8 +20,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init(){
         super.init()
+        
+        DistributedNotificationCenter.default.addObserver(
+            self,
+            selector: #selector(interfaceColorChanged),
+            name: .AppleInterfaceThemeChangedNotification,
+            object: nil
+        )
+        
         setupAppFolder()
         Settings.shared.load()
+    }
+    
+    @objc func interfaceColorChanged() {
+        NotificationCenter.default.post(name: .updateTheme, object: nil)
     }
     
     func setupAppFolder() {

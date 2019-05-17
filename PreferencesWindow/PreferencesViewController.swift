@@ -30,6 +30,6 @@ class PreferencesViewController: NSViewController {
         Settings.shared.theme = sender.titleOfSelectedItem!.lowercased()
         UserDefaults.standard.set(Settings.shared.theme, forKey: "theme")
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateTheme"), object: nil);
+        NotificationCenter.default.post(name: .updateTheme, object: nil)
     }
 }

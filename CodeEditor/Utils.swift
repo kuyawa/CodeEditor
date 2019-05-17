@@ -251,5 +251,9 @@ class Dialog {
     }
 }
 
+extension Notification.Name {
+    static let AppleInterfaceThemeChangedNotification = Notification.Name("AppleInterfaceThemeChangedNotification")
+    static let updateTheme = NSNotification.Name(rawValue: "updateTheme")
+}
 
 // End
