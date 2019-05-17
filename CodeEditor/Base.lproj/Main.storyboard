@@ -1014,6 +1014,7 @@ GQ
                         <outlet property="buttonSave" destination="PWd-fV-DYu" id="N6a-qb-cdc"/>
                         <outlet property="buttonTrash" destination="PqP-7k-9Iz" id="0vg-AI-Aqp"/>
                         <outlet property="consoleArea" destination="eeW-ol-2YG" id="pph-tD-IpD"/>
+                        <outlet property="consoleTextView" destination="Bfh-fE-MT4" id="zon-jU-TZ0"/>
                         <outlet property="editorArea" destination="0dD-US-7Ap" id="xoU-Ep-JLz"/>
                         <outlet property="editorTitle" destination="P5l-aY-scr" id="fxc-WW-Msn"/>
                         <outlet property="fileArea" destination="N7K-3Y-vcm" id="bWc-Iu-fuI"/>

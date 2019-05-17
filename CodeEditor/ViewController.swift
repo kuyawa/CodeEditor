@@ -39,6 +39,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     /// Console view
     @IBOutlet weak var consoleArea: NSView!
     
+    /// Console text view
+    @IBOutlet weak var consoleTextView: NSTextView!
+    
     /// Editor view
     @IBOutlet weak var editorArea: NSView!
     
@@ -152,6 +155,41 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         }
     }
 
+    func appendToConsole(_ text: String) {
+        if consoleArea.isHidden {
+            self.consoleToggle(self)
+        }
+        
+        // make it not editable.
+        consoleTextView.isEditable = false
+        
+        // get the user's calendar
+        let userCalendar = Calendar.current
+        
+        // choose which date and time components are needed
+        let requestedComponents: Set<Calendar.Component> = [
+            .year,
+            .month,
+            .day,
+            .hour,
+            .minute,
+            .second
+        ]
+        
+        // get the components
+        let dateTimeComponents = userCalendar.dateComponents(
+            requestedComponents,
+            from: Date()
+        )
+    
+        if consoleTextView.string == "" {
+            consoleTextView.string = "Welcome to Macaw!\n"
+        }
+        
+        consoleTextView.string = "\(consoleTextView.string)[\(dateTimeComponents.day!)/\(dateTimeComponents.month!)/\(dateTimeComponents.year!) \(dateTimeComponents.hour!):\(dateTimeComponents.minute!).\(dateTimeComponents.second!)] \(text)"
+        consoleTextView.scrollToEndOfDocument(self)
+    }
+    
     func initialize() {
         NotificationCenter.default.addObserver(self, selector: #selector(setTheme), name: .updateTheme, object: nil);
         consoleArea.isHidden = true

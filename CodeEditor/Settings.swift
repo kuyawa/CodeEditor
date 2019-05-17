@@ -108,6 +108,7 @@ struct Settings {
             options["theme"],
             "system"
         )
+
         fontFamily = Default.string(
             options["font-family"],
             "menlo"
@@ -128,6 +129,7 @@ struct Settings {
                 "333333"
             )
         )
+
         light_backgroundColor = NSColor(
             Default.string(
                 options["light-backgroundColor"],
@@ -149,11 +151,11 @@ struct Settings {
             )
         )
         
-        
         indentationChar  = Default.string(
             options["indentation-char"],
             "space"
         )
+        
         indentationCount = Default.int(
             options["indentation-count"],
             4
@@ -163,6 +165,7 @@ struct Settings {
             options["syntax-default"],
             "swift"
         )
+        
         syntaxUnknown = Default.string(
             options["syntax-unknown"],
             "txt"

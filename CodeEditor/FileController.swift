@@ -9,7 +9,6 @@
 import Cocoa
 import Foundation
 
-
 enum DocumentNewResult {
     case ok, unknownError
 }
@@ -17,7 +16,6 @@ enum DocumentNewResult {
 enum DocumentSaveResult {
     case ok, emptyText, noEditable, invalidName, unknownError
 }
-
 
 class FileController: NSObject {
     enum FileKey: String {
@@ -37,9 +35,17 @@ class FileController: NSObject {
     var onSelected  : (_ file: FileNode) -> Void = { file in }
     
     func start() -> FileNode {
-        let lastRoot   = UserDefaults.standard.url(forKey: FileKey.root.rawValue)
-        let lastFolder = UserDefaults.standard.url(forKey: FileKey.folder.rawValue)
-        let lastFile   = UserDefaults.standard.url(forKey: FileKey.file.rawValue)
+        let lastRoot = UserDefaults.standard.url(
+            forKey: FileKey.root.rawValue
+        )
+
+        let lastFolder = UserDefaults.standard.url(
+            forKey: FileKey.folder.rawValue
+        )
+
+        let lastFile = UserDefaults.standard.url(
+            forKey: FileKey.file.rawValue
+        )
 
         changeRootFolder(lastRoot)
         changeWorkingFolder(lastFolder)
@@ -47,18 +53,18 @@ class FileController: NSObject {
         //currentDocument.parent = workingFolder
         
         files = listFolder(root.url)
-        print("Root: "  , lastRoot   ?? "Empty")
+        print("Root: ", lastRoot ?? "Empty")
         print("Folder: ", lastFolder ?? "Empty")
-        print("File: "  , lastFile   ?? "Empty")
+        print("File: ", lastFile ?? "Empty")
         
         return currentDocument
     }
     
     func assignTree(_ treeView: NSOutlineView) {
         outlineView = treeView
-        outlineView?.delegate   = self
+        outlineView?.delegate = self
         outlineView?.dataSource = self
-        outlineView?.target     = self
+        outlineView?.target = self
     }
     
     func assignEditor(_ editor: NSTextView) {
@@ -72,8 +78,11 @@ class FileController: NSObject {
     func getWorkingFolder() -> URL? {
         let url = workingFolder.url
 
-        if url == nil {
-            changeWorkingFolder(FileManager.default.homeDirectoryForCurrentUser)
+        if (url == nil) {
+            changeWorkingFolder(
+                FileManager.default.homeDirectoryForCurrentUser
+            )
+            
             return workingFolder.url
         }
 
@@ -105,7 +114,7 @@ class FileController: NSObject {
         
         var folder = workingFolder.url!
         if !folder.hasDirectoryPath {
-            folder = folder.deletingLastPathComponent()  // remove file name if any
+            folder = folder.deletingLastPathComponent()
         }
         
         workingFolder.url  = folder
@@ -116,21 +125,41 @@ class FileController: NSObject {
     
     func saveDefaults() {
         print("Saving defaults...")
-        UserDefaults.standard.set(root.url, forKey: FileKey.root.rawValue)
-        UserDefaults.standard.set(workingFolder.url, forKey: FileKey.folder.rawValue)
-        UserDefaults.standard.set(currentDocument.url, forKey: FileKey.file.rawValue)
+        UserDefaults.standard.set(
+            root.url,
+            forKey: FileKey.root.rawValue
+        )
+        
+        UserDefaults.standard.set(
+            workingFolder.url,
+            forKey: FileKey.folder.rawValue
+        )
+        
+        UserDefaults.standard.set(
+            currentDocument.url,
+            forKey: FileKey.file.rawValue
+        )
     }
     
     func saveRootFolder() {
-        UserDefaults.standard.set(root.url, forKey: FileKey.root.rawValue)
+        UserDefaults.standard.set(
+            root.url,
+            forKey: FileKey.root.rawValue
+        )
     }
     
     func saveWorkingFolder() {
-        UserDefaults.standard.set(workingFolder.url, forKey: FileKey.folder.rawValue)
+        UserDefaults.standard.set(
+            workingFolder.url,
+            forKey: FileKey.folder.rawValue
+        )
     }
     
     func saveCurrentFile() {
-        UserDefaults.standard.set(currentDocument.url, forKey: FileKey.file.rawValue)
+        UserDefaults.standard.set(
+            currentDocument.url,
+            forKey: FileKey.file.rawValue
+        )
     }
     
     func getFileInfo(_ url: URL?) -> FileNode {
@@ -162,12 +191,13 @@ class FileController: NSObject {
         let options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles]
 
         if let fileArray = try? filer.contentsOfDirectory(at: folder!, includingPropertiesForKeys: props, options: options) {
-            let results = fileArray.map { url -> FileNode in
+            let results = fileArray.map {
+                url -> FileNode in
                 
                 do {
-                    let info  = try url.resourceValues(forKeys: [URLResourceKey.localizedNameKey, URLResourceKey.fileResourceTypeKey, URLResourceKey.creationDateKey, URLResourceKey.fileSizeKey, URLResourceKey.isDirectoryKey])
-                    let file  = FileNode()
-                    file.url  = url
+                    let info = try url.resourceValues(forKeys: [URLResourceKey.localizedNameKey, URLResourceKey.fileResourceTypeKey, URLResourceKey.creationDateKey, URLResourceKey.fileSizeKey, URLResourceKey.isDirectoryKey])
+                    let file = FileNode()
+                    file.url = url
                     file.name = info.localizedName ?? "Error"
                     file.path = url.path
                     file.type = info.fileResourceType ?? URLFileResourceType.unknown
@@ -180,7 +210,6 @@ class FileController: NSObject {
                     }
                     
                     return file
-                    
                 } catch {
                     print(error)
                 }
@@ -197,7 +226,7 @@ class FileController: NSObject {
     }
     
     func walkTheTree(_ file: FileNode) -> FileNode? {
-        print("Finding: ", file.url ?? "No file")
+        print("Searching: ", file.url ?? "No file")
         let find = file.url
         if root.url == find { return root }
 

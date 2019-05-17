@@ -62,6 +62,7 @@
 		BC59EB41227472DB00880767 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		BC59EB432274741F00880767 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		DE4AB1AB1F9D1E76006B16FA /* php.default.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = php.default.yaml; sourceTree = "<group>"; };
+		DE500211228F1B5E00A31EFF /* Macaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Macaw.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +94,7 @@
 		3D106F291E29BFDD0081E0EC = {
 			isa = PBXGroup;
 			children = (
+				DE500211228F1B5E00A31EFF /* Macaw.entitlements */,
 				3D28D9251E31C3970014C41E /* Readme.md */,
 				3D106F441E29C4380081E0EC /* ToDo.txt */,
 				BC59EB3E2274713800880767 /* PreferencesWindow */,
@@ -176,6 +178,11 @@
 						CreatedOnToolsVersion = 8.0;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

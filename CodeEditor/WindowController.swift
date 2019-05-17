@@ -19,20 +19,39 @@ class WindowController: NSWindowController {
     func build() {
         if let viewController = self.contentViewController as? ViewController {
             if viewController.filer.root.isFolder {
+                let filePath = viewController.filer.root.path
+                
                 // C & C++ Makefile
-                if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/Makefile") {
-                    _ = Utils.shell(
+                if FileManager.default.fileExists(
+                    atPath: filePath + "/Makefile"
+                    ) {
+                    let retVal = Utils.shell(
                         launchPath: "/usr/bin/env",
                         arguments: ["make", "-C", viewController.filer.root.path]
                     )
+                    
+                    viewController.appendToConsole(retVal)
                 }
                 // NodeJS - npm
-                else if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/package.json") {
-                    
-                    _ = Utils.shell(
+                else if FileManager.default.fileExists(
+                    atPath: filePath + "/package.json"
+                    ) {
+                    let retVal = Utils.shell(
                         launchPath: "/usr/bin/env",
-                        arguments: ["`which npm`", "-v", "install", "-C", viewController.filer.root.path]
+                        arguments: [
+                            // Open bash (the trick to remove the "env: node: No such file or directory." error)
+                            "/bin/bash",
+                            // Force path to npm (hopefully everyone installs it using homebrew.
+                            "/usr/local/bin/npm",
+                            // @Brouilles original code.
+                            "-v",
+                            "install",
+                            "-C",
+                            viewController.filer.root.path
+                        ]
                     )
+                    
+                    viewController.appendToConsole(retVal)
                 }
                 else {
                     let alert = NSAlert()
