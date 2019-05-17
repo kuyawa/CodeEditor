@@ -14,9 +14,18 @@ indentation-count : 4
 syntax-default: swift
 syntax-unknown: txt
 
+# light user interface
+light-textColor: 333333
+light-backgroundColor: FFFFFF
+
+# dark user interface
+dark-textColor: EEEEEE
+dark-backgroundColor: 333333
+# end user interface settings
+
 # Syntax files for extensions
 
-extensions:
+file-extensions:
     css             : css.default.yaml
     html            : html.default.yaml
     js              : js.default.yaml

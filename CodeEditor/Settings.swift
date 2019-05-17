@@ -15,6 +15,7 @@ struct Settings {
     static var shared = Settings()
     
     var theme = "system"
+    
     var isDarkTheme: Bool {
         get {
             if (theme == "system") {
@@ -42,6 +43,22 @@ struct Settings {
     
     var syntaxList: [String: String] = [:]
     
+    var light_textColor = NSColor("333333")
+    var light_backgroundColor = NSColor("FFFFFF")
+    var dark_textColor = NSColor("EEEEEE")
+    var dark_backgroundColor = NSColor("333333")
+    
+    var textColor: NSColor {
+        get {
+            return isDarkTheme ? dark_textColor : light_textColor
+        }
+    }
+    
+    var backgroundColor: NSColor {
+        get {
+            return isDarkTheme ? dark_backgroundColor : light_backgroundColor
+        }
+    }
     
     mutating func load() {
         guard let url = Bundle.main.url(forResource: "Settings", withExtension: "yaml") else {
@@ -61,13 +78,28 @@ struct Settings {
         fontSize   = Default.int(options["font-size"], 14)
         wordWrap   = Default.bool(options["word-wrap"], false)
         
+        light_textColor = NSColor(
+            Default.string(options["light-textColor"], "333333")
+        )
+        light_backgroundColor = NSColor(
+            Default.string(options["light-backgroundColor"], "FFFFFF")
+        )
+        
+        dark_textColor = NSColor(
+            Default.string(options["dark-textColor"], "EEEEEE")
+        )
+        dark_backgroundColor = NSColor(
+            Default.string(options["dark-backgroundColor"], "333333")
+        )
+        
+        
         indentationChar  = Default.string(options["indentation-char"], "space")
         indentationCount = Default.int(options["indentation-count"], 4)
 
         syntaxDefault = Default.string(options["syntax-default"], "swift")
         syntaxUnknown = Default.string(options["syntax-unknown"], "txt")
         
-        if let exts = options["extensions"] as? Dixy {
+        if let exts = options["file-extensions"] as? Dixy {
             syntaxList = exts as! [String : String]
         }
         

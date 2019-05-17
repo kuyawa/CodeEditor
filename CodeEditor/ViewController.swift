@@ -79,8 +79,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         buttonTrash.image = NSImage(named: goDark ? "icon_trash2" : "icon_trash")
         
         // Fix textview color.
-        textEditor.backgroundColor = goDark ? NSColor("333333") : NSColor("FFFFFF")
-        textEditor.textColor = goDark ? NSColor("EEEEEE") : NSColor("333333")
+        textEditor.textColor = Settings.shared.textColor
+        textEditor.backgroundColor = Settings.shared.backgroundColor
     }
     
     func sidebarToggle(_ sender: AnyObject) {
@@ -143,13 +143,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         textEditor.textContainer?.widthTracksTextView = false
         
         // Default colors
-        if Settings.shared.isDarkTheme {
-            textEditor.backgroundColor = NSColor("333333")
-            textEditor.textColor = NSColor("EEEEEE")
-        } else {
-            textEditor.backgroundColor = NSColor("FFFFFF")
-            textEditor.textColor = NSColor("333333")
-        }
+        textEditor.textColor = Settings.shared.textColor
+        textEditor.backgroundColor = Settings.shared.backgroundColor
     }
     
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
