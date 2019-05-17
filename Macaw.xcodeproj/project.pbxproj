@@ -170,7 +170,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = Armonia;
+				ORGANIZATIONNAME = WDGWV;
 				TargetAttributes = {
 					3D106F311E29BFDE0081E0EC = {
 						CreatedOnToolsVersion = 8.0;
@@ -392,7 +392,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Armonia.CodeEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = wdgwv.Macaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -408,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Armonia.CodeEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = wdgwv.Macaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

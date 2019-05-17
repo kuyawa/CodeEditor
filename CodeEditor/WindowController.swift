@@ -21,7 +21,18 @@ class WindowController: NSWindowController {
             if viewController.filer.root.isFolder {
                 // C & C++ Makefile
                 if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/Makefile") {
-                    _ = Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
+                    _ = Utils.shell(
+                        launchPath: "/usr/bin/env",
+                        arguments: ["make", "-C", viewController.filer.root.path]
+                    )
+                }
+                // NodeJS - npm
+                else if FileManager.default.fileExists(atPath: viewController.filer.root.path + "/package.json") {
+                    
+                    _ = Utils.shell(
+                        launchPath: "/usr/bin/env",
+                        arguments: ["`which npm`", "-v", "install", "-C", viewController.filer.root.path]
+                    )
                 }
                 else {
                     let alert = NSAlert()
