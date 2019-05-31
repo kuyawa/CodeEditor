@@ -118,7 +118,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
     }
     
     func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-        print(filer.currentDocument.path)
         return filer.currentDocument.url! as QLPreviewItem
     }
     
