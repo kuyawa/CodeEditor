@@ -7,8 +7,9 @@
 //
 
 import Cocoa
+import Quartz
 
-class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegate {
+class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate {
     /// Appdelegate
     let app = NSApp.delegate as! AppDelegate
     
@@ -110,6 +111,15 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             _ = filer.save()
         }
         filer.saveDefaults()
+    }
+    
+    func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
+        return 1
+    }
+    
+    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+        print(filer.currentDocument.path)
+        return filer.currentDocument.url! as QLPreviewItem
     }
     
     @objc func setTheme() {
@@ -266,8 +276,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             // Remove old attributes
             let old = NSRange(location: 0, length: textEditor.textStorage?.length ?? 0)
             textEditor.textStorage?.removeAttribute(NSAttributedString.Key.foregroundColor, range: old)
-            //textEditor.textStorage?.setAttributes([:], range: all)
-            //textEditor.textStorage?.setAttributedString(NSAttributedString(string: ""))
             textEditor.string = ""
 
             // Assign new text
@@ -283,6 +291,14 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
             } catch {
                 print("Error loading file ", file.url ?? "No file")
                 textEditor.string = "[\(file.name) is not editable]"
+                
+                // Preview with Quickview
+                if let sharedPanel = QLPreviewPanel.shared() {
+                    sharedPanel.delegate = self
+                    sharedPanel.dataSource = self
+                    sharedPanel.makeKeyAndOrderFront(self)
+                }
+                
                 resetEditor()
             }
             

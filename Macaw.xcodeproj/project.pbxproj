@@ -61,6 +61,7 @@
 		BC59EB3F2274715900880767 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		BC59EB41227472DB00880767 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		BC59EB432274741F00880767 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		BCDD662722A1A65900A6A5C4 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		DE4AB1AB1F9D1E76006B16FA /* php.default.yaml */ = {isa = PBXFileReference; lastKnownFileType = text; path = php.default.yaml; sourceTree = "<group>"; };
 		DE500211228F1B5E00A31EFF /* Macaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Macaw.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +101,7 @@
 				BC59EB3E2274713800880767 /* PreferencesWindow */,
 				3D106F341E29BFDF0081E0EC /* CodeEditor */,
 				3D106F331E29BFDF0081E0EC /* Products */,
+				BCDD662622A1A65900A6A5C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +143,14 @@
 				BC59EB41227472DB00880767 /* PreferencesViewController.swift */,
 			);
 			path = PreferencesWindow;
+			sourceTree = "<group>";
+		};
+		BCDD662622A1A65900A6A5C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCDD662722A1A65900A6A5C4 /* QuickLook.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
