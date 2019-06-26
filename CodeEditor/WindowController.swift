@@ -32,6 +32,21 @@ class WindowController: NSWindowController {
                     
                     viewController.appendToConsole(retVal)
                 }
+                // Rust - cargo
+                else if FileManager.default.fileExists(
+                    atPath: filePath + "/Cargo.toml"
+                    ) {
+                    let retVal = Utils.shell(
+                        launchPath: "~/.cargo/bin/cargo",
+                        arguments: [
+                            "build",
+                            "--manifest-path",
+                            viewController.filer.root.path + "/Cargo.toml"
+                        ]
+                    )
+                    
+                    viewController.appendToConsole(retVal)
+                }
                 // NodeJS - npm
                 else if FileManager.default.fileExists(
                     atPath: filePath + "/package.json"
