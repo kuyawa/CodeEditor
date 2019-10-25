@@ -72,26 +72,32 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         showOptions()
     }
     
+    /// on File -> New (click)
     @IBAction func onFileNew(_ sender: AnyObject) {
         fileNew()
     }
     
+    /// on File -> Opem (click)
     @IBAction func onFileOpen(_ sender: AnyObject) {
         fileOpen()
     }
     
+    /// on File -> Save (click)
     @IBAction func onFileSave(_ sender: AnyObject) {
         fileSave()
     }
     
+    /// on File -> Delete (click)
     @IBAction func onFileDelete(_ sender: AnyObject) {
         fileDelete()
     }
     
+    /// on Sidebar -> toggle (click)
     @IBAction func onSidebarToggle(_ sender: AnyObject) {
         sidebarToggle(sender)
     }
     
+    /// on Sidebar -> console (click)
     @IBAction func onConsoleToggle(_ sender: AnyObject) {
         consoleToggle(sender)
     }
@@ -149,9 +155,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSTextStorageDelegat
         if let menuItem = sender as? NSMenuItem {
             menuItem.state = NSControl.StateValue(rawValue: fileArea.isHidden ? 0 : 1)
         }
-        
-        // FIX: Repaint view to remove buggy vertical line
-        // WTF?
     }
 
     func consoleToggle(_ sender: AnyObject) {
