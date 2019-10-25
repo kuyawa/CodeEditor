@@ -12,6 +12,7 @@ class WindowController: NSWindowController {
     /// Build file button
     @IBOutlet weak var buttonBuild: NSButton!
     
+    /// Can we build?
     func canBuild() -> Bool {
         if let viewController = self.contentViewController as? ViewController {
             if viewController.filer.root.isFolder {
@@ -42,19 +43,16 @@ class WindowController: NSWindowController {
         return false
     }
     
-    func updateBuildButton() {
-        print("checking if we can build...")
-        
-        buttonBuild.isEnabled = !canBuild()
-    }
-    
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        self.updateBuildButton()
+        /// Check if we can build
+        buttonBuild.isEnabled = canBuild()
         
+        /// Set a timer for every 5 seconds.
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
-            self.updateBuildButton()
+            /// Check if we can build
+            self.buttonBuild.isEnabled = self.canBuild()
         }
     }
     
