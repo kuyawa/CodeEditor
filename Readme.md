@@ -22,15 +22,15 @@ Check out the [Roadmap](https://github.com/wdg/CodeEditor/projects/1) towards a 
 | Shortcut | Description |
 |----------|-------------|
 | `⌘+N` | New file |
-| `cmd+O` | Open folder |
-| `cmd+B` | Open in Browser |
-| `cmd+S` | Save file |
-| `cmd+F` | Find in file |
+| `⌘+O` | Open folder |
+| `⌘+B` | Open in Browser |
+| `⌘+S` | Save file |
+| `⌘+F` | Find in file |
 |  |  |
-| `cmd+D` |  Duplicate line |
-| `cmd+L` |  Delete line |
-| `cmd+Bck` | Delete to Begin of Line |
-| `cmd+Del` | Delete to End of Line |
+| `⌘+D` |  Duplicate line |
+| `⌘+L` |  Delete line |
+| `⌘+Bck` | Delete to Begin of Line |
+| `⌘+Del` | Delete to End of Line |
 |  |  |
-| `ctl+Up` | Move line Up |
-| `ctl+Dn` | Move line down |
+| `⌘+Up` | Move line Up |
+| `⌘+Dn` | Move line down |
