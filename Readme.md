@@ -21,7 +21,7 @@ Check out the [Roadmap](https://github.com/wdg/CodeEditor/projects/1) towards a 
 
 | Shortcut | Description |
 |----------|-------------|
-| `cmd+N` | New file |
+| `⌘+N` | New file |
 | `cmd+O` | Open folder |
 | `cmd+B` | Open in Browser |
 | `cmd+S` | Save file |
