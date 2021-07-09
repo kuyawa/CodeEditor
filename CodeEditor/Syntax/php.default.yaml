@@ -1,0 +1,64 @@
+# Macaw 1.0
+# Syntax: php
+# Author: wdg@github
+
+
+colors:
+    red          : 990000
+    green        : 009900
+    blue         : 0000CC
+    magenta      : 990099
+    purple       : 999900
+    cyan         : 009999
+    orange       : DD6633
+    yellow       : EECC66
+
+    lite-red     : CC3333
+    lite-green   : 33AA33
+    lite-blue    : 6699DD
+    lite-magenta : CC66CC
+    lite-purple  : AAAA33
+    lite-cyan    : 33AAAA
+
+    white        : FFFFFF
+    snow         : EEEEEE
+    lite-gray    : CCCCCC
+    gray         : AAAAAA
+    dark-gray    : 333333
+    black        : 000000
+
+styles:
+    keywords      : magenta
+    attributes    : magenta
+    identifiers   : blue
+    types         : cyan
+    stringLiteral : red
+    commentLine   : green
+    commentBlock  : green
+
+styles-dark:
+    keywords      : lite-magenta
+    attributes    : lite-magenta
+    identifiers   : lite-blue
+    types         : lite-cyan
+    stringLiteral : yellow
+    commentLine   : lite-green
+    commentBlock  : lite-green
+
+
+order: keywords, attributes, identifiers, types, stringLiteral, commentLine, commentBlock
+
+patterns:
+    keywords      : \b(and|list|abstract|global|private|echo|interface|as|static|endswitch|array|null|if|endwhile|or|const|for|endforeach|self|var|while|isset|public|protected|exit|foreach|throw|elseif|include|__FILE__|empty|do|xor|return|parent|clone|use|__CLASS__|__LINE__|else|break|print|eval|new|catch|__METHOD__|case|exception|default|die|__FUNCTION__|enddeclare|final|try|switch|continue|endfor|endif|declare|unset|true|false|trait|goto|instanceof|insteadof|__DIR__|__NAMESPACE__|yield|finally)\b
+    attributes    : ((@)(\B\$[0-9]+|\b[\w^\d][\w\d]*\b|\B`[\w^\d][\w\d]*`\B))
+    identifiers   : (?<=include_once|require_once|include|require|class|struct|enum|function|extension|protocol|var|let)\s*(\w*)
+    types         : \b(Int|Float|Double|String|Bool)\b
+    stringLiteral : (".*")
+    numberLiteral : \b([0-9]*(\.[0-9]*)?)\b
+    commentLine   : (//.*)
+    commentBlock  : (/\*.*?\*/)
+
+options:
+    commentBlock : multiline
+
+#end

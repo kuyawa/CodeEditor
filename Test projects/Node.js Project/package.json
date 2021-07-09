@@ -1,0 +1,16 @@
+{
+	"name": "macaw_test",
+	"version": "1.0.0",
+	"license": "MIT",
+	"description": "This is a test package",
+	"keywords": [
+        "test",
+        "Macaw",
+        "Swift"
+    ],
+    "main": "app.js",
+     "scripts": {
+        "build": "node app.js",
+        "test": "standard"
+    }
+}

@@ -1,46 +1,36 @@
-![Macaw](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/CodeEditor/Assets.xcassets/AppIcon.appiconset/macaweditor128.png)
+![Macaw](https://raw.githubusercontent.com/wdg/CodeEditor/master/CodeEditor/Assets.xcassets/AppIcon.appiconset/macaweditor128.png)
 
 # Macaw - Code Editor in Swift
 
-**Macaw Editor** is a simple code editor for Swift specially designed for ease of use without all the bloat of Xcode, just ten megs instead of four gigs. Ideal for coding server apps in Swift, html, css and js. Of course there is no Interface Builder and all the fancy toys, just an editor for quick hacks.
+**Macaw Editor** is a code editor specially designed for ease of use, without all the bloat of an average IDE.
 
-### Screenshot:
+A ideal editor which is lightweight and opens fast!
 
-![Screenshot](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/Screenshots/Screenshot.jpg)
+Check out the [Roadmap](https://github.com/wdg/CodeEditor/projects/1) towards a new version.
+
+### Light theme
+
+![Screenshot](https://raw.githubusercontent.com/wdg/CodeEditor/master/Screenshots/Screenshot.jpg)
 
 ### Dark theme
 
-![Screenshot](https://raw.githubusercontent.com/kuyawa/CodeEditor/master/Screenshots/Screenshot2.jpg)
+![Screenshot](https://raw.githubusercontent.com/wdg/CodeEditor/master/Screenshots/Screenshot2.jpg)
 
 
-### Version 1.0:
+### Shortcuts
 
-Syntax highlighter needs a little polish, some editor commands are ready.
-
-Editor commands implemented:
-
-- cmd+N  New file
-- cmd+O  Open folder
-- cmd+B  Open in Browser
-- cmd+S  Save file
-- cmd+F  Find in file
-
-- cmd+D   Duplicate line
-- cmd+L   Delete line
-- cmd+Bck Delete to Begin of Line
-- cmd+Del Delete to End of Line
-
-- ctl+Up Move line Up
-- ctl+Dn Move line down
-
-### Version Next:
-
-- Enable console
-- Build and Run: call swift build, show progress in console area
-- Show errors and allow user to jump to files and lines
-
-### Available
-
-If you like what you see, [hire me!](mailto:haxapp@gmail.com)
-
-Or donate via [Patreon](https://www.patreon.com/kuyawa) so I can develop more projects you like!
+| Shortcut | Description |
+|----------|-------------|
+| `⌘+N` | New file |
+| `⌘+O` | Open folder |
+| `⌘+B` | Open in Browser |
+| `⌘+S` | Save file |
+| `⌘+F` | Find in file |
+|  |  |
+| `⌘+D` |  Duplicate line |
+| `⌘+L` |  Delete line |
+| `⌘+Bck` | Delete to Begin of Line |
+| `⌘+Del` | Delete to End of Line |
+|  |  |
+| `⌘+Up` | Move line Up |
+| `⌘+Dn` | Move line down |

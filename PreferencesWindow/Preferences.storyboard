@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="C4h-9A-A1a">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="HDM-ML-p7u">
+            <objects>
+                <windowController id="C4h-9A-A1a" customClass="PreferencesWindowController" customModule="CodeEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="INO-xV-Vfe">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="461" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+                        <connections>
+                            <outlet property="delegate" destination="C4h-9A-A1a" id="buS-l3-2HB"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="wo0-6E-MVm" kind="relationship" relationship="window.shadowedContentViewController" id="mQK-7u-W40"/>
+                    </connections>
+                </windowController>
+                <customObject id="8TR-nS-LKa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="-61"/>
+        </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="VCu-6u-Ddy">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wo0-6E-MVm" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="General" identifier="" image="NSPreferencesGeneral" id="BvK-CL-ajs"/>
+                        <tabViewItem label="Key Bindings" image="NSAdvanced" id="kfb-ia-nbQ"/>
+                    </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
+                    <tabView key="tabView" type="noTabsNoBorder" id="RHu-RP-s13">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <connections>
+                            <outlet property="delegate" destination="wo0-6E-MVm" id="dmd-Hb-XBs"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="RHu-RP-s13" id="aGZ-MC-Ubo"/>
+                        <segue destination="5qy-bY-dCf" kind="relationship" relationship="tabItems" id="rhw-Iq-3aW"/>
+                        <segue destination="bg9-Xj-0hy" kind="relationship" relationship="tabItems" id="ZSG-LO-KMP"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="x1q-5X-exo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="442"/>
+        </scene>
+        <!--General-->
+        <scene sceneID="FN8-RJ-DQw">
+            <objects>
+                <viewController title="General" id="5qy-bY-dCf" customClass="PreferencesViewController" customModule="CodeEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="g58-01-H5n">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="303"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-1R-0U2">
+                                <rect key="frame" x="111" y="264" width="50" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Theme:" id="6Gi-XW-Uhd">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMl-y1-Pnh">
+                                <rect key="frame" x="181" y="259" width="118" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="System" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="wX9-Ux-kca" id="a4w-oM-aC9">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="ktY-T7-GM2">
+                                        <items>
+                                            <menuItem title="System" state="on" id="wX9-Ux-kca"/>
+                                            <menuItem title="Light" id="9Pk-JK-3vX"/>
+                                            <menuItem title="Dark" id="Mgm-WW-H31"/>
+                                        </items>
+                                    </menu>
+                                    <connections>
+                                        <action selector="changeTheme:" target="5qy-bY-dCf" id="Dfh-gM-lbZ"/>
+                                    </connections>
+                                </popUpButtonCell>
+                            </popUpButton>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="menuTheme" destination="ktY-T7-GM2" id="kaN-hc-fhD"/>
+                    </connections>
+                </viewController>
+                <customObject id="V1d-HN-zjK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="230.5"/>
+        </scene>
+        <!--Key Bindings-->
+        <scene sceneID="QgJ-2d-RhQ">
+            <objects>
+                <viewController title="Key Bindings" id="bg9-Xj-0hy" customClass="PreferencesViewController" customModule="CodeEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="IR2-Hg-reh">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="g5f-1Z-EKT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="628"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
+</document>
