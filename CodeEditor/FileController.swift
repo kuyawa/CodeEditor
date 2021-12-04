@@ -19,20 +19,20 @@ enum DocumentSaveResult {
 
 class FileController: NSObject {
     enum FileKey: String {
-        case root   = "root"
+        case root = "root"
         case folder = "folder"
-        case file   = "file"
+        case file = "file"
     }
 
     var root  = FileNode()
     var files = [FileNode]()
     
-    var workingFolder   = FileNode()
+    var workingFolder = FileNode()
     var currentDocument = FileNode()
 
-    var textView    : NSTextView?
-    var outlineView : NSOutlineView?
-    var onSelected  : (_ file: FileNode) -> Void = { file in }
+    var textView: NSTextView?
+    var outlineView: NSOutlineView?
+    var onSelected: (_ file: FileNode) -> Void = { file in }
     
     func start() -> FileNode {
         let lastRoot = UserDefaults.standard.url(

@@ -15,9 +15,7 @@ class EditorController: NSTextView, NSTextViewDelegate {
     
     /*
      TODO:
-     
-     - if } alone in line, unindent before inserting new line
-     
+        - if } alone in line, unindent before inserting new line
      */
     
     typealias IndentInfo = (count: Int, stop: Bool, last: Character)

@@ -171,7 +171,7 @@ struct Settings {
             "txt"
         )
         
-        if let exts = options["file-extensions"] as? Dixy {
+        if let exts = options["file-extensions"] as? [String: Any] {
             syntaxList = exts as! [String : String]
         }
         

@@ -11,18 +11,18 @@ import Foundation
 
 
 class FileNode: NSObject {
-    var url  : URL?
-    var name : String = ""
-    var path : String = ""
-    var type : URLFileResourceType?
-    var date : Date = Date()
-    var size : Int  = 0
+    var url: URL?
+    var name: String = ""
+    var path: String = ""
+    var type: URLFileResourceType?
+    var date: Date = Date()
+    var size: Int = 0
     
-    var isFolder   : Bool = false
-    var canSave    : Bool = true
-    var parent     : FileNode?
-    var children   : [FileNode]?
-    var childCount : Int {
+    var isFolder: Bool = false
+    var canSave: Bool = true
+    var parent: FileNode?
+    var children: [FileNode]?
+    var childCount: Int {
         get {
             if children != nil {
                 return children!.count
@@ -32,13 +32,13 @@ class FileNode: NSObject {
         }
     }
     
-    var ext : String {
+    var ext: String {
         get {
             return url?.pathExtension ?? ""
         }
     }
     
-    var isEditable : Bool {
+    var isEditable: Bool {
         get {
             //let valid = "swift txt md html xml css js plist py php rb c h json yaml sql"
             let invalid = "exe bin app zip rar tar gz 7z dmg"

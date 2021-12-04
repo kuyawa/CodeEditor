@@ -13,11 +13,8 @@ import Darwin
 class Utils {
     /*
      Use:
-     
      Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
-     
      */
-    
     static func shell(launchPath path: String, arguments args: [String]) -> String {
         let task = Process()
         task.launchPath = path
@@ -50,17 +47,14 @@ class Utils {
     }
 }
 
-typealias Dixy = [String: Any]
-
 extension String {
-    
     func subtext(from pos: Int) -> String {
         guard pos >= 0 else { return "" }
         
         if pos > self.count { return  "" }
         
         let first = self.index(self.startIndex, offsetBy: pos)
-        let text  = self[first...]
+        let text = self[first...]
         
         return String(text)
     }
@@ -105,7 +99,6 @@ extension Bundle {
 }
 
 extension NSColor {
-
     // Use: NSColor("ffffff")
     convenience init(_ hex: String) {
         if let hexInt = Int(hex.lowercased(), radix: 16) {
@@ -234,10 +227,9 @@ class Toast {
 
 /*
  Use:
- 
+
  Dialog("Everything is OK?").show()
- Dialog(title:"Warning", info:"The file will be deleted!").show()
- 
+ Dialog(title: "Warning", info: "The file will be deleted!").show() 
  */
 class Dialog {
     var title :String = "Message"

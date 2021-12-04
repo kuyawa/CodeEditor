@@ -11,41 +11,39 @@ import Foundation
 
 
 class SyntaxFormatter {
-    
-    var colors     = Dixy()
-    var styles     = Dixy()
-    var stylesDark = Dixy()
-    var patterns   = Dixy()
-    var options    = Dixy()
-    var order      = [String]()
+    var colors = [String: Any]()
+    var styles = [String: Any]()
+    var stylesDark = [String: Any]()
+    var patterns = [String: Any]()
+    var options = [String: Any]()
+    var order = [String]()
     
     var colorTextLite = NSColor("333333")
     var colorBackLite = NSColor("FFFFFF")
     var colorTextDark = NSColor("EEEEEE")
     var colorBackDark = NSColor("333333")
-    
 
-    func load(_ syntax: Dixy) {
+    func load(_ syntax: [String: Any]) {
         // User defined
-        colors = Dixy() // reset
+        colors = [String: Any]() // reset
         if syntax["colors"] != nil {
-            for (key, val) in syntax["colors"]! as! Dixy {
+            for (key, val) in syntax["colors"]! as! [String: Any] {
                 let hex = val as! String
                 colors[key] = NSColor(hex)
             }
         }
 
-        patterns = Dixy() // reset
+        patterns = [String: Any]() // reset
         if syntax["patterns"] != nil {
-            patterns = syntax["patterns"]! as! Dixy
+            patterns = syntax["patterns"]! as! [String: Any]
         }
         
         if syntax["options"] != nil {
-            options = syntax["options"]! as! Dixy
+            options = syntax["options"]! as! [String: Any]
         }
         
         if syntax["styles"] != nil {
-            styles = syntax["styles"]! as! Dixy
+            styles = syntax["styles"]! as! [String: Any]
             if let fore = styles["foreground"] {
                 colorTextLite = colors[fore as! String] as! NSColor
             }
@@ -55,7 +53,7 @@ class SyntaxFormatter {
         }
         
         if syntax["styles-dark"] != nil {
-            stylesDark = syntax["styles-dark"]! as! Dixy
+            stylesDark = syntax["styles-dark"]! as! [String: Any]
             if let fore = stylesDark["foreground"] {
                 colorTextDark = colors[fore as! String] as! NSColor
             }
@@ -72,10 +70,10 @@ class SyntaxFormatter {
 }
 
 class SyntaxColorizer {
-    var textView  : NSTextView?
-    var fileExt   : String = "swift"
-    var format    : String = "swift"
-    var formatter : SyntaxFormatter?
+    var textView: NSTextView?
+    var fileExt: String = "swift"
+    var format: String = "swift"
+    var formatter: SyntaxFormatter?
     var isDark = false
     var isColorizable = false
 
@@ -152,7 +150,7 @@ class SyntaxColorizer {
         guard let formatter = formatter else { return }
         guard !text.isEmpty else { return }
 
-        var styles = Dixy()
+        var styles = [String: Any]()
 
         if isDark {
             styles = formatter.stylesDark
