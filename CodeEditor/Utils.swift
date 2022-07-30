@@ -8,32 +8,66 @@
 
 import Cocoa
 import Foundation
+import Darwin
 
-
-typealias Dixy = [String: Any]
+class Utils {
+    /*
+     Use:
+     Utils.shell(launchPath: "/usr/bin/env", arguments: ["make", "-C", viewController.filer.root.path])
+     */
+    static func shell(launchPath path: String, arguments args: [String]) -> String {
+        let task = Process()
+        task.launchPath = path
+        task.arguments = args
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        task.waitUntilExit()
+        
+        return(output!)
+    }
+    
+    static func runCommand(_ cmd: String) -> Int32 {
+        var pid: Int32 = 0
+        let args = ["/bin/sh", "-c", cmd]
+        let argv: [UnsafeMutablePointer<CChar>?] = args.map{ $0.withCString(strdup) }
+        defer { for case let arg? in argv { free(arg) } }
+        if posix_spawn(&pid, argv[0], nil, nil, argv + [nil], environ) < 0 {
+            print("ERROR: Unable to spawn")
+            return 1
+        }
+        var status: Int32 = 0
+        _ = waitpid(pid, &status, 0)
+        return status
+    }
+}
 
 extension String {
-    
     func subtext(from pos: Int) -> String {
         guard pos >= 0 else { return "" }
         
-        if pos > self.characters.count { return  "" }
+        if pos > self.count { return  "" }
         
         let first = self.index(self.startIndex, offsetBy: pos)
-        let text  = self.substring(from: first)
+        let text = self[first...]
         
-        return text
+        return String(text)
     }
 
     func subtext(to pos: Int) -> String {
         var end = pos
         
-        if pos > self.characters.count { end = self.characters.count }
+        if pos > self.count { end = self.count }
         
         let last = self.index(self.startIndex, offsetBy: end)
-        let text = self.substring(to: last)
+        let text = self[...last]
         
-        return text
+        return String(text)
     }
 
     func subtext(from ini: Int, to end: Int) -> String {
@@ -42,15 +76,15 @@ extension String {
         
         var fin = end
         
-        if ini > self.characters.count { return  "" }
-        if end > self.characters.count { fin = self.characters.count }
+        if ini > self.count { return  "" }
+        if end > self.count { fin = self.count }
         
         let first = self.index(self.startIndex, offsetBy: ini)
         let last  = self.index(self.startIndex, offsetBy: fin)
         let range = first ..< last
-        let text  = self.substring(with: range)
+        let text  = self[range]
         
-        return text
+        return String(text)
     }
 
 }
@@ -65,7 +99,6 @@ extension Bundle {
 }
 
 extension NSColor {
-
     // Use: NSColor("ffffff")
     convenience init(_ hex: String) {
         if let hexInt = Int(hex.lowercased(), radix: 16) {
@@ -124,8 +157,6 @@ class Default {
         return Bool(str) ?? def!
     }
 }
-
-
 
 /*
  Use:
@@ -196,10 +227,9 @@ class Toast {
 
 /*
  Use:
- 
+
  Dialog("Everything is OK?").show()
- Dialog(title:"Warning", info:"The file will be deleted!").show()
- 
+ Dialog(title: "Warning", info: "The file will be deleted!").show() 
  */
 class Dialog {
     var title :String = "Message"
@@ -222,11 +252,15 @@ class Dialog {
         alert.informativeText = info
         alert.addButton(withTitle: "NO")
         alert.addButton(withTitle: "YES")
-        ok = (alert.runModal() == NSAlertSecondButtonReturn)
+        ok = (alert.runModal() == NSApplication.ModalResponse.alertSecondButtonReturn)
         
         return ok
     }
 }
 
+extension Notification.Name {
+    static let AppleInterfaceThemeChangedNotification = Notification.Name("AppleInterfaceThemeChangedNotification")
+    static let updateTheme = NSNotification.Name(rawValue: "updateTheme")
+}
 
 // End

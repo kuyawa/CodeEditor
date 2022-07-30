@@ -7,31 +7,90 @@
 //
 
 import Foundation
-
+import Cocoa
 
 struct Settings {
-    var theme = "light"
+    /// Shared
+    static var shared = Settings()
+    
+    /// Theme
+    var theme: String = "system"
+    
+    /// is Dark mode?
     var isDarkTheme: Bool {
-        get { return theme == "dark" }
-        set {
-            theme = newValue ? "dark" : "light"
-            UserDefaults.standard.set(theme, forKey: "theme")
+        get {
+            if (theme == "system") {
+                if #available(OSX 10.14, *) {
+                    return UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+                }
+                else {
+                    return false
+                }
+            }
+            
+            return theme == "dark"
         }
     }
     
-    var fontFamily = "Menlo"
-    var fontSize   = 14
-    var wordWrap   = false
+    /// Font family
+    var fontFamily: String = "Menlo"
     
-    var indentationChar  = "space"
-    var indentationCount = 4
-
-    var syntaxDefault = "swift"
-    var syntaxUnknown = "txt"
+    /// Font size
+    var fontSize: CGFloat = 14
     
+    /// Word wrap enabled
+    var wordWrap: Bool = false
+    
+    /// Indentation character
+    var indentationChar: String = "space"
+    
+    /// Indentation count
+    var indentationCount: Int = 4
+    
+    /// Default syntax
+    var syntaxDefault: String = "swift"
+    
+    /// Handle unknown files as
+    var syntaxUnknown: String = "txt"
+    
+    /// Syntax list
     var syntaxList: [String: String] = [:]
     
+    /// Text color in light mode
+    var light_textColor = NSColor("333333")
     
+    /// Background color in light mode
+    var light_backgroundColor = NSColor("FFFFFF")
+    
+    /// Text color in dark mode
+    var dark_textColor = NSColor("EEEEEE")
+    
+    /// Background color in dark mode
+    var dark_backgroundColor = NSColor("333333")
+    
+    /// Text color in current mode
+    var textColor: NSColor {
+        get {
+            return isDarkTheme
+                ? dark_textColor
+                : light_textColor
+        }
+    }
+    
+    /// Background color in current mode
+    var backgroundColor: NSColor {
+        get {
+            return isDarkTheme
+                ? dark_backgroundColor
+                : light_backgroundColor
+        }
+    }
+    
+    /**
+     * Load the settings.
+     *
+     * This overwrites the default settings.
+     */
     mutating func load() {
         guard let url = Bundle.main.url(forResource: "Settings", withExtension: "yaml") else {
             print("WARN: Settings file not found")
@@ -44,19 +103,75 @@ struct Settings {
         }
         
         let options = QuickYaml().parse(text)
-
-        theme      = Default.string(options["theme"], "light")
-        fontFamily = Default.string(options["font-family"], "menlo")
-        fontSize   = Default.int(options["font-size"], 14)
-        wordWrap   = Default.bool(options["word-wrap"], false)
         
-        indentationChar  = Default.string(options["indentation-char"], "space")
-        indentationCount = Default.int(options["indentation-count"], 4)
+        theme = Default.string(
+            options["theme"],
+            "system"
+        )
 
-        syntaxDefault = Default.string(options["syntax-default"], "swift")
-        syntaxUnknown = Default.string(options["syntax-unknown"], "txt")
+        fontFamily = Default.string(
+            options["font-family"],
+            "menlo"
+        )
         
-        if let exts = options["extensions"] as? Dixy {
+        if let unwrapped = options["font-size"] as? CGFloat {
+            fontSize = unwrapped
+        }
+        
+        wordWrap = Default.bool(
+            options["word-wrap"],
+            false
+        )
+        
+        light_textColor = NSColor(
+            Default.string(
+                options["light-textColor"],
+                "333333"
+            )
+        )
+
+        light_backgroundColor = NSColor(
+            Default.string(
+                options["light-backgroundColor"],
+                "FFFFFF"
+            )
+        )
+        
+        dark_textColor = NSColor(
+            Default.string(
+                options["dark-textColor"],
+                "EEEEEE"
+            )
+        )
+        
+        dark_backgroundColor = NSColor(
+            Default.string(
+                options["dark-backgroundColor"],
+                "333333"
+            )
+        )
+        
+        indentationChar  = Default.string(
+            options["indentation-char"],
+            "space"
+        )
+        
+        indentationCount = Default.int(
+            options["indentation-count"],
+            4
+        )
+        
+        syntaxDefault = Default.string(
+            options["syntax-default"],
+            "swift"
+        )
+        
+        syntaxUnknown = Default.string(
+            options["syntax-unknown"],
+            "txt"
+        )
+        
+        if let exts = options["file-extensions"] as? [String: Any] {
             syntaxList = exts as! [String : String]
         }
         
@@ -65,23 +180,5 @@ struct Settings {
             theme = userTheme
         }
     }
-    
-    /*
-    func save() {
-        guard let url = Bundle.main.url(forResource: "Settings", withExtension: "yaml") else {
-            print("WARN: Settings file not found")
-            return
-        }
-
-        let text = "" //QuickYaml.toString(self)
-        
-        if (try? text.write(to: url, atomically: false, encoding: .utf8)) != nil {
-            print("ERROR: Settings file could not be saved")
-            return
-        }
-    }
-    */
 }
-
-
 // End

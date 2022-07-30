@@ -10,12 +10,11 @@ import Foundation
 
 
 class QuickYaml {
-    
-    func parse(_ text: String) -> Dixy {
+    func parse(_ text: String) -> [String: Any] {
         let lines = text.components(separatedBy: "\n")
-        var dixy  = Dixy()
-        var key   = ""
-        var children = Dixy()
+        var dixy = [String: Any]()
+        var key = ""
+        var children = [String: Any]()
         var hasChildren = false
         
         // Lopp dictionary in order or patterns will mess up colorizing
@@ -34,7 +33,7 @@ class QuickYaml {
                 key = pair.0
                 if pair.1.isEmpty {
                     hasChildren = true
-                    children = Dixy()
+                    children = [String: Any]()
                 } else {
                     dixy[key] = pair.1
                 }
@@ -54,9 +53,9 @@ class QuickYaml {
         var val = (parts.last ?? "").trimmingCharacters(in: .whitespaces)
         
         if parts.count > 2 { /* colons in value? */
-            let index = text.characters.index(of: ":")
+            let index = text.firstIndex(of: ":")
             let position = text.index(index!, offsetBy: 1)
-            val = text.substring(from: position).trimmingCharacters(in: .whitespaces)
+            val = text[position...].trimmingCharacters(in: .whitespaces)
             //print("Colons \(parts.count) - position: \(position) - text: \(val)")
         }
         

@@ -9,7 +9,6 @@
 import Cocoa
 import Foundation
 
-
 enum DocumentNewResult {
     case ok, unknownError
 }
@@ -18,28 +17,35 @@ enum DocumentSaveResult {
     case ok, emptyText, noEditable, invalidName, unknownError
 }
 
-
 class FileController: NSObject {
     enum FileKey: String {
-        case root   = "root"
+        case root = "root"
         case folder = "folder"
-        case file   = "file"
+        case file = "file"
     }
 
     var root  = FileNode()
     var files = [FileNode]()
     
-    var workingFolder   = FileNode()
+    var workingFolder = FileNode()
     var currentDocument = FileNode()
 
-    var textView    : NSTextView?
-    var outlineView : NSOutlineView?
-    var onSelected  : (_ file: FileNode) -> Void = { file in }
+    var textView: NSTextView?
+    var outlineView: NSOutlineView?
+    var onSelected: (_ file: FileNode) -> Void = { file in }
     
     func start() -> FileNode {
-        let lastRoot   = UserDefaults.standard.url(forKey: FileKey.root.rawValue)
-        let lastFolder = UserDefaults.standard.url(forKey: FileKey.folder.rawValue)
-        let lastFile   = UserDefaults.standard.url(forKey: FileKey.file.rawValue)
+        let lastRoot = UserDefaults.standard.url(
+            forKey: FileKey.root.rawValue
+        )
+
+        let lastFolder = UserDefaults.standard.url(
+            forKey: FileKey.folder.rawValue
+        )
+
+        let lastFile = UserDefaults.standard.url(
+            forKey: FileKey.file.rawValue
+        )
 
         changeRootFolder(lastRoot)
         changeWorkingFolder(lastFolder)
@@ -47,18 +53,18 @@ class FileController: NSObject {
         //currentDocument.parent = workingFolder
         
         files = listFolder(root.url)
-        print("Root: "  , lastRoot   ?? "Empty")
+        print("Root: ", lastRoot ?? "Empty")
         print("Folder: ", lastFolder ?? "Empty")
-        print("File: "  , lastFile   ?? "Empty")
+        print("File: ", lastFile ?? "Empty")
         
         return currentDocument
     }
     
     func assignTree(_ treeView: NSOutlineView) {
         outlineView = treeView
-        outlineView?.delegate   = self
+        outlineView?.delegate = self
         outlineView?.dataSource = self
-        outlineView?.target     = self
+        outlineView?.target = self
     }
     
     func assignEditor(_ editor: NSTextView) {
@@ -67,14 +73,16 @@ class FileController: NSObject {
     
     func reload() {
         outlineView?.reloadData()
-        //outlineView?.expandItem(nil, expandChildren: true) // expand all
     }
     
     func getWorkingFolder() -> URL? {
         let url = workingFolder.url
 
-        if url == nil {
-            changeWorkingFolder(FileManager.default.homeDirectoryForCurrentUser)
+        if (url == nil) {
+            changeWorkingFolder(
+                FileManager.default.homeDirectoryForCurrentUser
+            )
+            
             return workingFolder.url
         }
 
@@ -106,7 +114,7 @@ class FileController: NSObject {
         
         var folder = workingFolder.url!
         if !folder.hasDirectoryPath {
-            folder = folder.deletingLastPathComponent()  // remove file name if any
+            folder = folder.deletingLastPathComponent()
         }
         
         workingFolder.url  = folder
@@ -117,21 +125,41 @@ class FileController: NSObject {
     
     func saveDefaults() {
         print("Saving defaults...")
-        UserDefaults.standard.set(root.url, forKey: FileKey.root.rawValue)
-        UserDefaults.standard.set(workingFolder.url, forKey: FileKey.folder.rawValue)
-        UserDefaults.standard.set(currentDocument.url, forKey: FileKey.file.rawValue)
+        UserDefaults.standard.set(
+            root.url,
+            forKey: FileKey.root.rawValue
+        )
+        
+        UserDefaults.standard.set(
+            workingFolder.url,
+            forKey: FileKey.folder.rawValue
+        )
+        
+        UserDefaults.standard.set(
+            currentDocument.url,
+            forKey: FileKey.file.rawValue
+        )
     }
     
     func saveRootFolder() {
-        UserDefaults.standard.set(root.url, forKey: FileKey.root.rawValue)
+        UserDefaults.standard.set(
+            root.url,
+            forKey: FileKey.root.rawValue
+        )
     }
     
     func saveWorkingFolder() {
-        UserDefaults.standard.set(workingFolder.url, forKey: FileKey.folder.rawValue)
+        UserDefaults.standard.set(
+            workingFolder.url,
+            forKey: FileKey.folder.rawValue
+        )
     }
     
     func saveCurrentFile() {
-        UserDefaults.standard.set(currentDocument.url, forKey: FileKey.file.rawValue)
+        UserDefaults.standard.set(
+            currentDocument.url,
+            forKey: FileKey.file.rawValue
+        )
     }
     
     func getFileInfo(_ url: URL?) -> FileNode {
@@ -163,12 +191,13 @@ class FileController: NSObject {
         let options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles]
 
         if let fileArray = try? filer.contentsOfDirectory(at: folder!, includingPropertiesForKeys: props, options: options) {
-            let results = fileArray.map { url -> FileNode in
+            let results = fileArray.map {
+                url -> FileNode in
                 
                 do {
-                    let info  = try url.resourceValues(forKeys: [URLResourceKey.localizedNameKey, URLResourceKey.fileResourceTypeKey, URLResourceKey.creationDateKey, URLResourceKey.fileSizeKey, URLResourceKey.isDirectoryKey])
-                    let file  = FileNode()
-                    file.url  = url
+                    let info = try url.resourceValues(forKeys: [URLResourceKey.localizedNameKey, URLResourceKey.fileResourceTypeKey, URLResourceKey.creationDateKey, URLResourceKey.fileSizeKey, URLResourceKey.isDirectoryKey])
+                    let file = FileNode()
+                    file.url = url
                     file.name = info.localizedName ?? "Error"
                     file.path = url.path
                     file.type = info.fileResourceType ?? URLFileResourceType.unknown
@@ -181,7 +210,6 @@ class FileController: NSObject {
                     }
                     
                     return file
-                    
                 } catch {
                     print(error)
                 }
@@ -198,16 +226,16 @@ class FileController: NSObject {
     }
     
     func walkTheTree(_ file: FileNode) -> FileNode? {
-        print("Finding: ", file.url)
+        print("Searching: ", file.url ?? "No file")
         let find = file.url
         if root.url == find { return root }
 
         // From root to file
         func walker(_ node: FileNode) -> FileNode? {
-            print("Walking folder: ", node.url)
+            print("Walking folder: ", node.url ?? "No folder")
             if let kids = node.children {
                 for item in kids {
-                    print("Walking item: ", item.url)
+                    print("Walking item: ", item.url ?? "No item")
                     if item.url == find { return item }
                     if item.isFolder {
                         if let found = walker(item) { return found }
@@ -219,7 +247,7 @@ class FileController: NSObject {
         }
         
         let node = walker(file)
-        print("Walker found ", node?.url)
+        print("Walker found ", node?.url ?? "None")
         
         return node
     }
@@ -391,7 +419,7 @@ extension FileController {
         dialog.canChooseDirectories = true
         let choice = dialog.runModal()
         
-        if choice == NSFileHandlingPanelOKButton {
+        if choice.rawValue == NSFileHandlingPanelOKButton {
             if let url = dialog.url {
                 changeWorkingFolder(url)
                 saveWorkingFolder()
@@ -426,7 +454,7 @@ extension FileController {
     }
     
     func save() -> DocumentSaveResult {
-        print("Saving \(currentDocument.url) ...")
+        print("Saving \(String(describing: currentDocument.url)) ...")
         
         guard let text = textView?.string else { print("Warn: no text to save"); return .emptyText }
         guard currentDocument.isEditable else { print("Warn: file is not editable"); return .noEditable }
@@ -459,7 +487,7 @@ extension FileController {
     
     func delete() {
         guard let url = currentDocument.url else { return }
-        print("Deleting file \(currentDocument.url)...")
+        print("Deleting file \(String(describing: currentDocument.url))...")
         
         guard var row = outlineView?.row(forItem: currentDocument) else { return }
         let index = IndexSet(integer: row)
@@ -468,7 +496,7 @@ extension FileController {
             //try FileManager.default.removeItem(at: url)
             try FileManager.default.removeItem(atPath: url.path)
             //files.remove(at: row)
-            outlineView?.removeItems(at: index, inParent: nil, withAnimation: .slideUp)
+            outlineView?.removeItems(at: index, inParent: nil, withAnimation: NSTableView.AnimationOptions.slideUp)
 
             // Keep it inside bounds
             let numRows = outlineView?.numberOfRows ?? 0
@@ -553,18 +581,13 @@ extension FileController: NSOutlineViewDataSource, NSOutlineViewDelegate  {
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        //print("Column item: ", item)
         guard let file = item as? FileNode else { return nil }
-        //print("Identifier: ", (tableColumn?.identifier)!)
-        
-        //let cellId = "filename"
         let cellId = "DataCell"
-        let result = outlineView.make(withIdentifier: cellId, owner: self) as? NSTableCellView
+        let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self) as? NSTableCellView
         
         result?.textField?.stringValue = file.name
         result?.imageView?.image = file.getFileImage()
         result?.textField?.delegate = self
-        //print("Result: ", result)
         return result
     }
     
@@ -628,7 +651,7 @@ extension FileController: NSTextFieldDelegate {
      
     */
     
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         //print("Control endEditing")
 
         if let field = obj.object as? NSTextField {
@@ -647,6 +670,15 @@ extension FileController: NSTextFieldDelegate {
                             return
                         }
                         
+                        /*
+ 
+ let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self) as? NSTableCellView
+ 
+ result?.textField?.stringValue = file.name
+ result?.imageView?.image = file.getFileImage(fileExt: file.ext)
+ result?.textField?.delegate = self
+ */
+                        
                         // If everything ok, rename it
                         do {
                             let source = item.url
@@ -655,6 +687,10 @@ extension FileController: NSTextFieldDelegate {
                             try FileManager.default.moveItem(at: source!, to: target!)
                             item.url = target
                             item.name = newName
+                            
+                            // Update image
+                            let tableCellView = outlineView?.rowView(atRow: index, makeIfNecessary: false)?.view(atColumn: 0) as? NSTableCellView
+                            tableCellView?.imageView?.image = item.getFileImage()
                         } catch {
                             // Revert to old name
                             field.undoManager?.undo()
